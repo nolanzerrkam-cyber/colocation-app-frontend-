@@ -1,2 +1,8 @@
 # colocation-app
-This application developed in JAVA, CSS, JavaScript and HTML allows roommates to manage their expenses, tasks and rent. The owner acts as an administrator.
+This application interface is developped in CSS, HTML and JavaScript.
+
+--- 
+
+# Members of this project
+
+Idriss Degauque, Nolan Mertens, Louis Di llio, Lucas Istasse
