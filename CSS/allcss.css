@@ -1,0 +1,122 @@
+*
+{
+    margin : 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Syne';
+}
+html, body
+{
+    height: 100%;
+    background: linear-gradient(to bottom, white, rgb(156, 179, 241) 25%, rgb(130, 130, 245) 50%, rgb(219, 219, 250) 75%);
+}
+
+.footerApp
+{
+    display: flex;
+    gap : 2%;
+    height : 10vh;
+    padding: 2px;
+    bottom: 0%;
+    background-color: rgb(219, 219, 250);
+    border : 2px black solid;
+    align-items: center;
+    justify-content: center;
+
+    position : fixed;
+    width: 100vw;
+}
+
+.topPage {
+    display: flex;
+    gap : 50%;
+    height: 7vh;
+    padding: 2px;
+    top: 0;
+    background-color: rgb(219, 219, 250);
+    border : 2px black solid;
+    align-items: center;
+    justify-content: center;
+
+    position : fixed;
+    width: 100vw;
+}
+
+.middlePage
+{
+    display: flex;
+    flex-direction: row; 
+    align-items: center;
+    justify-content: space-evenly;
+
+    position: absolute;
+    top: 7vh;
+    height: calc(100vh - 17vh);
+    width: 100vw;
+    padding: 0 20px;
+}
+
+.sumRent, .sumChores, .sumPayement
+{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    width: 30%;                  
+    height: 80%;                 /* En gros sa prend sur la hauteur disponible, 80% et c de même pour width */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.buttonFooter
+{
+    height: 8vh;
+    width: 20vh;
+    background-color: white;
+    border: 2px black solid;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10%;
+    box-shadow: 2px black;
+}
+
+h1
+{
+    text-align: center;
+}
+
+#hour
+{
+
+    border: 2px solid black;
+    padding: 2.5vh;
+}
+
+#rentButton
+{
+    background-image: url("../image/rent.png");
+}
+
+#choresButton
+{
+    background-image: url("../image/todolist.png");
+}
+
+#moreButton
+{
+    background-image: url("../image/home.png");
+}
+
+#payementButton
+{
+    background-image: url("../image/wallet.png");
+}
+
+#settingsButton
+{
+    background-image: url("../image/setting.png");
+}
