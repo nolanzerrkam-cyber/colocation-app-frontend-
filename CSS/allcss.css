@@ -42,7 +42,7 @@ html, body
     width: 100vw;
 }
 
-.middlePage
+.middlePage, .middlePageOwner
 {
     display: flex;
     flex-direction: row; 
@@ -56,7 +56,7 @@ html, body
     padding: 0 20px;
 }
 
-.sumRent, .sumChores, .sumPayement
+.sumRent, .sumChores, .sumPayement, .sumRoomates, .sumRentOwner
 {
     background-color: white;
     border: 2px solid black;
@@ -69,6 +69,101 @@ html, body
     padding: 15px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-direction: column;
+}
+
+.sumRoomates, .sumRentOwner
+{
+    width: 80%;
+    height : 30%;
+}
+
+.middlePageOwner
+{
+    flex-direction: column;
+}
+
+
+.loginPart
+{
+    background-color: aliceblue;
+    border : 4px double black;
+    border-radius: 12px;
+    width : 80vw;
+    height : 80vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    box-shadow: 10px black;
+}
+
+.bodyLogin
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+input[type="text"], input[type="password"], input[type="submit"]
+{
+    width: 50%;
+    height: 90%;
+    border: 3px double darkblue;
+    font-size: larger;
+}
+
+.labels
+{
+    position : relative;
+    margin : 10px;
+}
+
+.labels .emailIcon
+{
+    position : absolute;
+    padding : 10px;
+    pointer-events: none;
+}
+
+.emailIcon
+{
+    position : relative;
+    width: 100%;
+    max-width: 300px;
+}
+
+#email
+{
+    background-image: url("/image/mail.png");
+    background-repeat: no-repeat;
+    background-position: -10px center;
+    background-size: 50px auto;
+    
+    text-indent: 50px;
+}
+
+#pswrd
+{
+    background-image: url(/image/lock.png);
+    background-repeat: no-repeat;
+    background-position: 0px center;
+    background-size : 30px auto;
+    
+    text-indent: 50px;
+}
+
+.adminShowOnly
+{
+    background-color: darkgrey;
+    border : 3px double red;
+    padding : 5%;
+    margin : 0 auto;
+    width: fit-content;
 }
 
 .buttonFooter
@@ -96,7 +191,7 @@ h1
     padding: 2.5vh;
 }
 
-#rentButton
+#rentButton, #rentButtonOwner
 {
     background-image: url("../image/rent.png");
 }
@@ -119,4 +214,19 @@ h1
 #settingsButton
 {
     background-image: url("../image/setting.png");
+}
+
+#roomatesButton
+{
+    background-image: url("../image/roomates.png");
+}
+
+#supportButton
+{
+    background-image: url(../image/placeholder.png);
+}
+
+#logout
+{
+    background-image: url("../image/logout.png");
 }
