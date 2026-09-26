@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gérer les colocataires [Owner]</title>
+    <link rel="stylesheet" href="../CSS/allcss.css">
+    <script type="text/javascript" src="/JS/appjs.js" defer></script>
+</head>
+<body>
+
+    <div class="topPage">
+        <h1>Gestion Colocataires</h1>
+        <p><span id="hour"></span></p>
+    </div>
+
+    <div class="middlePageOwner">
+        
+        <div class="sumRoomates roomatesCard">
+            <div class="action-header">
+                <h2>Liste des colocataires</h2>
+                <button class="btn btn-add" id="addRoommateBtn">+ Ajouter</button>
+            </div>
+
+            <div class="roommates-container" id="roommatesList">
+                <!-- colocataire 1 -->
+                <div class="roommate-item">
+                    <div class="roommate-info">
+                        <span class="roommate-name">Alexandre Dupont</span>
+                        <div class="roommate-details">Chambre 01 — alex.dupont@email.com</div>
+                    </div>
+                    <button class="btn btn-delete">Supprimer</button>
+                </div>
+
+                <!-- colocataire 2 -->
+                <div class="roommate-item">
+                    <div class="roommate-info">
+                        <span class="roommate-name">Sophie Martin</span>
+                        <div class="roommate-details">Chambre 02 — sophie.m@email.com</div>
+                    </div>
+                    <button class="btn btn-delete">Supprimer</button>
+                </div>
+
+                <!-- colocataire 3 -->
+                <div class="roommate-item">
+                    <div class="roommate-info">
+                        <span class="roommate-name">Lucas Bernard</span>
+                        <div class="roommate-details">Chambre 03 — lucas.b@email.com</div>
+                    </div>
+                    <button class="btn btn-delete">Supprimer</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="sumRentOwner statusCard">
+            <p>Statut : 3/4 Chambres occupées</p>
+            <p>Tous les loyers du mois sont réglés.</p>
+        </div>
+
+    </div>
+
+    <div class="footerApp">
+        <a class="buttonFooter" id="roomatesButton" href="#" style="border: 4px solid red;"></a>
+        <a class="buttonFooter" id="supportButton" href="#"></a>
+        <a class="buttonFooter" id="moreButton" href="#"></a>
+        <a class="buttonFooter" id="rentButtonOwner" href="#"></a>
+        <a class="buttonFooter" id="logout" href="login.html"></a>
+    </div>
+
+</body>
+</html>

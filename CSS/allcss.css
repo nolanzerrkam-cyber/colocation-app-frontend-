@@ -184,6 +184,82 @@ h1
     text-align: center;
 }
 
+.roomatesCard {
+    height: 65%;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.statusCard {
+    height: 15%;
+}
+
+.action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.roommates-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: calc(100% - 40px);
+}
+
+.roommate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.roommate-info 
+{
+    text-align: left;
+}
+
+.roommate-name 
+{
+    font-weight: bold;
+    font-size: 1rem;
+    display: block;
+}
+
+.roommate-details 
+{
+    font-size: 0.85rem;
+    color: #444;
+}
+
+.btn 
+{
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid black;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: 2px solid black;
+}
+
 #hour
 {
 
