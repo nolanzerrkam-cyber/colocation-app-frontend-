@@ -11,21 +11,6 @@ html, body
     background: linear-gradient(to bottom, white, rgb(156, 179, 241) 25%, rgb(130, 130, 245) 50%, rgb(219, 219, 250) 75%);
 }
 
-.footerApp
-{
-    display: flex;
-    gap : 2%;
-    height : 10vh;
-    padding: 2px;
-    bottom: 0%;
-    background-color: rgb(219, 219, 250);
-    border : 2px black solid;
-    align-items: center;
-    justify-content: center;
-
-    position : fixed;
-    width: 100vw;
-}
 
 .topPage {
     display: flex;
@@ -42,6 +27,21 @@ html, body
     z-index: 10;
     overflow: hidden;
 }
+.footerApp
+{
+    display: flex;
+    gap : 2%;
+    height : 10vh;
+    padding: 2px;
+    bottom: 0%;
+    background-color: rgb(219, 219, 250);
+    border : 2px black solid;
+    align-items: center;
+    justify-content: center;
+
+    position : fixed;
+    width: 100vw;
+}
 
 .middlePage
 {
@@ -55,7 +55,7 @@ html, body
         "chores rent";
 
     position: absolute;
-    top: 7vh;
+    top: 10vh;
     height: calc(100vh - 17vh);
     width: 100vw;
     box-sizing: border-box;
@@ -63,78 +63,52 @@ html, body
     padding: 15px;
 }
 
+.sum{
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 100%;
 
-.sumRent
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s ease-out,
+    border-color 0.3s ease-out,
+    box-shadow 0.3s ease-out;
+}
+.sum:hover
+{
+    color: rgb(130, 130, 245);
+    border: 4px solid rgb(130, 130, 245);
+    transform: translateY(-5px);
+}
+.sum.clicked
+{
+    transform: scale(2.5);
+    z-index: 999;
+}
+#sumRent
 {
     grid-area: rent;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%;
 }
 
-.sumChores
+#sumChores
 {
     grid-area: chores;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%;
 }
 
-.sumPayement
+#sumPayement
 {
     grid-area: payment;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%;
 }
 
-.sumShop
+#sumShop
 {
     grid-area: shop;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%;
-}
-
-.buttonFooter
-{
-    height: 8vh;
-    width: 20vh;
-    background-color: white;
-    border: 2px black solid;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10%;
-    box-shadow: 2px black;
 }
 
 h1
@@ -148,7 +122,31 @@ h1
     border: 2px solid black;
     padding: 2.5vh;
 }
-
+.buttonFooter
+{
+    height: 8vh;
+    width: 20vh;
+    background-color: white;
+    border: 2px black solid;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10%;
+    box-shadow: 2px black;
+}
+#settingsButton
+{
+    background-image: url("../image/setting.png");
+    height: 8vh;
+    width: 20vh;
+    background-color: white;
+    border: 2px black solid;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10%;
+    box-shadow: 2px black;
+}
 #rentButton
 {
     background-image: url("../image/rent.png");
