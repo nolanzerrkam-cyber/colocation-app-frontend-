@@ -166,6 +166,10 @@ h1
 {
     background-image: url("../image/wallet.png");
 }
+#shopButton
+{
+    background-image: url("../image/shop_icon.png");
+}
 
 .centerPage
 {
