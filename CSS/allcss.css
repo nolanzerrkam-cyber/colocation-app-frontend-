@@ -144,7 +144,7 @@ h1
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10%;
-    box-shadow: 2px black;
+    box-shadow: 2px 0 black;
 }
 #settingsButton
 {
