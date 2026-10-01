@@ -21,6 +21,7 @@ onload = function()
         }
     });
 
+// Visual transitions on click
     sumShop.addEventListener("click", shopMorph);
     sumRent.addEventListener("click", rentMorph);
     sumChores.addEventListener("click", choresMorph);
