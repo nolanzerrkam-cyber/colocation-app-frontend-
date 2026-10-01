@@ -53,7 +53,7 @@ async function getHelloWorld() {
     }
 }
 
-function payementMorph() {
+function morph(redirect) {
     if (this.classList.contains('clicked')) return;
     this.classList.add('clicked');
 
@@ -73,77 +73,6 @@ function payementMorph() {
     this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
 
     setTimeout(function() {
-        location.href = "payement.html";
-    }, 380);
-}
-function choresMorph() {
-    if (this.classList.contains('clicked')) return;
-    this.classList.add('clicked');
-
-    const startRect = this.getBoundingClientRect();
-
-    const targetLeft = 15;
-    const targetTop = (window.innerHeight * 0.1) + 15;
-    const targetWidth = window.innerWidth - 30;
-    const targetHeight = (window.innerHeight - (window.innerHeight * 0.17)) - 30;
-
-    const deltaX = targetLeft - startRect.left;
-    const deltaY = targetTop - startRect.top;
-
-    const scaleX = targetWidth / startRect.width;
-    const scaleY = targetHeight / startRect.height;
-
-    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
-
-    setTimeout(function() {
-        location.href = "chores.html";
-    }, 380);
-}
-
-function shopMorph() {
-    if (this.classList.contains('clicked')) return;
-    this.classList.add('clicked');
-
-    const startRect = this.getBoundingClientRect();
-
-    const targetLeft = 15;
-    const targetTop = (window.innerHeight * 0.1) + 15;
-    const targetWidth = window.innerWidth - 30;
-    const targetHeight = (window.innerHeight - (window.innerHeight * 0.17)) - 30;
-
-    const deltaX = targetLeft - startRect.left;
-    const deltaY = targetTop - startRect.top;
-
-    const scaleX = targetWidth / startRect.width;
-    const scaleY = targetHeight / startRect.height;
-
-    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
-
-    setTimeout(function() {
-        location.href = "shop.html";
-    }, 380);
-}
-
-function rentMorph() {
-    if (this.classList.contains('clicked')) return;
-    this.classList.add('clicked');
-
-    const startRect = this.getBoundingClientRect();
-
-    const targetLeft = 15;
-    const targetTop = (window.innerHeight * 0.1) + 15;
-    const targetWidth = window.innerWidth - 30;
-    const targetHeight = (window.innerHeight - (window.innerHeight * 0.17)) - 30;
-
-    const deltaX = targetLeft - startRect.left;
-    const deltaY = targetTop - startRect.top;
-
-    const scaleX = targetWidth / startRect.width;
-    const scaleY = targetHeight / startRect.height;
-
-    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
-
-    setTimeout(function() {
-        location.href = "rent.html";
+        location.href = redirect;
     }, 380);
 }
