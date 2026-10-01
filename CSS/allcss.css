@@ -11,11 +11,27 @@ html, body
     background: linear-gradient(to bottom, white, rgb(156, 179, 241) 25%, rgb(130, 130, 245) 50%, rgb(219, 219, 250) 75%);
 }
 
+.topPage {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    padding: 0 15px;
+    height: 10vh;
+    top: 0;
+    background-color: rgb(219, 219, 250);
+    border : 2px black solid;
+
+    position : fixed;
+    width: 100vw;
+    z-index: 10;
+    overflow: hidden;
+}
 .footerApp
 {
     display: flex;
     gap : 2%;
-    height : 10vh;
+    height : 7vh;
     padding: 2px;
     bottom: 0%;
     background-color: rgb(219, 219, 250);
@@ -27,61 +43,85 @@ html, body
     width: 100vw;
 }
 
-.topPage {
-    display: flex;
-    gap : 50%;
-    height: 7vh;
-    padding: 2px;
-    top: 0;
-    background-color: rgb(219, 219, 250);
-    border : 2px black solid;
-    align-items: center;
-    justify-content: center;
-
-    position : fixed;
-    width: 100vw;
-}
-
 .middlePage
 {
-    display: flex;
-    flex-direction: row; 
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    grid-template-rows: 30% 45% auto;
+
+    grid-template-areas:
+        "payment shop"
+        "chores shop"
+        "chores rent";
 
     position: absolute;
-    top: 7vh;
+    top: 10vh;
     height: calc(100vh - 17vh);
     width: 100vw;
-    padding: 0 20px;
+    box-sizing: border-box;
+    gap: 15px;
+    padding: 15px;
 }
 
-.sumRent, .sumChores, .sumPayement
-{
+.sum {
     background-color: white;
     border: 2px solid black;
     border-radius: 12px;
-    width: 30%;                  
-    height: 80%;                 /* En gros sa prend sur la hauteur disponible, 80% et c de même pour width */
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 15px;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s ease-out,
+    border-color 0.3s ease-out,
+    box-shadow 0.3s ease-out;
+
+    transform-origin: top left;
 }
 
-.buttonFooter
+.sum:hover {
+    color: rgb(130, 130, 245);
+    border: 4px solid rgb(130, 130, 245);
+    transform: translateY(-5px);
+}
+
+.sum.clicked {
+    z-index: 9999;
+}
+
+body:has(.sum.clicked) .sum:not(.clicked)
 {
-    height: 8vh;
-    width: 20vh;
-    background-color: white;
-    border: 2px black solid;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10%;
-    box-shadow: 2px black;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+#sumRent
+{
+    grid-area: rent;
+
+}
+
+#sumChores
+{
+    grid-area: chores;
+
+}
+
+#sumPayement
+{
+    grid-area: payment;
+
+}
+
+#sumShop
+{
+    grid-area: shop;
+
 }
 
 h1
@@ -91,32 +131,93 @@ h1
 
 #hour
 {
-
     border: 2px solid black;
     padding: 2.5vh;
 }
-
+.ButtonApp
+{
+    height: 8vh;
+    width: 20vh;
+    background-color: white;
+    border: 2px black solid;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10%;
+    box-shadow: 2px 0 black;
+}
+#settingsButton
+{
+    background-image: url("../image/setting.png");
+}
 #rentButton
 {
     background-image: url("../image/rent.png");
 }
-
 #choresButton
 {
     background-image: url("../image/todolist.png");
 }
-
 #moreButton
 {
     background-image: url("../image/home.png");
 }
-
 #payementButton
 {
     background-image: url("../image/wallet.png");
 }
-
-#settingsButton
+#shopButton
 {
-    background-image: url("../image/setting.png");
+    background-image: url("../image/shop_icon.png");
+}
+
+.centerPage
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10vh;
+    height: calc(100vh - 17vh);
+    width: 100vw;
+    box-sizing: border-box;
+    gap: 15px;
+    padding: 15px;
+}
+.infoPage
+{
+    background-color: white;
+
+    color: rgb(130, 130, 245);
+    border: 4px solid rgb(130, 130, 245);
+
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 100%;
+    view-transition-name: box-payement;
+}
+
+/*le css pour le mobile*/
+@media screen and (max-width: 900px) {
+    .middlePage {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 17vh);
+        position: absolute;
+        overflow-y: auto;
+        padding-bottom: 25px;
+    }
+
+    .sumRent { height: 130px; width: 100%; }
+    .sumChores { height: 220px; width: 100%; }
+    .sumPayement { height: 160px; width: 100%; }
+    .sumShop { height: 180px; width: 100%; }
+
+    .topPage { gap: 20px; }
 }

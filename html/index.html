@@ -4,34 +4,33 @@
     <meta charset="UTF-8">
     <title>Welcome to your colocation App !</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <script type="text/javascript" src="../JS/appjs.js" defer></script>
 </head>
 <body>
     <div class="topPage">
         <h1>Welcome, [name]. You are on the main page.</h1>
+        <a  class="ButtonApp" id="settingsButton" href="settings.html"></a>
         <p><span id="hour"></span></p>
     </div>
 
     <div class="middlePage">
-        <div class="sumRent">
-            <p>The rent has been paid.</p>
+
+        <div class="sum" id="sumPayement">
+            <p>You have no payement to do.</p>
         </div>
 
-        <div class="sumChores">
+        <div class="sum" id="sumShop">
+            <p>The shopping list is empty.</p>
+        </div>
+
+        <div class="sum" id="sumChores">
             <p>You have done all your chores !</p>
         </div>
 
-        <div class="sumPayement">
-         <p>You have no payement to do.</p>
+        <div class="sum" id="sumRent">
+            <p>The rent has been paid.</p>
         </div>
-    </div>
-
-    <div class="footerApp">
-        <a class="buttonFooter" id="rentButton" href="rent.html"></a>
-        <a class="buttonFooter" id="choresButton" href="chores.html"></a>
-        <a class="buttonFooter" id="moreButton" href="#"></a>
-        <a class="buttonFooter" id="payementButton" href="payement.html"></a>
-        <a class="buttonFooter" id="settingsButton" href="settings.html"></a>
     </div>
 </body>
 </html>

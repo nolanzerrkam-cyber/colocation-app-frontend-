@@ -1,3 +1,34 @@
+let sumPayement;
+let sumShop;
+let sumRent;
+let sumChores;
+let boxes;
+
+onload = function()
+{
+    sumPayement = document.getElementById("sumPayement");
+    sumShop = document.getElementById("sumShop");
+    sumRent = document.getElementById("sumRent");
+    sumChores = document.getElementById("sumChores");
+    boxes = Array.from(document.getElementsByClassName("sum"));
+
+    window.addEventListener('pageshow', function(event) {
+        if (event.persisted) {
+            boxes.forEach(box => {
+                box.classList.remove('clicked');
+                box.style.transform = '';
+            });
+        }
+    });
+
+// Visual transitions on click
+// Visual transitions on click
+    sumShop.addEventListener("click", morph("shop.html"));
+    sumRent.addEventListener("click", morph("rent.html"));
+    sumChores.addEventListener("click", morph("chores.html"));
+    sumPayement.addEventListener("click", morph("payement.html"));
+}
+
 function updateClock()
 {
     var tdy = new Date();
@@ -6,7 +37,6 @@ function updateClock()
 
 updateClock();
 setInterval(updateClock, 1000);
-
 async function getHelloWorld() {
     const url = "http://localhost:8080/api/test/2";
     try {
@@ -21,4 +51,28 @@ async function getHelloWorld() {
     } catch (error) {
         console.error(error.message);
     }
+}
+
+function morph(redirect) {
+    if (this.classList.contains('clicked')) return;
+    this.classList.add('clicked');
+
+    const startRect = this.getBoundingClientRect();
+
+    const targetLeft = 15;
+    const targetTop = (window.innerHeight * 0.1) + 15;
+    const targetWidth = window.innerWidth - 30;
+    const targetHeight = (window.innerHeight - (window.innerHeight * 0.17)) - 30;
+
+    const deltaX = targetLeft - startRect.left;
+    const deltaY = targetTop - startRect.top;
+
+    const scaleX = targetWidth / startRect.width;
+    const scaleY = targetHeight / startRect.height;
+
+    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
+
+    setTimeout(function() {
+        location.href = redirect;
+    }, 380);
 }
