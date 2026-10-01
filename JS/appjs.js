@@ -23,10 +23,10 @@ onload = function()
 
 // Visual transitions on click
 // Visual transitions on click
-    sumShop.addEventListener("click", shopMorph);
-    sumRent.addEventListener("click", rentMorph);
-    sumChores.addEventListener("click", choresMorph);
-    sumPayement.addEventListener("click", payementMorph);
+    sumShop.addEventListener("click", morph("shop.html"));
+    sumRent.addEventListener("click", morph("rent.html"));
+    sumChores.addEventListener("click", morph("chores.html"));
+    sumPayement.addEventListener("click", morph("payement.html"));
 }
 
 function updateClock()
