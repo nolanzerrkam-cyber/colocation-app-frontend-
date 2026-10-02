@@ -21,12 +21,11 @@ onload = function()
         }
     });
 
-// Visual transitions on click
-// Visual transitions on click
-    sumShop.addEventListener("click", morph("shop.html"));
-    sumRent.addEventListener("click", morph("rent.html"));
-    sumChores.addEventListener("click", morph("chores.html"));
-    sumPayement.addEventListener("click", morph("payement.html"));
+    // Visual transitions on click
+    sumShop.addEventListener("click", () => morph("shop.html"));
+    sumRent.addEventListener("click",() => morph("rent.html"));
+    sumChores.addEventListener("click", () => morph("chores.html"));
+    sumPayement.addEventListener("click", () => morph("payement.html"));
 }
 
 function updateClock()
@@ -38,7 +37,7 @@ function updateClock()
 updateClock();
 setInterval(updateClock, 1000);
 async function getHelloWorld() {
-    const url = "http://localhost:8080/api/test/2";
+    const url = "http://localhost:8080/api/test/1";
     try {
         const response = await fetch(url);
         if (!response.ok) {
