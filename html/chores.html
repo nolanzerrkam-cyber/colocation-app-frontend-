@@ -2,27 +2,70 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chores list</title>    
+    <title>Chores</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
-    <script type="text/javascript" src="../JS/appjs.js" defer></script>
+    <script type="text/javascript" src="../JS/chores.js" defer></script>
 </head>
-<body>
-    <div class="topPage">
-        <h1>Welcome, [name]. You are on the chores list.</h1>
-        <a class="ButtonApp" id="settingsButton" href="settings.html"></a>
-        <p><span id="hour"></span></p>
+<body id="chores-page">
+<main>
+    <h1>Chores</h1>
+    <div id="filter-div">
+        <button id="todo-filter" class="task-filter task-filter-selected">To do</button>
+        <button id="mine-filter" class="task-filter">Mine</button>
+        <button id="done-filter" class="task-filter">Done</button>
     </div>
-    <div class="centerPage">
-        <div class="infoPage">
+    <div>
+        <div id="task-title-div">
+            <h2>Coming up</h2>
+            <p id="add-chore-1">+ Add chore</p>
+        </div>
+        <div id="tasks-list"></div>
+    </div>
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-card">
+            <button type="button" class="close-btn" id="closeBtn">&times;</button>
+
+            <h2 class="title">Add a chore</h2>
+
+            <form id="choreForm">
+                <div class="form-group">
+                    <label for="choreName">CHORE NAME</label>
+                    <input type="text" id="choreName" name="name" placeholder="Mop the hallway" required/>
+                </div>
+
+                <!--                <div class="form-group">-->
+                <!--                    <label for="assignTo">ASSIGN TO</label>-->
+                <!--                    <select id="assignTo">-->
+                <!--                        <option value="you">You</option>-->
+                <!--                    </select>-->
+                <!--                </div>-->
+
+                <div class="form-group">
+                    <label for="repeat">REPEAT</label>
+                    <select id="repeat" name="repeat">
+                        <option value="none">Does not repeat</option>
+                        <option value="monday">Monday</option>
+                        <option value="tuesday">Tuesday</option>
+                        <option value="wednesday">Wednesday</option>
+                        <option value="thursday">Thursday</option>
+                        <option value="friday">Friday</option>
+                        <option value="saturday">Saturday</option>
+                        <option value="sunday">Sunday</option>
+                    </select>
+                </div>
+
+                <div id="form-group-date" class="form-group">
+                    <label for="date">DATE</label>
+                    <input type="datetime-local" id="date" name="date"/>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-button">Create task</button>
+                <p id="notifier">p</p>
+            </form>
 
         </div>
     </div>
-    <div class="footerApp">
-        <a class="ButtonApp" id="rentButton" href="rent.html"></a>
-        <a class="ButtonApp" id="choresButton" href="#"></a>
-        <a class="ButtonApp" id="moreButton" href="index.html"></a>
-        <a class="ButtonApp" id="payementButton" href="payement.html"></a>
-        <a class="ButtonApp" id="shopButton" href="shop.html"></a>
-    </div>
+    <p id="add-chore-2">+</p>
+</main>
 </body>
+</html>
