@@ -75,7 +75,7 @@ function getTasks() {
 function createTaskComponent(taskJson) {
     //taskName, date, isRecurring, assigneeName, isDone
     const task = document.createElement('div');
-    task.className = 'task';
+    task.classList.add('task');
 
     const taskDetails = document.createElement('div');
 
