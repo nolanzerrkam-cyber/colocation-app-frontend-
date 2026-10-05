@@ -405,23 +405,21 @@ h1
     right: 40px;
 }
 
-/* Arrière-plan assombri et flouté (Overlay) */
 .modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.2); /* Fond léger sombre */
-    backdrop-filter: blur(8px);           /* Effort de flou sur le fond */
-    -webkit-backdrop-filter: blur(8px);   /* Support pour Safari */
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     display: none;
     justify-content: center;
     align-items: center;
     z-index: 1000;
 }
 
-/* Carte principale de la modale */
 .modal-card {
     position: relative;
     background-color: #ffffff;
@@ -434,7 +432,6 @@ h1
     box-sizing: border-box;
 }
 
-/* Bouton Fermer (X) */
 .close-btn {
     position: absolute;
     top: 24px;
@@ -457,7 +454,6 @@ h1
     background-color: #F7FAFC;
 }
 
-/* Textes de l'en-tête */
 .subtitle {
     display: block;
     font-size: 11px;
@@ -475,7 +471,6 @@ h1
     color: #0F172A;
 }
 
-/* Éléments du Formulaire */
 .form-group {
     margin-bottom: 18px;
 }
@@ -496,24 +491,23 @@ h1
     padding: 14px 16px;
     border-radius: 12px;
     border: 1px solid #E0ECDF;
-    background-color: #F2F9F3; /* Teinte verdâtre très légère */
+    background-color: #F2F9F3;
     font-size: 14px;
     color: #1A202C;
     outline: none;
     box-sizing: border-box;
-    appearance: none; /* Uniformise le style des select */
+    appearance: none;
 }
 
 .form-group input::placeholder {
     color: #A0AEC0;
 }
 
-/* Bouton Soumettre */
 .submit-btn {
     width: 100%;
     padding: 14px;
     margin-top: 10px;
-    background-color: #005F4B; /* Vert foncé correspondant à la maquette */
+    background-color: #005F4B;
     color: #FFFFFF;
     border: none;
     border-radius: 12px;
@@ -534,7 +528,7 @@ h1
 .task-separator {
     border: none;
     height: 1px;
-    background-color: #e2e8f0; /* Couleur claire discrète */
+    background-color: #e2e8f0;
     width: 95%;
     margin: 20px auto 20px auto;
 }
