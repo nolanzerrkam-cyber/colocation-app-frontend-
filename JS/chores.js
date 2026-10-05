@@ -90,7 +90,7 @@ function createTaskComponent(taskJson) {
     title.textContent = taskJson.taskName;
 
     const taskTime = document.createElement('div');
-    taskTime.className = 'task-time';
+    taskTime.classList.add('task-time');
 
     const options = {weekday: 'long', hour: '2-digit', minute: '2-digit'};
     const formattedDate = new Intl.DateTimeFormat('fr-FR', options).format(taskJson.date);
