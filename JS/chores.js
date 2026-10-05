@@ -138,7 +138,7 @@ function removeTasksComponent() {
 
 function createSeparatorComponent() {
     const separator = document.createElement('hr');
-    separator.className = 'task-separator';
+    separator.classList.add('task-separator');
     tasksList.appendChild(separator)
 }
 
