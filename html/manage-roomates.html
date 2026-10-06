@@ -3,60 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gérer les colocataires [Owner]</title>
+    <title>Manage Roomates [Owner]</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="text/javascript" src="/JS/appjs.js" defer></script>
 </head>
 <body>
 
     <div class="topPage">
-        <h1>Gestion Colocataires</h1>
+        <h1>Welcome [Owner]. Here you can manage all of the roomate in your house.</h1>
         <p><span id="hour"></span></p>
     </div>
 
-    <div class="middlePageOwner">
-        
-        <div class="sumRoomates roomatesCard">
+    <div class="centerPage">
+        <div class="infoPage" id="manageRoommatesCard">
+            
             <div class="action-header">
-                <h2>Liste des colocataires</h2>
-                <button class="btn btn-add" id="addRoommateBtn">+ Ajouter</button>
+                <div class="header-top">
+                    <h2>List of roomates</h2>
+                    <button class="btn btn-add" id="addRoommateBtn">+ Add roomate</button>
+                </div>
+                <h3 id="error-section"></h3>
             </div>
 
             <div class="roommates-container" id="roommatesList">
-                <!-- colocataire 1 -->
                 <div class="roommate-item">
                     <div class="roommate-info">
                         <span class="roommate-name">Alexandre Dupont</span>
-                        <div class="roommate-details">Chambre 01 — alex.dupont@email.com</div>
+                        <div class="roommate-details">Room n°1 — alex.dupont@email.com</div>
                     </div>
-                    <button class="btn btn-delete">Supprimer</button>
+                    <button class="btn btn-delete">- Delete</button>
                 </div>
 
-                <!-- colocataire 2 -->
                 <div class="roommate-item">
                     <div class="roommate-info">
                         <span class="roommate-name">Sophie Martin</span>
-                        <div class="roommate-details">Chambre 02 — sophie.m@email.com</div>
+                        <div class="roommate-details">Room n°2 — sophie.m@email.com</div>
                     </div>
-                    <button class="btn btn-delete">Supprimer</button>
+                    <button class="btn btn-delete">- Delete</button>
                 </div>
 
-                <!-- colocataire 3 -->
                 <div class="roommate-item">
                     <div class="roommate-info">
                         <span class="roommate-name">Lucas Bernard</span>
-                        <div class="roommate-details">Chambre 03 — lucas.b@email.com</div>
+                        <div class="roommate-details">Room n°3 — lucas.b@email.com</div>
                     </div>
-                    <button class="btn btn-delete">Supprimer</button>
+                    <button class="btn btn-delete">- Delete</button>
                 </div>
             </div>
-        </div>
 
-        <div class="sumRentOwner statusCard">
-            <p>Statut : 3/4 Chambres occupées</p>
-            <p>Tous les loyers du mois sont réglés.</p>
-        </div>
+            <div class="statusCard">
+                <p><strong>In the shared home :</strong> <span id="numberOfRoomates"></span>/30 roomates in total.</p>
+            </div>
 
+        </div>
     </div>
 
     <div class="footerApp">

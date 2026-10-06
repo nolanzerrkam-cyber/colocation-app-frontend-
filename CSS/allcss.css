@@ -139,26 +139,39 @@ body:has(.sum.clicked) .sum:not(.clicked)
 {
     grid-column: 1;
     height: 100%;
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;  
+    align-items: center;      
+    gap: 15px;                
+    text-align: center;
 }
 
-#sumSupport
-{
+#sumSupport {
     position: absolute;
-    top: 100%;
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -289%);
-    border-radius: 80%;
-    height: 12rem;
+    transform: translate(-50%, -50%);
+    transform-origin: center center !important; /* Really important for the animation, otherwise the center will be 0,0, which is the top left corner of your screen.*/
+    
     width: 12rem;
-
-
-    grid-area: support;
+    height: 12rem;
+    border-radius: 50%;
+    
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
 }
 
-#sumRent
+#sumRentOwner
 {
     grid-column: 2;
     height: 100%;
+    display: flex;
+    flex-direction: column;   
+    justify-content: center;  
+    align-items: center;      
+    gap: 15px;                
+    text-align: center;
 }
 
 h1
@@ -184,13 +197,13 @@ h1
     box-shadow: 2px 0 black;
 }
 
-.sumRoomates, .sumRentOwner
+/* .sumRoomates, .sumRentOwner
 {
     background-color: white;
     border: 2px solid black;
     border-radius: 12px;
     width: 30%;                  
-    height: 80%;                 /* En gros sa prend sur la hauteur disponible, 80% et c de même pour width */
+    height: 80%;                 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,7 +217,7 @@ h1
 {
     width: 80%;
     height : 30%;
-}
+} */
 
 .loginPart
 {
@@ -434,7 +447,82 @@ input[type="text"], input[type="password"], input[type="submit"]
     view-transition-name: box-payement;
 }
 
-/*le css pour le mobile*/
+/* Surcharge uniquement pour la page de gestion des colocataires */
+#manageRoommatesCard {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding: 25px;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
+/* Add and delete button */
+#manageRoommatesCard .action-header {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #333;
+}
+
+#manageRoommatesCard .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#error-section {
+    color: #e74c3c;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+#manageRoommatesCard .roommates-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding: 15px;
+    border: 3px double #a0a0a0;
+    border-radius: 10px;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+/* For each roomates, we have whats called a roomate item, which is a element to define a single roomate */
+#manageRoommatesCard .roommate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid #222;
+    border-radius: 8px;
+    padding: 12px 16px;
+    background: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+#manageRoommatesCard .roommate-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+/* Status block*/
+#manageRoommatesCard .statusCard {
+    margin-top: auto;
+    padding: 15px;
+    border: 2px solid #4a6fa5;
+    border-radius: 8px;
+    background-color: #f0f4f8;
+    color: #222;
+}
+
+/*css for mobile*/
 @media screen and (max-width: 900px) {
     .middlePage {
         display: flex;
