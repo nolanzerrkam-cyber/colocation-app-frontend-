@@ -522,6 +522,16 @@ input[type="text"], input[type="password"], input[type="submit"]
     color: #222;
 }
 
+#manageRentCard {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: stretch !important;
+    padding: 25px;
+    gap: 20px;
+    box-sizing: border-box;
+}
+
 /*css for mobile*/
 @media screen and (max-width: 900px) {
     .middlePage {

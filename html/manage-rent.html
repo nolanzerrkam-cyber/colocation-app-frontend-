@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage all the rents of the roomates</title>    
+    <title>Manage Rents & Taxes [Owner]</title>    
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="text/javascript" src="../JS/appjs.js" defer></script>
 </head>
 <body>
     <div class="topPage">
-        <h1>Hello [Owner], here you can manage the rents of the roomates !</h1>
+        <h1>Hello [Owner], manage roommates rents & taxes!</h1>
         <p><span id="hour"></span></p>
     </div>
-    <div class="centerPage">
-        <div class="infoPage">
 
+    <div class="centerPage">
+        <div class="infoPage" id="manageRentCard">
+            <h2>Rent & Tax Overview</h2>
+            
+            <div class="roommates-container">
+                <div class="roommate-item">
+                    <span>Alexandre Dupont (Room 01)</span>
+                    <strong>$545 (Paid)</strong>
+                </div>
+                <div class="roommate-item">
+                    <span>Sophie Martin (Room 02)</span>
+                    <strong>$565 (Pending)</strong>
+                </div>
+                <div class="roommate-item">
+                    <span>Lucas Bernard (Room 03)</span>
+                    <strong>$525 (Paid)</strong>
+                </div>
+            </div>
+
+            <button class="btn btn-add" style="margin-top: 15px;">+ Add Tax / Charge</button>
         </div>
     </div>
+
     <div class="footerApp">
         <a class="ButtonApp" id="roomatesButton" href="manage-roomates.html"></a>
         <a class="ButtonApp" id="supportButton" href="support.html"></a>
@@ -25,3 +44,4 @@
         <a class="ButtonApp" id="logout" href="login.html"></a>
     </div>
 </body>
+</html>
