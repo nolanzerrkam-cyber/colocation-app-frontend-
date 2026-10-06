@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne&display=swap');
+
 *
 {
     margin : 0;
@@ -51,6 +53,19 @@ html, body
 
     position: absolute;
     top: 7vh;
+    height: calc(100vh - 17vh);
+    width: 100vw;
+    padding: 0 20px;
+}
+
+.middlePageOwner
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    position: absolute;
+    top: 10vh;
     height: calc(100vh - 17vh);
     width: 100vw;
     padding: 0 20px;
@@ -136,25 +151,33 @@ input[type="text"], input[type="password"], input[type="submit"]
     width: 100%;
     max-width: 300px;
 }
-
-#email
+#sumRent
 {
-    background-image: url("/image/mail.png");
-    background-repeat: no-repeat;
-    background-position: -10px center;
-    background-size: 50px auto;
-    
-    text-indent: 50px;
+    grid-area: rent;
+
 }
 
-#pswrd
+#sumChores
 {
-    background-image: url(/image/lock.png);
-    background-repeat: no-repeat;
-    background-position: 0px center;
-    background-size : 30px auto;
-    
-    text-indent: 50px;
+    grid-area: chores;
+
+}
+
+#sumPayement
+{
+    grid-area: payment;
+
+}
+
+#sumShop
+{
+    grid-area: shop;
+
+}
+
+h1
+{
+    text-align: center;
 }
 
 .adminShowOnly
@@ -178,96 +201,11 @@ input[type="text"], input[type="password"], input[type="submit"]
     border-radius: 10%;
     box-shadow: 2px black;
 }
-
-h1
+#settingsButton
 {
-    text-align: center;
+    background-image: url("../image/setting.png");
 }
-
-.roomatesCard {
-    height: 65%;
-    justify-content: flex-start;
-    padding: 20px;
-}
-
-.statusCard {
-    height: 15%;
-}
-
-.action-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.roommates-container {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: auto;
-    max-height: calc(100% - 40px);
-}
-
-.roommate-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #f8f9fa;
-    padding: 10px 15px;
-    border: 2px solid black;
-    border-radius: 8px;
-}
-
-.roommate-info 
-{
-    text-align: left;
-}
-
-.roommate-name 
-{
-    font-weight: bold;
-    font-size: 1rem;
-    display: block;
-}
-
-.roommate-details 
-{
-    font-size: 0.85rem;
-    color: #444;
-}
-
-.btn 
-{
-    cursor: pointer;
-    padding: 6px 14px;
-    border-radius: 6px;
-    font-weight: bold;
-    font-size: 0.85rem;
-}
-
-.btn-add {
-    background-color: #28a745;
-    color: white;
-    border: 2px solid black;
-}
-
-.btn-delete {
-    background-color: #dc3545;
-    color: white;
-    border: 2px solid black;
-}
-
-#hour
-{
-
-    border: 2px solid black;
-    padding: 2.5vh;
-}
-
-#rentButton, #rentButtonOwner
+#rentButton
 {
     background-image: url("../image/rent.png");
 }
@@ -290,6 +228,18 @@ h1
 #settingsButton
 {
     background-image: url("../image/setting.png");
+}
+#roomatesButton
+{
+    background-image: url("../image/roomates.png");
+}
+#supportButton
+{
+    background-image: url(../image/placeholder.png);
+}
+#logout
+{
+    background-image: url("../image/logout.png");
 }
 
 #roomatesButton
