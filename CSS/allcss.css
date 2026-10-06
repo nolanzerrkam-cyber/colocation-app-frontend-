@@ -67,15 +67,14 @@ html, body
 
 .middlePageOwner
 {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
     position: absolute;
     top: 10vh;
     height: calc(100vh - 17vh);
     width: 100vw;
-    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 .sum {
@@ -115,10 +114,10 @@ body:has(.sum.clicked) .sum:not(.clicked)
     opacity: 0;
     transition: opacity 0.2s ease-out;
 }
+
 #sumRent
 {
     grid-area: rent;
-
 }
 
 #sumChores
@@ -134,6 +133,32 @@ body:has(.sum.clicked) .sum:not(.clicked)
 #sumShop
 {
     grid-area: shop;
+}
+
+#sumRoomates
+{
+    grid-column: 1;
+    height: 100%;
+}
+
+#sumSupport
+{
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -289%);
+    border-radius: 80%;
+    height: 12rem;
+    width: 12rem;
+
+
+    grid-area: support;
+}
+
+#sumRent
+{
+    grid-column: 2;
+    height: 100%;
 }
 
 h1
@@ -337,6 +362,8 @@ input[type="text"], input[type="password"], input[type="submit"]
     
     text-indent: 50px;
 }
+
+
 
 
 #settingsButton
