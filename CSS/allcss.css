@@ -147,7 +147,7 @@ body:has(.sum.clicked) .sum:not(.clicked)
 
 }
 
-#sumPayement
+#sumExpenses
 {
     grid-area: payment;
 
@@ -197,7 +197,7 @@ h1
 {
     background-image: url("../image/home.png");
 }
-#payementButton
+#expensesButton
 {
     background-image: url("../image/wallet.png");
 }
@@ -234,7 +234,7 @@ h1
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: 100%;
     width: 100%;
-    view-transition-name: box-payement;
+    view-transition-name: box-expenses;
 }
 
 /*le css pour le mobile*/
