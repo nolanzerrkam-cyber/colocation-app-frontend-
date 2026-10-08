@@ -6,6 +6,22 @@
     <title>Expenses</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="text/javascript" src="../JS/appjs.js" defer></script>
+    <script type="text/javascript" src="../JS/expenses.js" defer></script>
 </head>
-<body>
+<body id="expense-page" class="background">
+<main>
+    <h1>Expenses</h1>
+    <div id="balance-div">
+        <div>
+            <h2>YOUR BALANCE</h2>
+            <p id="balance"></p>
+            <div class="separator"></div>
+            <p id="total-container"><span>Total shared across the colocation</span><span id="total-expenses"></span></p>
+        </div>
+    </div>
+    <div>
+        <h2 id="recent-expenses-title">Expenses</h2>
+        <div id="expenses-list"></div>
+    </div>
+</main>
 </body>
