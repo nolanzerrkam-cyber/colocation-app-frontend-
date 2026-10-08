@@ -1,31 +1,31 @@
 @font-face {
-    font-family: Manrope-Bold; 
-    src: url("../assets/font/Manrope-Bold.ttf"); 
+    font-family: Manrope-Bold;
+    src: url("../assets/font/Manrope-Bold.ttf");
 }
 
 @font-face {
-    font-family: Manrope-ExtraBold; 
-    src: url("../assets/font/Manrope-ExtraBold.ttf"); 
+    font-family: Manrope-ExtraBold;
+    src: url("../assets/font/Manrope-ExtraBold.ttf");
 }
 
 @font-face {
-    font-family: Manrope-ExtraLight; 
-    src: url("../assets/font/Manrope-ExtraLight.ttf"); 
+    font-family: Manrope-ExtraLight;
+    src: url("../assets/font/Manrope-ExtraLight.ttf");
 }
 
 @font-face {
-    font-family: Manrope-Light; 
-    src: url("../assets/font/Manrope-Light.ttf"); 
+    font-family: Manrope-Light;
+    src: url("../assets/font/Manrope-Light.ttf");
 }
 
 @font-face {
-    font-family: Manrope-Medium; 
-    src: url("../assets/font/Manrope-Medium.ttf"); 
+    font-family: Manrope-Medium;
+    src: url("../assets/font/Manrope-Medium.ttf");
 }
 
 @font-face {
-    font-family: Manrope-Regular; 
-    src: url("../assets/font/Manrope-Regular.ttf"); 
+    font-family: Manrope-Regular;
+    src: url("../assets/font/Manrope-Regular.ttf");
 }
 
 @font-face {
@@ -33,15 +33,14 @@
     src: url("../assets/font/Manrope-SemiBold.ttf");
 }
 
-*
-{
-    margin : 0;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Manrope-Regular, sans-serif;
 }
-html, body
-{
+
+html, body {
     height: 100%;
     background: linear-gradient(to bottom, white, rgb(156, 179, 241) 25%, rgb(130, 130, 245) 50%, rgb(219, 219, 250) 75%);
 }
@@ -55,31 +54,30 @@ html, body
     height: 10vh;
     top: 0;
     background-color: rgb(219, 219, 250);
-    border : 2px black solid;
+    border: 2px black solid;
 
-    position : fixed;
+    position: fixed;
     width: 100vw;
     z-index: 10;
     overflow: hidden;
 }
-.footerApp
-{
+
+.footerApp {
     display: flex;
-    gap : 2%;
-    height : 7vh;
+    gap: 2%;
+    height: 7vh;
     padding: 2px;
     bottom: 0%;
     background-color: rgb(219, 219, 250);
-    border : 2px black solid;
+    border: 2px black solid;
     align-items: center;
     justify-content: center;
 
-    position : fixed;
+    position: fixed;
     width: 100vw;
 }
 
-.middlePage
-{
+.middlePage {
     display: grid;
     grid-template-columns: 60% 1fr;
     grid-template-rows: 30% 45% auto;
@@ -130,47 +128,41 @@ html, body
     z-index: 9999;
 }
 
-body:has(.sum.clicked) .sum:not(.clicked)
-{
+body:has(.sum.clicked) .sum:not(.clicked) {
     opacity: 0;
     transition: opacity 0.2s ease-out;
 }
-#sumRent
-{
+
+#sumRent {
     grid-area: rent;
 
 }
 
-#sumChores
-{
+#sumChores {
     grid-area: chores;
 
 }
 
-#sumExpenses
-{
+#sumExpenses {
     grid-area: payment;
 
 }
 
-#sumShop
-{
+#sumShop {
     grid-area: shop;
 
 }
 
-h1
-{
+h1 {
     text-align: center;
 }
 
-#hour
-{
+#hour {
     border: 2px solid black;
     padding: 2.5vh;
 }
-.ButtonApp
-{
+
+.ButtonApp {
     height: 8vh;
     width: 20vh;
     background-color: white;
@@ -181,33 +173,32 @@ h1
     border-radius: 10%;
     box-shadow: 2px 0 black;
 }
-#settingsButton
-{
+
+#settingsButton {
     background-image: url("../image/setting.png");
 }
-#rentButton
-{
+
+#rentButton {
     background-image: url("../image/rent.png");
 }
-#choresButton
-{
+
+#choresButton {
     background-image: url("../image/todolist.png");
 }
-#moreButton
-{
+
+#moreButton {
     background-image: url("../image/home.png");
 }
-#expensesButton
-{
+
+#expensesButton {
     background-image: url("../image/wallet.png");
 }
-#shopButton
-{
+
+#shopButton {
     background-image: url("../image/shop_icon.png");
 }
 
-.centerPage
-{
+.centerPage {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -219,8 +210,8 @@ h1
     gap: 15px;
     padding: 15px;
 }
-.infoPage
-{
+
+.infoPage {
     background-color: white;
 
     color: rgb(130, 130, 245);
@@ -249,12 +240,29 @@ h1
         padding-bottom: 25px;
     }
 
-    .sumRent { height: 130px; width: 100%; }
-    .sumChores { height: 220px; width: 100%; }
-    .sumPayement { height: 160px; width: 100%; }
-    .sumShop { height: 180px; width: 100%; }
+    .sumRent {
+        height: 130px;
+        width: 100%;
+    }
 
-    .topPage { gap: 20px; }
+    .sumChores {
+        height: 220px;
+        width: 100%;
+    }
+
+    .sumPayement {
+        height: 160px;
+        width: 100%;
+    }
+
+    .sumShop {
+        height: 180px;
+        width: 100%;
+    }
+
+    .topPage {
+        gap: 20px;
+    }
 }
 
 #chores-page {
@@ -536,4 +544,149 @@ h1
 #notifier {
     padding: 15px 0 0 0;
     color: white;
+}
+
+.background {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: oklch(0.975 0.012 172);
+}
+
+.background h1 {
+    font-size: 35px;
+    font-family: Manrope-ExtraBold, sans-serif;
+    text-align: left;
+}
+
+.background main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 90%;
+    margin: 70px 40px 0 40px;
+}
+
+#balance-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    width: 100%;
+    background: #1A202C;
+    border-radius: 20px;
+    color: white;
+}
+
+#balance-div h2 {
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    letter-spacing: 2px;
+}
+
+#balance {
+    font-family: Manrope-ExtraBold, sans-serif;
+    font-size: 40px;
+    padding: 15px 0 30px 0;
+}
+
+#balance-div div:first-child {
+    width: 95%;
+    height: 70%;
+}
+
+#total {
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+#total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Manrope-Regular, sans-serif;
+    font-size: 11px;
+    padding: 15px 0 0 0;
+}
+
+.separator {
+    height: 1px;
+    background: #E0ECDF;
+}
+
+#expenses-list {
+    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
+    border-radius: 20px;
+    background: white;
+}
+
+.expense {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    margin: 20px;
+}
+
+.expense div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.expense h3 {
+    font-size: 12px;
+    font-family: Manrope-Bold, sans-serif;
+}
+
+.expense p {
+    font-size: 10px;
+}
+
+.expense-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: oklch(0.9359 0.043 172);
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+
+.expense-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.expense-sender {
+    display: flex;
+    gap: 10px;
+}
+
+.expense-amount {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.expense-amount p {
+    font-size: 15px;
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+.expense-separator {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    width: 95%;
+    margin: 20px auto 20px auto;
+}
+
+#recent-expenses-title {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
 }
