@@ -22,10 +22,10 @@ onload = function()
     });
 
     // Visual transitions on click
-    sumShop.addEventListener("click", () => morph("shop.html"));
-    sumRent.addEventListener("click",() => morph("rent.html"));
-    sumChores.addEventListener("click", () => morph("chores.html"));
-    sumExpenses.addEventListener("click", () => morph("expenses.html"));
+    sumShop.addEventListener("click", () => morph("shop.html", sumShop));
+    sumRent.addEventListener("click",() => morph("rent.html", sumRent));
+    sumChores.addEventListener("click", () => morph("chores.html", sumChores));
+    sumPayement.addEventListener("click", () => morph("payement.html", sumPayement));
 }
 
 function updateClock()
@@ -52,11 +52,11 @@ async function getHelloWorld() {
     }
 }
 
-function morph(redirect) {
-    if (this.classList.contains('clicked')) return;
-    this.classList.add('clicked');
+function morph(redirect, element) {
+    if (element.classList.contains('clicked')) return;
+    element.classList.add('clicked');
 
-    const startRect = this.getBoundingClientRect();
+    const startRect = element.getBoundingClientRect();
 
     const targetLeft = 15;
     const targetTop = (window.innerHeight * 0.1) + 15;
@@ -69,7 +69,7 @@ function morph(redirect) {
     const scaleX = targetWidth / startRect.width;
     const scaleY = targetHeight / startRect.height;
 
-    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
+    element.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
 
     setTimeout(function() {
         location.href = redirect;
