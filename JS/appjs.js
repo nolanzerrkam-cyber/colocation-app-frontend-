@@ -1,4 +1,4 @@
-let sumPayement;
+let sumExpenses;
 let sumShop;
 let sumRent;
 let sumChores;
@@ -6,7 +6,7 @@ let boxes;
 
 onload = function()
 {
-    sumPayement = document.getElementById("sumPayement");
+    sumExpenses = document.getElementById("sumExpenses");
     sumShop = document.getElementById("sumShop");
     sumRent = document.getElementById("sumRent");
     sumChores = document.getElementById("sumChores");
