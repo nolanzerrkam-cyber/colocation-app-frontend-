@@ -222,7 +222,7 @@ h1 {
     align-items: center;
     position: absolute;
     top: 10vh;
-    height: calc(100vh - 17vh); /* Même hauteur que sur le dashboard (100vh - 10vh top - 7vh footer) */
+    height: calc(100vh - 17vh);
     width: 100vw;
     box-sizing: border-box;
     gap: 15px;
@@ -238,11 +238,22 @@ h1 {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     height: 100%;
     width: 100%;
-    view-transition-name: box-expenses; /* Ou box-payement selon la page */
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     padding: 15px;
+
+
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    scrollbar-width: none;
+
+    /* Pour Chrome, Safari et Edge */
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 /*le css pour le mobile*/
@@ -578,9 +589,9 @@ h1 {
 .background main {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    width: 90%;
-    margin: 70px 40px 0 40px;
+    width: 100vw;
+    margin: 0;
+
 }
 
 #balance-div {
