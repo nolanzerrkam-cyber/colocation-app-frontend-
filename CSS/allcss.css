@@ -190,6 +190,12 @@ h1 {
     border-radius: 10%;
     box-shadow: 2px 0 black;
 }
+.ButtonApp:hover
+{
+    color: #005F4B;
+    border: 3px solid #005F4B;
+    transform: translateY(-2px);
+}
 
 #settingsButton {
     background-image: url("../image/setting.png");
