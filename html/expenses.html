@@ -9,19 +9,38 @@
     <script type="text/javascript" src="../JS/expenses.js" defer></script>
 </head>
 <body id="expense-page" class="background">
-<main>
-    <h1>Expenses</h1>
-    <div id="balance-div">
-        <div>
-            <h2>YOUR BALANCE</h2>
-            <p id="balance"></p>
-            <div class="separator"></div>
-            <p id="total-container"><span>Total shared across the colocation</span><span id="total-expenses"></span></p>
-        </div>
+<div class="topPage">
+    <div class="brand">
+        <img src="../image/logocoloc-removebg-preview.png"/>
+        <img src="../image/nomcoloc-removebg-preview.png"/>
     </div>
-    <div>
+    <div id="hour"></div>
+    <a class="ButtonApp" id="settingsButton" href="settings.html"></a>
+</div>
+<main>
+    <div class="centerPage">
+        <div class="infoPage">
+            <h1>Expenses</h1>
+            <div id="balance-div">
+                <div>
+                    <h2>YOUR BALANCE</h2>
+                    <p id="balance"></p>
+                    <div class="separator"></div>
+                    <p id="total-container"><span>Total shared across the colocation</span><span id="total-expenses"></span></p>
+                </div>
+            </div>
+        <div>
         <h2 id="recent-expenses-title">Expenses</h2>
         <div id="expenses-list"></div>
+        </div>
+        </div>
     </div>
 </main>
+<div class="footerApp">
+    <a class="ButtonApp" id="rentButton" href="rent.html"></a>
+    <a class="ButtonApp" id="choresButton" href="chores.html"></a>
+    <a class="ButtonApp" id="moreButton" href="index.html"></a>
+    <a class="ButtonApp" id="expensesButton" href="expenses.html"></a>
+    <a class="ButtonApp" id="shopButton" href="#"></a>
+</div>
 </body>
