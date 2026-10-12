@@ -70,3 +70,51 @@ function updateClock()
 
 updateClock();
 setInterval(updateClock, 1000);
+
+
+//Login
+const submitLoginBtn = document.getElementById("submitLogin");
+
+async function login(event)
+{
+    event?.preventDefault();
+    document.getElementById("error").style.display = "none";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email)
+    {
+        alert("Email cannot be empty or only spaces");
+        return;
+    }
+
+    if (!password.trim())
+    {
+        alert("Password cannot be empty or only spaces");
+        return;
+    }
+
+        const response = await fetch('http://localhost:8080/api/user/login',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({email,password})
+            });
+
+        if (!response.ok)
+        {
+            let errorText = await response.text();
+            let el = document.getElementById("error");
+            el.textContent = errorText;
+            el.style.display = "block";
+        }
+
+        const result = await response.json();
+        sessionStorage.setItem("user", JSON.stringify(result));
+
+        window.location.replace("owner.html");
+
+}
+
+submitLoginBtn.addEventListener('click',login);

@@ -11,15 +11,17 @@
     <div class="loginPart">
         <h2>Welcome back to the app !</h2>
         <p>Please enter your credentials to continue.</p>
-        <div class="labels">
-            <input type="text" id="email" name="email" placeholder="Email"><br><br>
+        <div>
+            <p id="error"></p>
+            <form method="post" name="login">
+                <label for="email">Email: </label>
+                <input id="email" type="text">
+                <label for="password">Password: </label>
+                <input id="password" type="password">
+                <button id="submitLogin">Submit</button>
+            </form>
         </div>
-        <div class="labels">
-            <input type="password" id="pswrd" name="pswrd" placeholder="Password"><br><br>
-        </div>
-        <div class="buttonsLogin">
-            <input type="submit" value="Authentificate"><br><br>
-        </div>
+
         
         <div class="adminShowOnly">
             <h1>ADMIN ONLY</h1>

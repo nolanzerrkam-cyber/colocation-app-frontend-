@@ -256,3 +256,8 @@ h1
 {
     background-image: url("../image/logout.png");
 }
+
+#error
+{
+    background-color: red;
+}
