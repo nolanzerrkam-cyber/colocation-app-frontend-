@@ -97,6 +97,9 @@ html, body
     gap: 15px;
     padding: 15px;
 }
+
+/* ---------- Page owner (branche b44f) ---------- */
+
 .middlePageOwner
 {
     display: grid;
@@ -108,6 +111,8 @@ html, body
     width: 100vw;
     box-sizing: border-box;
 }
+
+/* ---------- Cartes du menu ---------- */
 
 .sum {
     background-color: white;
@@ -172,10 +177,10 @@ body:has(.sum.clicked) .sum:not(.clicked)
     grid-column: 1;
     height: 100%;
     display: flex;
-    flex-direction: column;   
-    justify-content: center;  
-    align-items: center;      
-    gap: 15px;                
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
     text-align: center;
 }
 
@@ -185,11 +190,11 @@ body:has(.sum.clicked) .sum:not(.clicked)
     left: 50%;
     transform: translate(-50%, -50%);
     transform-origin: center center !important; /* Really important for the animation, otherwise the center will be 0,0, which is the top left corner of your screen.*/
-    
+
     width: 12rem;
     height: 12rem;
     border-radius: 50%;
-    
+
     z-index: 10;
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
 }
@@ -199,10 +204,10 @@ body:has(.sum.clicked) .sum:not(.clicked)
     grid-column: 2;
     height: 100%;
     display: flex;
-    flex-direction: column;   
-    justify-content: center;  
-    align-items: center;      
-    gap: 15px;                
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
     text-align: center;
 }
 
@@ -216,99 +221,6 @@ h1
     border: 2px solid black;
     padding: 2.5vh;
 }
-.ButtonApp
-{
-    height: 8vh;
-    width: 20vh;
-    background-color: white;
-    border: 2px black solid;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10%;
-    box-shadow: 2px 0 black;
-}
-
-/* .sumRoomates, .sumRentOwner
-{
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
-    width: 30%;                  
-    height: 80%;                 
->>>>>>> b44f5d88da11ba1f2439009458589a5841ee89a8
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-<<<<<<< HEAD
-    height: 100%;
-    width: 100%;
-    position: relative;
-    cursor: pointer;
-
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-    opacity 0.3s ease-out,
-    border-color 0.3s ease-out,
-    box-shadow 0.3s ease-out;
-
-    transform-origin: top left;
-=======
-    flex-direction: column;
-}
-
-.sumRoomates, .sumRentOwner
-{
-    width: 80%;
-    height : 30%;
-} */
-
-.loginPart
-{
-    background-color: aliceblue;
-    border : 4px double black;
-    border-radius: 12px;
-    width : 80vw;
-    height : 80vh;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    gap: 20px;
-    box-shadow: 10px 10px black;
-}
-
-.bodyLogin
-{
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-}
-
-.sum:hover {
-    color: rgb(130, 130, 245);
-    border: 4px solid rgb(130, 130, 245);
-    transform: translateY(-5px);
-}
-
-.sum.clicked {
-    z-index: 9999;
-}
-
-body:has(.sum.clicked) .sum:not(.clicked)
-{
-    opacity: 0;
-    transition: opacity 0.2s ease-out;
-}
-
-#hour
-{
-    border: 2px solid black;
-    padding: 2.5vh;
-}
 
 .ButtonApp
 {
@@ -321,6 +233,7 @@ body:has(.sum.clicked) .sum:not(.clicked)
     background-position: center;
     border-radius: 10%;
     box-shadow: 2px 0 black;
+}
 
 .roomatesCard {
     height: 65%;
@@ -359,25 +272,25 @@ body:has(.sum.clicked) .sum:not(.clicked)
     border-radius: 8px;
 }
 
-.roommate-info 
+.roommate-info
 {
     text-align: left;
 }
 
-.roommate-name 
+.roommate-name
 {
     font-weight: bold;
     font-size: 1rem;
     display: block;
 }
 
-.roommate-details 
+.roommate-details
 {
     font-size: 0.85rem;
     color: #444;
 }
 
-.btn 
+.btn
 {
     cursor: pointer;
     padding: 6px 14px;
@@ -398,28 +311,17 @@ body:has(.sum.clicked) .sum:not(.clicked)
     border: 2px solid black;
 }
 
-#email
-{
-    background-image: url("../image/mail.png");
-    background-repeat: no-repeat;
-    background-position: -10px center;
-    background-size: 50px auto;
-    
-    text-indent: 50px;
-}
-
 #pswrd
 {
     background-image: url("../image/lock.png");
     background-repeat: no-repeat;
     background-position: 0px center;
     background-size : 30px auto;
-    
+
     text-indent: 50px;
 }
 
-
-
+/* ---------- Icônes des boutons ---------- */
 
 #settingsButton
 {
@@ -444,7 +346,6 @@ body:has(.sum.clicked) .sum:not(.clicked)
 #shopButton
 {
     background-image: url("../image/shop_icon.png");
-
 }
 #roomatesButton
 {
@@ -490,25 +391,7 @@ body:has(.sum.clicked) .sum:not(.clicked)
     view-transition-name: box-payement;
 }
 
-/*le css pour le mobile*/
-@media screen and (max-width: 900px) {
-    .middlePage {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 17vh);
-        position: absolute;
-        overflow-y: auto;
-        padding-bottom: 25px;
-    }
-
-    .sumRent { height: 130px; width: 100%; }
-    .sumChores { height: 220px; width: 100%; }
-    .sumPayement { height: 160px; width: 100%; }
-    .sumShop { height: 180px; width: 100%; }
-
-    .topPage { gap: 20px; }
-}
+/* ---------- Page chores (HEAD) ---------- */
 
 #chores-page {
     display: flex;
@@ -791,7 +674,7 @@ body:has(.sum.clicked) .sum:not(.clicked)
     color: white;
 }
 
-/* LOGIN */
+/* ---------- LOGIN (HEAD) ---------- */
 
 .bodyLogin {
     display: flex;
@@ -930,6 +813,10 @@ body:has(.sum.clicked) .sum:not(.clicked)
 
 .adminShowOnly a:hover {
     text-decoration: underline;
+}
+
+/* ---------- Pages de gestion owner (branche b44f) ---------- */
+
 /* Surcharge uniquement pour la page de gestion des colocataires */
 #manageRoommatesCard {
     display: flex !important;
@@ -949,8 +836,6 @@ body:has(.sum.clicked) .sum:not(.clicked)
     width: 100%;
     padding: 15px;
     border: 2px solid #333;
-
-
 }
 
 #manageRoommatesCard .header-top {
