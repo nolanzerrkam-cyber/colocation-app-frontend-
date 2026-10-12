@@ -25,7 +25,7 @@ onload = function()
     sumShop.addEventListener("click", () => morph("shop.html", sumShop));
     sumRent.addEventListener("click",() => morph("rent.html", sumRent));
     sumChores.addEventListener("click", () => morph("chores.html", sumChores));
-    sumPayement.addEventListener("click", () => morph("payement.html", sumPayement));
+    sumExpenses.addEventListener("click", () => morph("expenses.html", sumExpenses));
 }
 
 function updateClock()
