@@ -206,10 +206,44 @@ h1 {
     width: auto;
     object-fit: contain;
 }
+#logout {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: red;
+    border: 2px solid red;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    justify-content: center;
+    min-width: 90px;
+    min-height: 40px;
+    transition: color 0.3s ease;
+}
 
-#hour {
+#logout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: red;
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+#logout:hover::before {
+    width: 100%;
+}
+
+#logout:hover {
+    color: #FFFFFF;
+}
+#hour  {
     border: 2px solid black;
-    padding: 10px 15px;
     border-radius: 8px;
     background-color: white;
     display: flex;
@@ -283,9 +317,6 @@ h1 {
     background-image: url("../image/placeholder.png");
 }
 
-#logout {
-    background-image: url("../image/logout.png");
-}
 
 .middlePage {
     display: grid;
