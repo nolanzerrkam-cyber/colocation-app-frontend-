@@ -1,4 +1,4 @@
-let sumPayement;
+let sumExpenses;
 let sumShop;
 let sumRent;
 let sumChores;
@@ -9,7 +9,7 @@ let sumSupport;
 
 onload = function()
 {
-    sumPayement = document.getElementById("sumPayement");
+    sumExpenses = document.getElementById("sumExpenses");
     sumShop = document.getElementById("sumShop");
     sumRent = document.getElementById("sumRent");
     sumChores = document.getElementById("sumChores");
@@ -28,18 +28,62 @@ onload = function()
     });
 
     // Visual transitions on click
-    // Change from the 6th october : since we use the same js file for everything, I had to put validation so the translation actually work on the owner page too.
-    if (sumShop) sumShop.addEventListener("click", function() { morph.call(this, "shop.html"); });
-    if (sumRent) sumRent.addEventListener("click", function() { morph.call(this, "rent.html"); });
-    if (sumChores) sumChores.addEventListener("click", function() { morph.call(this, "chores.html"); });
-    if (sumPayement) sumPayement.addEventListener("click", function() { morph.call(this, "payement.html"); });
-    
-    // Éléments de la page Owner
+    sumShop.addEventListener("click", () => morph("shop.html", sumShop));
+    sumRent.addEventListener("click",() => morph("rent.html", sumRent));
+    sumChores.addEventListener("click", () => morph("chores.html", sumChores));
+    sumExpenses.addEventListener("click", () => morph("expenses.html", sumExpenses));
     if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "manage-rent.html"); });
     if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "manage-roomates.html"); });
     if (sumSupport) sumSupport.addEventListener("click", function() { morphCircle.call(this, "support.html"); });
 }
 
+function updateClock()
+{
+    var tdy = new Date();
+    document.getElementById('hour').innerHTML = tdy.toLocaleTimeString();
+}
+
+updateClock();
+setInterval(updateClock, 1000);
+async function getHelloWorld() {
+    const url = "http://localhost:8080/api/test/1";
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error("Error from backend")
+            return;
+        }
+
+        const result = await response.json();
+        console.log(result);
+    } catch (error) {
+        console.error(error.message);
+    }
+}
+
+function morph(redirect, element) {
+    if (element.classList.contains('clicked')) return;
+    element.classList.add('clicked');
+
+    const startRect = element.getBoundingClientRect();
+
+    const targetLeft = 15;
+    const targetTop = (window.innerHeight * 0.1) + 15;
+    const targetWidth = window.innerWidth - 30;
+    const targetHeight = (window.innerHeight - (window.innerHeight * 0.17)) - 30;
+
+    const deltaX = targetLeft - startRect.left;
+    const deltaY = targetTop - startRect.top;
+
+    const scaleX = targetWidth / startRect.width;
+    const scaleY = targetHeight / startRect.height;
+
+    element.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
+
+    setTimeout(function() {
+        location.href = redirect;
+    }, 380);
+}
 const list = document.getElementById('roommatesList');
 const addBtn = document.getElementById('addRoommateBtn');
 const numberRoomates = document.getElementById('numberOfRoomates');
@@ -50,9 +94,9 @@ if(numberRoomates)
 }
 if(list)
 {
-    list.addEventListener('click', (e) => 
+    list.addEventListener('click', (e) =>
     {
-        if (e.target.classList.contains('btn-delete')) 
+        if (e.target.classList.contains('btn-delete'))
         {
             if(list.children.length === 30)
             {
@@ -66,7 +110,7 @@ if(list)
 
 if(addBtn)
 {
-    addBtn.addEventListener('click', () => 
+    addBtn.addEventListener('click', () =>
     {
         const count = list.children.length + 1;
         if(count === 31)
@@ -90,17 +134,6 @@ if(addBtn)
     });
 }
 
-function updateClock()
-{
-    var tdy = new Date();
-    var hourElement = document.getElementById('hour');
-    if (hourElement) {
-        hourElement.innerHTML = tdy.toLocaleTimeString();
-    }
-}
-
-updateClock();
-setInterval(updateClock, 1000);
 
 
 //Login
@@ -188,7 +221,7 @@ function morph(redirect) {
 }
 
 // This method is used to do the animation, when click on the button support on owner.html.
-function morphCircle(redirect) 
+function morphCircle(redirect)
 {
     if (this.classList.contains('clicked')) return;
     this.classList.add('clicked');
