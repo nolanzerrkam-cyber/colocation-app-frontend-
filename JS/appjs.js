@@ -22,10 +22,10 @@ onload = function()
     });
 
     // Visual transitions on click
-    sumShop.addEventListener("click", () => morph("shop.html", sumShop));
-    sumRent.addEventListener("click",() => morph("rent.html", sumRent));
-    sumChores.addEventListener("click", () => morph("chores.html", sumChores));
-    sumExpenses.addEventListener("click", () => morph("expenses.html", sumExpenses));
+    if(sumShop) sumShop.addEventListener("click", () => morph("shop.html", sumShop));
+    if(sumRent) sumRent.addEventListener("click",() => morph("rent.html", sumRent));
+    if(sumChores) sumChores.addEventListener("click", () => morph("chores.html", sumChores));
+    if(sumExpenses) sumExpenses.addEventListener("click", () => morph("expenses.html", sumExpenses));
 }
 
 function updateClock()
