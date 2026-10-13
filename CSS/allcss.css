@@ -37,7 +37,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Manrope-ExtraBold, sans-serif;}
+    font-family: Manrope-ExtraBold, sans-serif;
+}
 
 html, body {
     height: 100%;
@@ -45,21 +46,24 @@ html, body {
     overflow-x: hidden;
 }
 
+h1 {
+    text-align: center;
+}
+
 .topPage {
     display: flex;
     justify-content: start;
     align-items: center;
-
     padding: 0 15px;
     height: 10vh;
     top: 0;
     background: oklch(0.975 0.012 172);
-
     position: fixed;
     width: 100vw;
     z-index: 10;
     overflow: hidden;
 }
+
 .brand {
     display: flex;
     align-items: center;
@@ -76,6 +80,19 @@ html, body {
     object-fit: contain;
 }
 
+#hour {
+    border: 2px solid black;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    min-width: 90px;
+    min-height: 40px;
+}
+
 .footerApp {
     display: flex;
     gap: 2%;
@@ -84,9 +101,63 @@ html, body {
     background: oklch(0.975 0.012 172);
     align-items: center;
     justify-content: center;
-
     position: fixed;
     width: 100vw;
+}
+
+.ButtonApp {
+    height: 8vh;
+    width: 20vh;
+    background-color: white;
+    border: 2px black solid;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 10%;
+    box-shadow: 2px 0 black;
+}
+
+.ButtonApp:hover {
+    color: #005F4B;
+    border: 3px solid #005F4B;
+    transform: translateY(-2px);
+}
+
+#settingsButton {
+    background-image: url("../image/setting.png");
+    margin: 5vh;
+}
+
+#rentButton {
+    background-image: url("../image/rent.png");
+}
+
+#choresButton {
+    background-image: url("../image/todolist.png");
+}
+
+#moreButton {
+    background-image: url("../image/home.png");
+}
+
+#expensesButton {
+    background-image: url("../image/wallet.png");
+}
+
+#shopButton {
+    background-image: url("../image/shop_icon.png");
+}
+
+#roomatesButton {
+    background-image: url("../image/roomates.png");
+}
+
+#supportButton {
+    background-image: url("../image/placeholder.png");
+}
+
+#logout {
+    background-image: url("../image/logout.png");
 }
 
 .middlePage {
@@ -99,7 +170,6 @@ html, body {
         "payment shop"
         "chores shop"
         "chores rent";
-
     position: absolute;
     top: 10vh;
     height: calc(100vh - 17vh);
@@ -108,17 +178,73 @@ html, body {
     gap: 15px;
     padding: 15px;
 }
-.middlePageOwner
-{
+
+.middlePageOwner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-
     position: absolute;
     top: 10vh;
     height: calc(100vh - 17vh);
     width: 100vw;
     box-sizing: border-box;
 }
+
+.centerPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10vh;
+    height: calc(100vh - 17vh);
+    width: 100vw;
+    box-sizing: border-box;
+    gap: 15px;
+    padding: 15px;
+}
+
+.infoPage {
+    background-color: white;
+    color: rgb(130, 130, 245);
+    border: 4px solid #005F4B;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 15px;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+.infoPage::-webkit-scrollbar {
+    display: none;
+}
+
+.background {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: oklch(0.975 0.012 172);
+}
+
+.background h1 {
+    font-size: 35px;
+    font-family: Manrope-ExtraBold, sans-serif;
+    text-align: left;
+}
+
+.background main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin: 0;
+}
+
 .sum {
     background-color: white;
     border: 2px solid black;
@@ -132,12 +258,10 @@ html, body {
     width: 100%;
     position: relative;
     cursor: pointer;
-
     transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
     opacity 0.3s ease-out,
     border-color 0.1s ease,
     box-shadow 0.3s ease-out;
-
     transform-origin: top left;
 }
 
@@ -158,29 +282,21 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 #sumRent {
     grid-area: rent;
-
 }
 
 #sumChores {
     grid-area: chores;
-
 }
 
 #sumExpenses {
     grid-area: payment;
-
 }
 
 #sumShop {
     grid-area: shop;
-
 }
 
-h1 {
-    text-align: center;
-}
-#sumRoomates
-{
+#sumRoomates {
     grid-column: 1;
     height: 100%;
     display: flex;
@@ -190,22 +306,8 @@ h1 {
     gap: 15px;
     text-align: center;
 }
-#sumSupport {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transform-origin: center center !important; /* Really important for the animation, otherwise the center will be 0,0, which is the top left corner of your screen.*/
 
-    width: 12rem;
-    height: 12rem;
-    border-radius: 50%;
-
-    z-index: 10;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
-}
-#sumRentOwner
-{
+#sumRentOwner {
     grid-column: 2;
     height: 100%;
     display: flex;
@@ -215,35 +317,19 @@ h1 {
     gap: 15px;
     text-align: center;
 }
-#hour {
-    border: 2px solid black;
-    padding: 10px 15px;
-    border-radius: 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    min-width: 90px;
-    min-height: 40px;
-}
 
-.ButtonApp {
-    height: 8vh;
-    width: 20vh;
-    background-color: white;
-    border: 2px black solid;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 10%;
-    box-shadow: 2px 0 black;
+#sumSupport {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center !important;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
 }
-.ButtonApp:hover
-{
-    color: #005F4B;
-    border: 3px solid #005F4B;
-    transform: translateY(-2px);
 
 .roomatesCard {
     height: 65%;
@@ -251,9 +337,6 @@ h1 {
     padding: 20px;
 }
 
-#settingsButton {
-    background-image: url("../image/setting.png");
-    margin: 5vh;
 .statusCard {
     height: 15%;
 }
@@ -285,164 +368,47 @@ h1 {
     border-radius: 8px;
 }
 
-.roommate-info
-{
+.roommate-info {
     text-align: left;
 }
-    .roommate-name
-    {
-        font-weight: bold;
-        font-size: 1rem;
-        display: block;
-    }
 
-    .roommate-details
-    {
-        font-size: 0.85rem;
-        color: #444;
-    }
-
-    .btn
-    {
-        cursor: pointer;
-        padding: 6px 14px;
-        border-radius: 6px;
-        font-weight: bold;
-        font-size: 0.85rem;
-    }
-
-    .btn-add {
-        background-color: #28a745;
-        color: white;
-        border: 2px solid black;
-    }
-
-    .btn-delete {
-        background-color: #dc3545;
-        color: white;
-        border: 2px solid black;
-    }
-
-    #pswrd
-    {
-        background-image: url("../image/lock.png");
-        background-repeat: no-repeat;
-        background-position: 0px center;
-        background-size : 30px auto;
-
-        text-indent: 50px;
-    }
-
-#rentButton {
-    background-image: url("../image/rent.png");
+.roommate-name {
+    font-weight: bold;
+    font-size: 1rem;
+    display: block;
 }
 
-#choresButton {
-    background-image: url("../image/todolist.png");
+.roommate-details {
+    font-size: 0.85rem;
+    color: #444;
 }
 
-#moreButton {
-    background-image: url("../image/home.png");
+.btn {
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.85rem;
 }
 
-#expensesButton {
-    background-image: url("../image/wallet.png");
-}
-#shopButton
-{
-    background-image: url("../image/shop_icon.png");
-}
-#roomatesButton
-{
-    background-image: url("../image/roomates.png");
-}
-#supportButton
-{
-    background-image: url(../image/placeholder.png);
-}
-#logout
-{
-    background-image: url("../image/logout.png");
+.btn-add {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid black;
 }
 
-
-
-
-.centerPage {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10vh;
-    height: calc(100vh - 17vh);
-    width: 100vw;
-    box-sizing: border-box;
-    gap: 15px;
-    padding: 15px;
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: 2px solid black;
 }
 
-.infoPage {
-    background-color: white;
-    color: rgb(130, 130, 245);
-    border: 4px solid #005F4B;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 15px;
-
-
-    min-height: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-
-    scrollbar-width: none;
-
-    /* Pour Chrome, Safari et Edge */
-    &::-webkit-scrollbar {
-        display: none;
-    }
-}
-
-/*le css pour le mobile*/
-@media screen and (max-width: 900px) {
-    .middlePage {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 17vh);
-        position: absolute;
-        overflow-y: auto;
-        padding-bottom: 25px;
-    }
-
-    .sumRent {
-        height: 130px;
-        width: 100%;
-    }
-
-    .sumChores {
-        height: 220px;
-        width: 100%;
-    }
-
-    .sumExpenses {
-        height: 160px;
-        width: 100%;
-    }
-
-    .sumShop {
-        height: 180px;
-        width: 100%;
-    }
-
-    .topPage {
-        gap: 20px;
-    }
+#pswrd {
+    background-image: url("../image/lock.png");
+    background-repeat: no-repeat;
+    background-position: 0px center;
+    background-size: 30px auto;
+    text-indent: 50px;
 }
 
 #chores-page {
@@ -463,6 +429,11 @@ h1 {
     flex-direction: column;
     width: 100vw;
     margin: 0;
+}
+
+#chores-page h2 {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
 }
 
 #filter-div {
@@ -487,15 +458,26 @@ h1 {
     color: white;
 }
 
-#chores-page h2 {
-    font-size: 15px;
-    font-family: Manrope-Bold, sans-serif;
-}
-
 #add-chore-1 {
     font-size: 13px;
     cursor: pointer;
     font-family: Manrope-Medium, sans-serif;
+}
+
+#add-chore-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    height: 60px;
+    width: 60px;
+    background: rgb(0, 93, 75);
+    color: white;
+    border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    bottom: 40px;
+    right: 40px;
 }
 
 #task-title-div {
@@ -576,20 +558,136 @@ h1 {
     font-size: 8px;
 }
 
-#add-chore-2 {
+.task-separator {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    width: 95%;
+    margin: 20px auto 20px auto;
+}
+
+#balance-div {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
-    height: 60px;
-    width: 60px;
-    background: rgb(0, 93, 75);
-    color: white;
+    height: 200px;
+    width: 100%;
+    background: #1A202C;
     border-radius: 20px;
-    position: absolute;
+    color: white;
+}
+
+#balance-div h2 {
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    letter-spacing: 2px;
+}
+
+#balance-div div:first-child {
+    width: 95%;
+    height: 70%;
+}
+
+#balance {
+    font-family: Manrope-ExtraBold, sans-serif;
+    font-size: 40px;
+    padding: 15px 0 30px 0;
+}
+
+#total {
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+#total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Manrope-Regular, sans-serif;
+    font-size: 11px;
+    padding: 15px 0 0 0;
+}
+
+.separator {
+    height: 1px;
+    background: #E0ECDF;
+}
+
+#recent-expenses-title {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
+}
+
+#expenses-list {
+    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
+    border-radius: 20px;
+    background: white;
+}
+
+.expense {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    margin: 20px;
+}
+
+.expense div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.expense h3 {
+    font-size: 12px;
+    font-family: Manrope-Bold, sans-serif;
+}
+
+.expense p {
+    font-size: 10px;
+}
+
+.expense-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: oklch(0.9359 0.043 172);
     cursor: pointer;
-    bottom: 40px;
-    right: 40px;
+    height: 35px;
+    width: 35px;
+}
+
+.expense-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.expense-sender {
+    display: flex;
+    gap: 10px;
+}
+
+.expense-amount {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.expense-amount p {
+    font-size: 15px;
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+.expense-separator {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    width: 95%;
+    margin: 20px auto 20px auto;
 }
 
 .modal-overlay {
@@ -712,160 +810,43 @@ h1 {
     filter: grayscale(1);
 }
 
-.task-separator {
-    border: none;
-    height: 1px;
-    background-color: #e2e8f0;
-    width: 95%;
-    margin: 20px auto 20px auto;
-}
-
 #notifier {
     padding: 15px 0 0 0;
     color: white;
 }
 
-.background {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background: oklch(0.975 0.012 172);
-}
+@media screen and (max-width: 900px) {
+    .middlePage {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 17vh);
+        position: absolute;
+        overflow-y: auto;
+        padding-bottom: 25px;
+    }
 
-.background h1 {
-    font-size: 35px;
-    font-family: Manrope-ExtraBold, sans-serif;
-    text-align: left;
-}
+    .sumRent {
+        height: 130px;
+        width: 100%;
+    }
 
-.background main {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    margin: 0;
+    .sumChores {
+        height: 220px;
+        width: 100%;
+    }
 
-}
+    .sumExpenses {
+        height: 160px;
+        width: 100%;
+    }
 
-#balance-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
-    width: 100%;
-    background: #1A202C;
-    border-radius: 20px;
-    color: white;
-}
+    .sumShop {
+        height: 180px;
+        width: 100%;
+    }
 
-#balance-div h2 {
-    font-size: 11px;
-    font-family: Manrope-Bold, sans-serif;
-    letter-spacing: 2px;
-}
-
-#balance {
-    font-family: Manrope-ExtraBold, sans-serif;
-    font-size: 40px;
-    padding: 15px 0 30px 0;
-}
-
-#balance-div div:first-child {
-    width: 95%;
-    height: 70%;
-}
-
-#total {
-    font-family: Manrope-ExtraBold, sans-serif;
-}
-
-#total-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: Manrope-Regular, sans-serif;
-    font-size: 11px;
-    padding: 15px 0 0 0;
-}
-
-.separator {
-    height: 1px;
-    background: #E0ECDF;
-}
-
-#expenses-list {
-    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
-    border-radius: 20px;
-    background: white;
-}
-
-.expense {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 35px;
-    margin: 20px;
-}
-
-.expense div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    height: 100%;
-}
-
-.expense h3 {
-    font-size: 12px;
-    font-family: Manrope-Bold, sans-serif;
-}
-
-.expense p {
-    font-size: 10px;
-}
-
-.expense-check {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    background: oklch(0.9359 0.043 172);
-    cursor: pointer;
-    height: 35px;
-    width: 35px;
-}
-
-.expense-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-}
-
-.expense-sender {
-    display: flex;
-    gap: 10px;
-}
-
-.expense-amount {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.expense-amount p {
-    font-size: 15px;
-    font-family: Manrope-ExtraBold, sans-serif;
-}
-
-.expense-separator {
-    border: none;
-    height: 1px;
-    background-color: #e2e8f0;
-    width: 95%;
-    margin: 20px auto 20px auto;
-}
-
-#recent-expenses-title {
-    font-size: 15px;
-    font-family: Manrope-Bold, sans-serif;
+    .topPage {
+        gap: 20px;
+    }
 }
