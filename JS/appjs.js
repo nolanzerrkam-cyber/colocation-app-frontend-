@@ -3,6 +3,9 @@ let sumShop;
 let sumRent;
 let sumChores;
 let boxes;
+let sumRentOwner;
+let sumRoomates;
+let sumSupport;
 
 onload = function()
 {
@@ -10,6 +13,9 @@ onload = function()
     sumShop = document.getElementById("sumShop");
     sumRent = document.getElementById("sumRent");
     sumChores = document.getElementById("sumChores");
+    sumRentOwner = document.getElementById("sumRentOwner");
+    sumRoomates = document.getElementById("sumRoomates");
+    sumSupport = document.getElementById("sumSupport");
     boxes = Array.from(document.getElementsByClassName("sum"));
 
     window.addEventListener('pageshow', function(event) {
@@ -26,6 +32,9 @@ onload = function()
     sumRent.addEventListener("click",() => morph("rent.html", sumRent));
     sumChores.addEventListener("click", () => morph("chores.html", sumChores));
     sumExpenses.addEventListener("click", () => morph("expenses.html", sumExpenses));
+    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "manage-rent.html"); });
+    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "manage-roomates.html"); });
+    if (sumSupport) sumSupport.addEventListener("click", function() { morphCircle.call(this, "support.html"); });
 }
 
 function updateClock()
@@ -75,3 +84,159 @@ function morph(redirect, element) {
         location.href = redirect;
     }, 380);
 }
+const list = document.getElementById('roommatesList');
+const addBtn = document.getElementById('addRoommateBtn');
+const numberRoomates = document.getElementById('numberOfRoomates');
+
+if(numberRoomates)
+{
+    numberRoomates.innerHTML = list.children.length;
+}
+if(list)
+{
+    list.addEventListener('click', (e) =>
+    {
+        if (e.target.classList.contains('btn-delete'))
+        {
+            if(list.children.length === 30)
+            {
+                document.getElementById("error-section").innerHTML = "";
+            }
+            e.target.closest('.roommate-item').remove();
+            numberRoomates.innerHTML = list.children.length;
+        }
+    });
+}
+
+if(addBtn)
+{
+    addBtn.addEventListener('click', () =>
+    {
+        const count = list.children.length + 1;
+        if(count === 31)
+        {
+            const error = document.getElementById("error-section");
+            error.innerHTML = "There are too much roomates on the shared home !";
+        }
+        else
+        {
+            const item = document.createElement('div');
+            item.className = 'roommate-item';
+            item.innerHTML = `
+                <div class="roommate-info">
+                    <span class="roommate-name">Roomate n°${count}</span>
+                    <div class="roommate-details">Room n°${count} — email@exemple.com</div>
+                </div>
+                <button class="btn btn-delete">- Delete</button>`;
+            list.appendChild(item);
+            numberRoomates.innerHTML = list.children.length;
+        }
+    });
+}
+
+
+
+//Login
+const submitLoginBtn = document.getElementById("submitLogin");
+
+async function login(event)
+{
+    console.log("login")
+    event?.preventDefault();
+    document.getElementById("error").style.display = "none";
+
+    //get email password
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email)
+    {
+        alert("Email cannot be empty or only spaces");
+        return;
+    }
+
+    if (!password.trim())
+    {
+        alert("Password cannot be empty or only spaces");
+        return;
+    }
+    //api request
+        const response = await fetch('http://localhost:8080/api/user/login',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({email,password})
+            });
+
+        //Error handling and display to user
+        if (!response.ok)
+        {
+            let errorText = await response.text();
+            let el = document.getElementById("error");
+            el.textContent = errorText;
+            el.style.display = "block";
+            return
+        }
+
+        //put user in session
+        const result = await response.json();
+        sessionStorage.setItem("user", JSON.stringify(result));
+
+        //redirection
+        if(result["role"] === "ROOMMATE"  )
+        {
+            window.location.replace("index.html");
+        }
+        else
+        {
+            window.location.replace("owner.html");
+        }
+
+}
+
+submitLoginBtn.addEventListener('click',login);
+
+function morph(redirect) {
+    if (this.classList.contains('clicked')) return;
+    this.classList.add('clicked');
+
+    const startRect = this.getBoundingClientRect();
+
+    const targetLeft = 15;
+    const targetTop = (window.innerHeight * 0.1) + 15;
+    const targetWidth = window.innerWidth - 30;
+    const targetHeight = (window.innerHeight - (window.innerHeight * 0.17)) - 30;
+
+    const deltaX = targetLeft - startRect.left;
+    const deltaY = targetTop - startRect.top;
+
+    const scaleX = targetWidth / startRect.width;
+    const scaleY = targetHeight / startRect.height;
+
+    this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
+
+    setTimeout(function() {
+        location.href = redirect;
+    }, 380);
+}
+
+// This method is used to do the animation, when click on the button support on owner.html.
+function morphCircle(redirect)
+{
+    if (this.classList.contains('clicked')) return;
+    this.classList.add('clicked');
+
+    // I need to calculate the space that I need on the screen
+    const maxDimension = Math.max(window.innerWidth, window.innerHeight);
+    const scaleFactor = (maxDimension * 0.5) / this.offsetWidth;
+
+    this.style.borderColor = "transparent";
+
+    // then i put the correct format for the animation
+    this.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
+
+    setTimeout(() => {
+        location.href = redirect;
+    }, 380);
+}
+

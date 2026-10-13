@@ -108,7 +108,17 @@ html, body {
     gap: 15px;
     padding: 15px;
 }
+.middlePageOwner
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 
+    position: absolute;
+    top: 10vh;
+    height: calc(100vh - 17vh);
+    width: 100vw;
+    box-sizing: border-box;
+}
 .sum {
     background-color: white;
     border: 2px solid black;
@@ -169,7 +179,42 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 h1 {
     text-align: center;
 }
+#sumRoomates
+{
+    grid-column: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+#sumSupport {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center !important; /* Really important for the animation, otherwise the center will be 0,0, which is the top left corner of your screen.*/
 
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
+}
+#sumRentOwner
+{
+    grid-column: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
 #hour {
     border: 2px solid black;
     padding: 10px 15px;
@@ -199,12 +244,94 @@ h1 {
     color: #005F4B;
     border: 3px solid #005F4B;
     transform: translateY(-2px);
+
+.roomatesCard {
+    height: 65%;
+    justify-content: flex-start;
+    padding: 20px;
 }
 
 #settingsButton {
     background-image: url("../image/setting.png");
     margin: 5vh;
+.statusCard {
+    height: 15%;
 }
+
+.action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.roommates-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: calc(100% - 40px);
+}
+
+.roommate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.roommate-info
+{
+    text-align: left;
+}
+    .roommate-name
+    {
+        font-weight: bold;
+        font-size: 1rem;
+        display: block;
+    }
+
+    .roommate-details
+    {
+        font-size: 0.85rem;
+        color: #444;
+    }
+
+    .btn
+    {
+        cursor: pointer;
+        padding: 6px 14px;
+        border-radius: 6px;
+        font-weight: bold;
+        font-size: 0.85rem;
+    }
+
+    .btn-add {
+        background-color: #28a745;
+        color: white;
+        border: 2px solid black;
+    }
+
+    .btn-delete {
+        background-color: #dc3545;
+        color: white;
+        border: 2px solid black;
+    }
+
+    #pswrd
+    {
+        background-image: url("../image/lock.png");
+        background-repeat: no-repeat;
+        background-position: 0px center;
+        background-size : 30px auto;
+
+        text-indent: 50px;
+    }
 
 #rentButton {
     background-image: url("../image/rent.png");
@@ -221,10 +348,25 @@ h1 {
 #expensesButton {
     background-image: url("../image/wallet.png");
 }
-
-#shopButton {
+#shopButton
+{
     background-image: url("../image/shop_icon.png");
 }
+#roomatesButton
+{
+    background-image: url("../image/roomates.png");
+}
+#supportButton
+{
+    background-image: url(../image/placeholder.png);
+}
+#logout
+{
+    background-image: url("../image/logout.png");
+}
+
+
+
 
 .centerPage {
     display: flex;
