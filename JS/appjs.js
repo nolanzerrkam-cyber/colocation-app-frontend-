@@ -108,6 +108,7 @@ const submitLoginBtn = document.getElementById("submitLogin");
 
 async function login(event)
 {
+    console.log("login")
     event?.preventDefault();
     document.getElementById("error").style.display = "none";
 
@@ -141,6 +142,7 @@ async function login(event)
             let el = document.getElementById("error");
             el.textContent = errorText;
             el.style.display = "block";
+            return
         }
 
         //put user in session
@@ -148,7 +150,14 @@ async function login(event)
         sessionStorage.setItem("user", JSON.stringify(result));
 
         //redirection
-        window.location.replace("owner.html");
+        if(result["role"] === "ROOMMATE"  )
+        {
+            window.location.replace("index.html");
+        }
+        else
+        {
+            window.location.replace("owner.html");
+        }
 
 }
 
