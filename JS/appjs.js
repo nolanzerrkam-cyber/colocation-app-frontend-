@@ -5,17 +5,26 @@ let sumChores;
 let boxes;
 let sumRentOwner;
 let sumRoomates;
-let sumSupport;
+let submitLoginBtn
 
 onload = function() {
+    const currentUser = sessionStorage.getItem("user");
+    if (!currentUser) {
+        window.location.replace("login.html");
+    }
     sumExpenses = document.getElementById("sumExpenses");
     sumShop = document.getElementById("sumShop");
     sumRent = document.getElementById("sumRent");
     sumChores = document.getElementById("sumChores");
     sumRentOwner = document.getElementById("sumRentOwner");
     sumRoomates = document.getElementById("sumRoomates");
-    sumSupport = document.getElementById("sumSupport");
+    submitLoginBtn = document.getElementById("submitLogin");
     boxes = Array.from(document.getElementsByClassName("sum"));
+
+    if (submitLoginBtn) {
+        submitLoginBtn.addEventListener('click', login);
+    }
+
 
     window.addEventListener('pageshow', function(event) {
         if (event.persisted) {
@@ -32,7 +41,6 @@ onload = function() {
     if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "expenses.html"));
     if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "manage-rent.html"); });
     if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "manage-roomates.html"); });
-    if (sumSupport) sumSupport.addEventListener("click", function() { morphCircle.call(this, "support.html"); });
 }
 
 function updateClock() {
@@ -113,8 +121,6 @@ if (addBtn) {
     });
 }
 
-const submitLoginBtn = document.getElementById("submitLogin");
-
 async function login(event) {
     event?.preventDefault();
     const errorEl = document.getElementById("error");
@@ -128,12 +134,18 @@ async function login(event) {
     const password = passwordInput.value;
 
     if (!email) {
-        alert("Email cannot be empty or only spaces");
+        if (errorEl) {
+            errorEl.textContent = "Email cannot be empty or white space !";
+            errorEl.style.display = "block";
+        }
         return;
     }
 
     if (!password.trim()) {
-        alert("Password cannot be empty or only spaces");
+        if (errorEl) {
+            errorEl.textContent = "Password cannot be empty or white space !";
+            errorEl.style.display = "block";
+        }
         return;
     }
 
@@ -147,7 +159,7 @@ async function login(event) {
         if (!response.ok) {
             let errorText = await response.text();
             if (errorEl) {
-                errorEl.textContent = errorText;
+                errorEl.textContent = errorText || "Invalid credentials";
                 errorEl.style.display = "block";
             }
             return;
@@ -163,12 +175,13 @@ async function login(event) {
         }
     } catch (err) {
         console.error(err);
+        if (errorEl) {
+            errorEl.textContent = "Server connection error.";
+            errorEl.style.display = "block";
+        }
     }
 }
 
-if (submitLoginBtn) {
-    submitLoginBtn.addEventListener('click', login);
-}
 
 function morph(redirect) {
     if (this.classList.contains('clicked')) return;
@@ -190,21 +203,6 @@ function morph(redirect) {
     this.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${scaleX}, ${scaleY})`;
 
     setTimeout(function() {
-        location.href = redirect;
-    }, 380);
-}
-
-function morphCircle(redirect) {
-    if (this.classList.contains('clicked')) return;
-    this.classList.add('clicked');
-
-    const maxDimension = Math.max(window.innerWidth, window.innerHeight);
-    const scaleFactor = (maxDimension * 1.5) / this.offsetWidth;
-
-    this.style.borderColor = "transparent";
-    this.style.transform = `translate(-50%, -50%) scale(${scaleFactor})`;
-
-    setTimeout(() => {
         location.href = redirect;
     }, 380);
 }
