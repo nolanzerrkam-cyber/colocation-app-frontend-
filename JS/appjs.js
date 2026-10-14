@@ -8,10 +8,7 @@ let sumRoomates;
 let submitLoginBtn
 
 onload = function() {
-    const currentUser = sessionStorage.getItem("user");
-    if (!currentUser) {
-        window.location.replace("login.html");
-    }
+
     sumExpenses = document.getElementById("sumExpenses");
     sumShop = document.getElementById("sumShop");
     sumRent = document.getElementById("sumRent");
