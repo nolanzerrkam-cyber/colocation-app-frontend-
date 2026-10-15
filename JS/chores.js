@@ -1,4 +1,4 @@
-import {getApiUrl} from "./api";
+import {getApiUrl} from "./api.js";
 
 let filter; // todo, mine, done
 let tasks; // list of tasks
