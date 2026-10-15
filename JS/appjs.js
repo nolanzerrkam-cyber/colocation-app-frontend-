@@ -34,12 +34,12 @@ onload = function() {
         }
     });
 
-    if (sumShop) sumShop.addEventListener("click", () => morph.call(sumShop, "shop.html"));
-    if (sumRent) sumRent.addEventListener("click", () => morph.call(sumRent, "rent.html"));
-    if (sumChores) sumChores.addEventListener("click", () => morph.call(sumChores, "chores.html"));
-    if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "expenses.html"));
-    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "manage-rent.html"); });
-    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "manage-roomates.html"); });
+    if (sumShop) sumShop.addEventListener("click", () => morph.call(sumShop, "html/shop.html"));
+    if (sumRent) sumRent.addEventListener("click", () => morph.call(sumRent, "html/rent.html"));
+    if (sumChores) sumChores.addEventListener("click", () => morph.call(sumChores, "html/chores.html"));
+    if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "html/expenses.html"));
+    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "html/manage-rent.html"); });
+    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roomates.html"); });
 }
 
 function updateClock() {
@@ -170,7 +170,7 @@ async function login(event) {
         if (result["role"] === "ROOMMATE") {
             window.location.href = "../index.html";
         } else {
-            window.location.replace("owner.html");
+            window.location.href = "html/owner.html";
         }
     } catch (err) {
         console.error(err);
