@@ -132,18 +132,33 @@ function createExpenseComponent(expenseJson) {
         deleteBtn.style.backgroundColor = '#ffebee';
     });
 
-    deleteBtn.addEventListener('click', async () => 
+    deleteBtn.addEventListener('click', () => 
     {
-        if(confirm(`Are you sure you want to delete ${expenseJson.label} from the list of expense?`));
-        {
+        const modal = document.getElementById("deleteModal");
+        const confirmBtn = document.getElementById("confirmDeleteBtn");
+        const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+        modal.style.display = "flex";
+
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+        const newCancelBtn = cancelBtn.cloneNode(true);
+        cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+            modal.style.display = 'none';
             const success = await deleteExpense(expenseJson.id);
-            if (success)
-            {
+            if (success) {
                 expenses = await getAllExpenses();
                 updateDashboard(expenses);
                 displayExpenseComponent(expenses);
             }
-        }
+        });
     });
 
     expenseAmount.appendChild(deleteBtn);
