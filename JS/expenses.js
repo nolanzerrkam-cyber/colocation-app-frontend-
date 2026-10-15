@@ -114,13 +114,23 @@ function createExpenseComponent(expenseJson) {
 
     expenseAmount.appendChild(amount);
 
-    // Bouton de suppression
     const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = '-';
+    deleteBtn.textContent = '✕';
     deleteBtn.style.border = 'none';
-    deleteBtn.style.background = 'transparent';
+    deleteBtn.style.backgroundColor = '#ffebee';
+    deleteBtn.style.color = '#c62828';
+    deleteBtn.style.padding = '6px 10px';
+    deleteBtn.style.borderRadius = '4px';
     deleteBtn.style.cursor = 'pointer';
     deleteBtn.style.marginLeft = '10px';
+    deleteBtn.style.fontWeight = 'bold';
+
+    deleteBtn.addEventListener('mouseenter', () => {
+        deleteBtn.style.backgroundColor = '#ffcdd2';
+    });
+    deleteBtn.addEventListener('mouseleave', () => {
+        deleteBtn.style.backgroundColor = '#ffebee';
+    });
 
     deleteBtn.addEventListener('click', async () => 
     {
