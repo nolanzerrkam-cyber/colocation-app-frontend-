@@ -383,6 +383,7 @@ h1 {
     padding: 15px;
     min-height: 0;
     overflow-y: auto;
+    gap: 15px;
     overflow-x: hidden;
     scrollbar-width: none;
 }
@@ -729,6 +730,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     justify-content: center;
     align-items: center;
     height: 200px;
+    min-height: 200px;
     width: 100%;
     background: #1A202C;
     border-radius: 20px;
@@ -779,6 +781,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
     border-radius: 20px;
     background: white;
+
 }
 
 .expense {
