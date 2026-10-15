@@ -52,6 +52,7 @@ async function getHelloWorld() {
     }
 }
 
+
 function morph(redirect, element) {
     if (element.classList.contains('clicked')) return;
     element.classList.add('clicked');
