@@ -1,3 +1,5 @@
+import {getApiUrl} from "./api.js";
+
 let sumExpenses;
 let sumShop;
 let sumRent;
@@ -52,7 +54,7 @@ updateClock();
 setInterval(updateClock, 1000);
 
 async function getHelloWorld() {
-    const url = "http://localhost:8080/api/test/1";
+    const url = getApiUrl("/api/test/1");
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -147,7 +149,7 @@ async function login(event) {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/api/user/login', {
+        const response = await fetch(getApiUrl('/api/user/login'), {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({ email, password })
