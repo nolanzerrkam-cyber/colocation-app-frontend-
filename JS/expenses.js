@@ -33,7 +33,7 @@ function getTotalExpenses(expensesList) {
 // Calculate the balance of the current user based on expenses
 function getBalance(expensesList, currentUserEmail) {
     let balance = 0;
-    expensesList.filter(e => e.roommateEmail === currentUserEmail).forEach(e => balance += e.price); // TODO update
+    expensesList.filter(e => e.email === currentUserEmail).forEach(e => balance += e.price);
     return balance;
 }
 
@@ -74,7 +74,7 @@ function createExpenseComponent(expenseJson) {
     expenseSpender.classList.add('expense-sender');
 
     const sender = document.createElement('p');
-    sender.textContent = "Paid by " + expenseJson.roommateEmail; // TODO update
+    sender.textContent = "Paid by " + expenseJson.firstname + ' ' + expenseJson.lastname;
 
     const pTime = document.createElement('p');
     pTime.textContent = expenseJson.date_expense;
