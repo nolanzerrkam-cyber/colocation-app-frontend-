@@ -1,3 +1,5 @@
+import {getApiUrl} from "./api";
+
 let expenses;
 
 const expensesList = document.getElementById("expenses-list");
@@ -31,7 +33,7 @@ function getBalance(expensesList) {
 
 // TODO: implement a pagination system
 async function getAllExpenses() {
-    const url = "http://localhost:8080/api/expense";
+    const url = getApiUrl("/api/expense");
     try {
         const response = await fetch(url);
         if (!response.ok) {
