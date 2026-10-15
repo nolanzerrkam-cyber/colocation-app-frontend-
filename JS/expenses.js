@@ -22,6 +22,14 @@ function getTotalExpenses(expensesList) {
     return total;
 }
 
+// To update the total balance and the total cost
+function updateDashboard(expenseList) {
+    const totalAmount = getTotalExpenses(expenseList);
+    total.innerText = totalAmount + "€";
+    const balanceAmount = getBalance(expenseList);
+    balance.innerText = balanceAmount + "€";
+}
+
 // Calculate the balance of the current user based on expenses
 function getBalance(expensesList) {
     const userSession = sessionStorage.getItem("user");
@@ -48,7 +56,25 @@ async function getAllExpenses() {
     }
 }
 
+async function deleteExpense(expenseId) {
+    const url = getApiUrl(`/api/expense/${expenseId}`);
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            console.error("Error deleting expense from backend");
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error(error.message);
+        return false;
+    }
+}
+
 function createExpenseComponent(expenseJson) {
+    console.log(expenseJson);
     const expense = document.createElement('div');
     expense.classList.add('expense');
 
@@ -87,6 +113,27 @@ function createExpenseComponent(expenseJson) {
     amount.textContent = expenseJson.price + '€';
 
     expenseAmount.appendChild(amount);
+
+    // Bouton de suppression
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '-';
+    deleteBtn.style.border = 'none';
+    deleteBtn.style.background = 'transparent';
+    deleteBtn.style.cursor = 'pointer';
+    deleteBtn.style.marginLeft = '10px';
+
+    deleteBtn.addEventListener('click', async () => 
+    {
+        const success = await deleteExpense(expenseJson.id);
+        if (success)
+         {
+            expenses = await getAllExpenses();
+            updateDashboard(expenses);
+            displayExpenseComponent(expenses);
+        }
+    });
+
+    expenseAmount.appendChild(deleteBtn);
 
     expense.appendChild(expenseDetails);
     expense.appendChild(expenseAmount);
