@@ -20,7 +20,7 @@ window.addEventListener('load', async () => {
     const balanceAmount = getBalance(expenses, currentUser.email);
     balance.innerText = balanceAmount + "€";
 
-    displayExpenseComponent(expenses)
+    displayExpenseComponent(expenses);
 });
 
 // Calculate the total expenses amount of the colocation
@@ -43,14 +43,14 @@ async function getAllExpenses() {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            console.error("Error from backend")
-            return;
+            console.error("Error from backend");
+            return [];
         }
 
         return response.json();
     } catch (error) {
         console.error(error.message);
-        return []
+        return [];
     }
 }
 
@@ -74,7 +74,7 @@ function createExpenseComponent(expenseJson) {
     expenseSpender.classList.add('expense-sender');
 
     const sender = document.createElement('p');
-    sender.textContent = "Paid by " + expenseJson.firstname + ' ' + expenseJson.lastname;
+    sender.textContent = "Paid by " + expenseJson.firstname + " " + expenseJson.lastname;
 
     const pTime = document.createElement('p');
     pTime.textContent = expenseJson.date_expense;
@@ -90,26 +90,26 @@ function createExpenseComponent(expenseJson) {
     expenseAmount.classList.add('expense-amount');
 
     const amount = document.createElement('p');
-    amount.textContent = expenseJson.price+'€';
+    amount.textContent = expenseJson.price + '€';
 
     expenseAmount.appendChild(amount);
 
     expense.appendChild(expenseDetails);
     expense.appendChild(expenseAmount);
 
-    expensesList.appendChild(expense)
+    expensesList.appendChild(expense);
 }
 
 // Remove all child of the tasks list div
 function removeExpenseComponent() {
     while (expensesList.firstChild)
-        expensesList.removeChild(expensesList.lastChild)
+        expensesList.removeChild(expensesList.lastChild);
 }
 
 function createSeparatorComponent() {
     const separator = document.createElement('hr');
     separator.classList.add('expense-separator');
-    expensesList.appendChild(separator)
+    expensesList.appendChild(separator);
 }
 
 function displayExpenseComponent(expenses) {
@@ -117,8 +117,9 @@ function displayExpenseComponent(expenses) {
 
     const expensesLength = expenses.length;
     expenses.forEach((e, index) => {
-        createExpenseComponent(e)
-        if (index !== expensesLength - 1)
-            createSeparatorComponent()
-    })
+        createExpenseComponent(e);
+        if (index !== expensesLength - 1) {
+            createSeparatorComponent();
+        }
+    });
 }
