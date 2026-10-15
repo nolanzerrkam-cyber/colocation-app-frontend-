@@ -5,11 +5,21 @@ const total = document.getElementById("total-expenses");
 const balance = document.getElementById("balance");
 
 window.addEventListener('load', async () => {
+    const currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
+
+    if(!currentUser) {
+        window.location.href = "login.html"
+        return;
+    }
+
     expenses = await getAllExpenses();
+
     const totalAmount = getTotalExpenses(expenses);
     total.innerText = totalAmount + "€";
-    const balanceAmount = getBalance(expenses);
+
+    const balanceAmount = getBalance(expenses, currentUser.email);
     balance.innerText = balanceAmount + "€";
+
     displayExpenseComponent(expenses)
 });
 
@@ -21,10 +31,9 @@ function getTotalExpenses(expensesList) {
 }
 
 // Calculate the balance of the current user based on expenses
-function getBalance(expensesList) {
-    const currentUser = "test@test.com"; // TODO get current user email
+function getBalance(expensesList, currentUserEmail) {
     let balance = 0;
-    expensesList.filter(e => e.coloc === currentUser).forEach(e => balance += e.price); // TODO update
+    expensesList.filter(e => e.roommateEmail === currentUserEmail).forEach(e => balance += e.price); // TODO update
     return balance;
 }
 
@@ -59,13 +68,13 @@ function createExpenseComponent(expenseJson) {
     expenseContent.classList.add('expense-content');
 
     const title = document.createElement('h3');
-    title.textContent = expenseJson.libele; // TODO update
+    title.textContent = expenseJson.label;
 
     const expenseSpender = document.createElement('div');
     expenseSpender.classList.add('expense-sender');
 
     const sender = document.createElement('p');
-    sender.textContent = "Paid by " + expenseJson.coloc; // TODO update
+    sender.textContent = "Paid by " + expenseJson.roommateEmail; // TODO update
 
     const pTime = document.createElement('p');
     pTime.textContent = expenseJson.date_expense;
