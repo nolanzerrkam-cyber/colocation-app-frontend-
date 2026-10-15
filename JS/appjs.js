@@ -168,7 +168,7 @@ async function login(event) {
         sessionStorage.setItem("user", JSON.stringify(result));
 
         if (result["role"] === "ROOMMATE") {
-            window.location.replace("index.html");
+            window.location.href = "../index.html";
         } else {
             window.location.replace("owner.html");
         }
