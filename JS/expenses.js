@@ -10,7 +10,7 @@ window.addEventListener('load', async () => {
     total.innerText = totalAmount + "€";
     const balanceAmount = getBalance(expenses);
     balance.innerText = balanceAmount + "€";
-    displayExpenseComponent(expenses)
+    displayExpenseComponent(expenses);
 });
 
 // Calculate the total expenses amount of the colocation
@@ -22,9 +22,10 @@ function getTotalExpenses(expensesList) {
 
 // Calculate the balance of the current user based on expenses
 function getBalance(expensesList) {
-    const currentUser = "test@test.com"; // TODO get current user email
+    const userSession = sessionStorage.getItem("user");
+    const currentUser = userSession ? JSON.parse(userSession).email : "";
     let balance = 0;
-    expensesList.filter(e => e.coloc === currentUser).forEach(e => balance += e.price); // TODO update
+    expensesList.filter(e => e.email === currentUser).forEach(e => balance += e.price);
     return balance;
 }
 
@@ -34,14 +35,14 @@ async function getAllExpenses() {
     try {
         const response = await fetch(url);
         if (!response.ok) {
-            console.error("Error from backend")
-            return;
+            console.error("Error from backend");
+            return [];
         }
 
         return response.json();
     } catch (error) {
         console.error(error.message);
-        return []
+        return [];
     }
 }
 
@@ -59,13 +60,13 @@ function createExpenseComponent(expenseJson) {
     expenseContent.classList.add('expense-content');
 
     const title = document.createElement('h3');
-    title.textContent = expenseJson.libele; // TODO update
+    title.textContent = expenseJson.label;
 
     const expenseSpender = document.createElement('div');
     expenseSpender.classList.add('expense-sender');
 
     const sender = document.createElement('p');
-    sender.textContent = "Paid by " + expenseJson.coloc; // TODO update
+    sender.textContent = "Paid by " + expenseJson.firstname + " " + expenseJson.lastname;
 
     const pTime = document.createElement('p');
     pTime.textContent = expenseJson.date_expense;
@@ -81,26 +82,26 @@ function createExpenseComponent(expenseJson) {
     expenseAmount.classList.add('expense-amount');
 
     const amount = document.createElement('p');
-    amount.textContent = expenseJson.price+'€';
+    amount.textContent = expenseJson.price + '€';
 
     expenseAmount.appendChild(amount);
 
     expense.appendChild(expenseDetails);
     expense.appendChild(expenseAmount);
 
-    expensesList.appendChild(expense)
+    expensesList.appendChild(expense);
 }
 
 // Remove all child of the tasks list div
 function removeExpenseComponent() {
     while (expensesList.firstChild)
-        expensesList.removeChild(expensesList.lastChild)
+        expensesList.removeChild(expensesList.lastChild);
 }
 
 function createSeparatorComponent() {
     const separator = document.createElement('hr');
     separator.classList.add('expense-separator');
-    expensesList.appendChild(separator)
+    expensesList.appendChild(separator);
 }
 
 function displayExpenseComponent(expenses) {
@@ -108,8 +109,9 @@ function displayExpenseComponent(expenses) {
 
     const expensesLength = expenses.length;
     expenses.forEach((e, index) => {
-        createExpenseComponent(e)
-        if (index !== expensesLength - 1)
-            createSeparatorComponent()
-    })
+        createExpenseComponent(e);
+        if (index !== expensesLength - 1) {
+            createSeparatorComponent();
+        }
+    });
 }
