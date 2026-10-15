@@ -36,7 +36,7 @@ async function createRoommate(event) {
     };
 
     try {
-        const response = await fetch("http://localhost:8080/api/user/register", {
+        const response = await fetch("https://dikkenek-backend.dev20.woogma.com/api/user/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
