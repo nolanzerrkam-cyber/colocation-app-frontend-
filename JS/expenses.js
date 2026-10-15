@@ -134,12 +134,15 @@ function createExpenseComponent(expenseJson) {
 
     deleteBtn.addEventListener('click', async () => 
     {
-        const success = await deleteExpense(expenseJson.id);
-        if (success)
-         {
-            expenses = await getAllExpenses();
-            updateDashboard(expenses);
-            displayExpenseComponent(expenses);
+        if(confirm(`Are you sure you want to delete ${expenseJson.label} from the list of expense?`));
+        {
+            const success = await deleteExpense(expenseJson.id);
+            if (success)
+            {
+                expenses = await getAllExpenses();
+                updateDashboard(expenses);
+                displayExpenseComponent(expenses);
+            }
         }
     });
 
