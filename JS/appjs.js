@@ -8,9 +8,18 @@ let boxes;
 let sumRentOwner;
 let sumRoomates;
 let submitLoginBtn
+let logoutBtn;
 
-onload = function() {
+onload = function () {
+    const userSession = JSON.parse(sessionStorage.getItem('user'));
 
+    if (!userSession && !window.location.href.includes("login.html")) {
+        window.location.href = "../html/login.html"
+        return
+    }
+
+
+    logoutBtn = document.getElementById("logout");
     sumExpenses = document.getElementById("sumExpenses");
     sumShop = document.getElementById("sumShop");
     sumRent = document.getElementById("sumRent");
@@ -25,7 +34,7 @@ onload = function() {
     }
 
 
-    window.addEventListener('pageshow', function(event) {
+    window.addEventListener('pageshow', function (event) {
         if (event.persisted) {
             boxes.forEach(box => {
                 box.classList.remove('clicked');
@@ -40,6 +49,11 @@ onload = function() {
     if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "html/expenses.html"));
     if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "html/manage-rent.html"); });
     if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roomates.html"); });
+
+    if(logoutBtn) logoutBtn.addEventListener("click", () => {
+        sessionStorage.removeItem("user");
+        window.location.href = "../html/login.html"
+    })
 }
 
 function updateClock() {
@@ -151,8 +165,8 @@ async function login(event) {
     try {
         const response = await fetch(getApiUrl('/api/user/login'), {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify({ email, password })
+            headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+            body: JSON.stringify({email, password})
         });
 
         if (!response.ok) {
