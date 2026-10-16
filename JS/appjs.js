@@ -224,3 +224,4 @@ function morph(redirect) {
         location.href = redirect;
     }, 380);
 }
+}
