@@ -83,9 +83,6 @@ async function getHelloWorld() {
     }
 }
 
-function morph(redirect, element) {
-    if (element.classList.contains('clicked')) return;
-    element.classList.add('clicked');
 
 const list = document.getElementById('roommatesList');
 const addBtn = document.getElementById('addRoommateBtn');
@@ -224,4 +221,4 @@ function morph(redirect) {
         location.href = redirect;
     }, 380);
 }
-}
+
