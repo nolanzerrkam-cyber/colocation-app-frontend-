@@ -1,3 +1,5 @@
+import {getApiUrl} from "./api.js";
+
 let user = JSON.parse(sessionStorage.getItem("user"));
 let createRoommateButton = document.getElementById("createRoommateBtn");
 let addRoommateButton = document.getElementById("addRoommateBtn");
@@ -19,12 +21,13 @@ async function createRoommate(event) {
         email: document.getElementById("email").value,
         firstname: document.getElementById("firstname").value,
         lastname: document.getElementById("lastname").value,
+        //TODO: pasword in backend not front
         password: "Changeme123",
         phonenumber: document.getElementById("phonenumber").value
     };
 
     try {
-        const response = await fetch("https://dikkenek-backend.dev20.woogma.com/api/user/register", {
+        const response = await fetch(getApiUrl('/api/user/register'), {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
