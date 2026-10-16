@@ -1,21 +1,9 @@
-let greetingHolder = document.getElementById("greeting-message");
 let user = JSON.parse(sessionStorage.getItem("user"));
 let createRoommateButton = document.getElementById("createRoommateBtn");
 let addRoommateButton = document.getElementById("addRoommateBtn");
 let backRoommateButton = document.getElementById("backRoommateBtn");
 
-//TODO: check with login
-function start() {
-    if (user) {
-        greetingHolder.innerHTML =
-            "Welcome " + user["firstname"] + ". Here you can manage all of the roommates in your house.";
-    }
-    else
-    {
-        greetingHolder.innerHTML =
-            "Welcome [Owner]. Here you can manage all of the roommates in your house.";
-    }
-}
+
 function openForm() {
     document.querySelector(".roommateForm").classList.add("open");
 }
@@ -57,7 +45,6 @@ async function createRoommate(event) {
     }
 }
 
-window.onload = start;
 addRoommateButton.addEventListener("click", openForm);
 backRoommateButton.addEventListener("click", closeForm);
 createRoommateButton.addEventListener("click", createRoommate);

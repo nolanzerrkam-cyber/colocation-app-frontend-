@@ -1010,6 +1010,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
         height: 180px;
         width: 100%;
     }
+}
 
 #balance-div h2 {
     font-size: 11px;
@@ -1260,5 +1261,4 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background-color: #F7FAFC;
     transform: translateX(-2px);
 
-}
 }

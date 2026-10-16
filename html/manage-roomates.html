@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Roomates [Owner]</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
-    <script type="module" src="/JS/appjs.js" defer></script>
+    <script type="module" src="/JS/roommates.js" defer></script>
 </head>
 <body>
 
@@ -27,6 +27,21 @@
                     <button class="btn btn-add" id="addRoommateBtn">+ Add roomate</button>
                 </div>
                 <h3 id="error-section"></h3>
+            </div>
+
+            <div class="roommateForm">
+                <button type="button" class="btn btn-back" id="backRoommateBtn">Back</button>
+                <form id="roommateForm" method="post">
+                    <label for="email">Email: </label>
+                    <input id="email" type="email">
+                    <label for="firstname">Firstname:</label>
+                    <input id="firstname" type="text">
+                    <label for="lastname">Lastname:</label>
+                    <input id="lastname" type="text">
+                    <label for="phonenumber">Phonenumber: </label>
+                    <input id="phonenumber" type="tel">
+                    <button id="createRoommateBtn">Create roommate</button>
+                </form>
             </div>
 
             <div class="roommates-container" id="roommatesList">
