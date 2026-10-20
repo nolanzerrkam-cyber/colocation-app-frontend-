@@ -27,11 +27,21 @@ const submitButton = document.getElementById("submit-button");
 const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
+    const currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
+
+    if(!currentUser) {
+        window.location.href = "login.html"
+        return;
+    }
+
     expenses = await getAllExpenses();
+
     const totalAmount = getTotalExpenses(expenses);
     total.innerText = totalAmount + "€";
-    const balanceAmount = getBalance(expenses);
+
+    const balanceAmount = getBalance(expenses, currentUser.email);
     balance.innerText = balanceAmount + "€";
+
     displayExpenseComponent(expenses);
 });
 
@@ -43,11 +53,9 @@ function getTotalExpenses(expensesList) {
 }
 
 // Calculate the balance of the current user based on expenses
-function getBalance(expensesList) {
-    const userSession = sessionStorage.getItem("user");
-    const currentUser = userSession ? JSON.parse(userSession).email : "";
+function getBalance(expensesList, currentUserEmail) {
     let balance = 0;
-    expensesList.filter(e => e.email === currentUser).forEach(e => balance += e.price);
+    expensesList.filter(e => e.email === currentUserEmail).forEach(e => balance += e.price);
     return balance;
 }
 
