@@ -21,8 +21,6 @@ async function createRoommate(event) {
         email: document.getElementById("email").value,
         firstname: document.getElementById("firstname").value,
         lastname: document.getElementById("lastname").value,
-        //TODO: pasword in backend not front
-        password: "Changeme123",
         phonenumber: document.getElementById("phonenumber").value
     };
 
@@ -44,7 +42,7 @@ async function createRoommate(event) {
     } catch (error)
     {
         console.error("Erreur lors de la création :", error);
-        document.getElementById("error-section").textContent = "Impossible de créer le roommate.";
+        document.getElementById("error-section").textContent = "Cannot create roommate.";
     }
 }
 
