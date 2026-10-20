@@ -6,6 +6,26 @@ const expensesList = document.getElementById("expenses-list");
 const total = document.getElementById("total-expenses");
 const balance = document.getElementById("balance");
 
+const addExpense = document.getElementById("add-expense");
+addExpense.addEventListener('click', openModal);
+
+const modalOverlay = document.getElementById('modalOverlay');
+modalOverlay.addEventListener('click', (event) => {
+    if (event.target === modalOverlay)
+        closeModal();
+});
+
+
+const closeButton = document.getElementById("closeBtn");
+closeButton.addEventListener('click', closeModal);
+
+const expenseForm = document.getElementById("expenseForm");
+expenseForm.addEventListener('submit', handleSubmitForm)
+
+const submitButton = document.getElementById("submit-button");
+
+const notifier = document.getElementById("notifier");
+
 window.addEventListener('load', async () => {
     expenses = await getAllExpenses();
     const totalAmount = getTotalExpenses(expenses);
@@ -191,4 +211,100 @@ function displayExpenseComponent(expenses) {
             createSeparatorComponent();
         }
     });
+}
+
+function openModal() {
+    modalOverlay.style.display = 'flex';
+}
+
+function closeModal() {
+    modalOverlay.style.display = 'none';
+}
+
+function handleSubmitForm(event) {
+    event.preventDefault();
+    setLoading(true);
+
+    const formData = new FormData(expenseForm);
+    const {isError, message} = validateInput(formData);
+
+    if (isError) {
+        setNotifier(message, true);
+        setLoading(false);
+        return;
+    }
+
+    createExpense(formData);
+
+    setLoading(false);
+}
+
+// Persist a new expense in database through the API
+function createExpense(expenseData) {
+    const currentUserEmail = JSON.parse(sessionStorage.getItem("user")).email;
+
+    if (!currentUserEmail)
+        setNotifier("Error: user email is invalid", true);
+
+    fetch('http://localhost:8080/api/expense', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "label": expenseData.get("name"),
+            "price": expenseData.get("price"),
+            "email": currentUserEmail,
+            "dateExpense": expenseData.get("date"),
+        })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Error: network error');
+            choreForm.reset();
+            setNotifier("Success: The expense has been created.", false)
+        })
+        .catch(error =>
+            setNotifier("Error: " + error, true));
+}
+
+function validateInput(formData) {
+    let errorCounter = 0;
+    let errorMessage = [];
+
+    if (!formData.get("name") || formData.get("name").length < 1) {
+        errorMessage.push("The name is required")
+        errorCounter++;
+    }
+
+    if (!formData.get("date")) {
+        errorMessage.push("The date is required")
+        errorCounter++;
+    }
+
+    if (!formData.get("price") || formData.get("price") <= 0) {
+        errorMessage.push("A price greater than 0 is required")
+        errorCounter++;
+    }
+
+    return {
+        isError: errorCounter > 0,
+        message: "Error: " + errorMessage.join("\n")
+    };
+}
+
+
+// Display error message
+function setNotifier(message, isError) {
+    notifier.innerText = message;
+    notifier.style.color = isError ? "red" : "green";
+}
+
+function setLoading(isLoading) {
+    if (isLoading) {
+        submitButton.innerText = "Loading...";
+        submitButton.disabled = true;
+    } else {
+        submitButton.innerText = "Create expense";
+        submitButton.disabled = false;
+    }
 }

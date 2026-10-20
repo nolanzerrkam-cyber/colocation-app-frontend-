@@ -781,7 +781,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
     border-radius: 20px;
     background: white;
-
+    margin: 0 0 0px 0;
 }
 
 .expense {
@@ -1079,4 +1079,20 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     .topPage {
         gap: 20px;
     }
+}
+
+#add-expense {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    height: 60px;
+    width: 60px;
+    background: rgb(0, 93, 75);
+    color: white;
+    border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    bottom: 100px;
+    right: 50px;
 }

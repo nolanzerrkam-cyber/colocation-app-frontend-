@@ -11,8 +11,8 @@
 <body id="expense-page" class="background">
 <div class="topPage">
     <div class="brand">
-        <img src="../image/logocoloc-removebg-preview.png"/>
-        <img src="../image/nomcoloc-removebg-preview.png"/>
+        <img src="../image/logocoloc-removebg-preview.png" alt="FlatMate Icon"/>
+        <img src="../image/nomcoloc-removebg-preview.png" alt="FlatMate Logo"/>
     </div>
     <div id="hour"></div>
     <a id="logout" href="login.html" >Logout</a>
@@ -45,6 +45,35 @@
             </div>
         </div>
     </div>
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-card">
+            <button type="button" class="close-btn" id="closeBtn">&times;</button>
+
+            <h2 class="title">Add an expense</h2>
+
+            <form id="expenseForm">
+                <div class="form-group">
+                    <label for="expenseName">EXPENSE NAME</label>
+                    <input type="text" id="expenseName" name="name" placeholder="Claude code subscription" required/>
+                </div>
+
+                <div id="form-group-price" class="form-group">
+                    <label for="price">PRICE</label>
+                    <input type="number" step="0.01" min="0" id="price" name="price" placeholder="10,50€" required/>
+                </div>
+
+                <div id="form-group-date" class="form-group">
+                    <label for="date">DATE</label>
+                    <input type="datetime-local" id="date" name="date" required/>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-button">Create expense</button>
+                <p id="notifier">p</p>
+            </form>
+
+        </div>
+    </div>
+    <p id="add-expense">+</p>
 </main>
 <div class="footerApp">
     <a class="ButtonApp" id="rentButton" href="rent.html"></a>
