@@ -144,14 +144,7 @@ function createExpenseComponent(expenseJson) {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = '✕';
-    deleteBtn.style.border = 'none';
-    deleteBtn.style.backgroundColor = '#ffebee';
-    deleteBtn.style.color = '#c62828';
-    deleteBtn.style.padding = '6px 10px';
-    deleteBtn.style.borderRadius = '4px';
-    deleteBtn.style.cursor = 'pointer';
-    deleteBtn.style.marginLeft = '10px';
-    deleteBtn.style.fontWeight = 'bold';
+    deleteBtn.classList.add("delete-btn");
 
     deleteBtn.addEventListener('mouseenter', () => {
         deleteBtn.style.backgroundColor = '#ffcdd2';
