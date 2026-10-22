@@ -83,9 +83,10 @@ async function getHelloWorld() {
     }
 }
 
+
 const list = document.getElementById('roommatesList');
-const addBtn = document.getElementById('addRoommateBtn');
 const numberRoomates = document.getElementById('numberOfRoomates');
+
 
 if (numberRoomates && list) {
     numberRoomates.innerHTML = list.children.length;
@@ -106,33 +107,6 @@ if (list) {
     });
 }
 
-if (addBtn) {
-    addBtn.addEventListener('click', () => {
-        const count = list.children.length + 1;
-        const error = document.getElementById("error-section");
-        if (count === 31) {
-            if (error) {
-                error.innerHTML = "There are too much roomates on the shared home !";
-            }
-        } else {
-            if (error) {
-                error.innerHTML = "";
-            }
-            const item = document.createElement('div');
-            item.className = 'roommate-item';
-            item.innerHTML = `
-                <div class="roommate-info">
-                    <span class="roommate-name">Roomate n°${count}</span>
-                    <div class="roommate-details">Room n°${count} — email@exemple.com</div>
-                </div>
-                <button class="btn btn-delete">- Delete</button>`;
-            list.appendChild(item);
-            if (numberRoomates) {
-                numberRoomates.innerHTML = list.children.length;
-            }
-        }
-    });
-}
 
 async function login(event) {
     event?.preventDefault();
@@ -219,3 +193,4 @@ function morph(redirect) {
         location.href = redirect;
     }, 380);
 }
+

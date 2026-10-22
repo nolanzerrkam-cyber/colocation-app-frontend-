@@ -189,6 +189,8 @@ h1 {
     width: 100vw;
     z-index: 10;
     overflow: hidden;
+    gap: 20px;
+
 }
 
 .brand {
@@ -1008,11 +1010,258 @@ body:has(.sum.clicked) .sum:not(.clicked) {
         height: 180px;
         width: 100%;
     }
-
-    .topPage {
-        gap: 20px;
-    }
 }
+
+#balance-div h2 {
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    letter-spacing: 2px;
+}
+
+#balance {
+    font-family: Manrope-ExtraBold, sans-serif;
+    font-size: 40px;
+    padding: 15px 0 30px 0;
+}
+
+#balance-div div:first-child {
+    width: 95%;
+    height: 70%;
+}
+
+#total {
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+#total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Manrope-Regular, sans-serif;
+    font-size: 11px;
+    padding: 15px 0 0 0;
+}
+
+.separator {
+    height: 1px;
+    background: #E0ECDF;
+}
+
+#expenses-list {
+    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
+    border-radius: 20px;
+    background: white;
+}
+
+.expense {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    margin: 20px;
+}
+
+.expense div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.expense h3 {
+    font-size: 12px;
+    font-family: Manrope-Bold, sans-serif;
+}
+
+.expense p {
+    font-size: 10px;
+}
+
+.expense-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: oklch(0.9359 0.043 172);
+    cursor: pointer;
+    height: 35px;
+    width: 35px;
+}
+
+.expense-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.expense-sender {
+    display: flex;
+    gap: 10px;
+}
+
+.expense-amount {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.expense-amount p {
+    font-size: 15px;
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+.expense-separator {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    width: 95%;
+    margin: 20px auto 20px auto;
+}
+
+#recent-expenses-title {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
+}
+
+.action-header {
+    margin-bottom: 15px;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.header-top h2 {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
+    color: #1A202C;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: none;
+    font-size: 13px;
+    font-family: Manrope-SemiBold, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-add {
+    background-color: #005F4B;
+    color: #FFFFFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add:hover {
+    background-color: #004B3B;
+    transform: translateY(-2px);
+}
+
+#manageRoommatesCard {
+    position: relative;
+}
+
+.roommateForm {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: left;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.roommateForm.open {
+    display: block;
+    animation: formFadeIn 0.25s ease-out;
+}
+
+@keyframes formFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+.roommateForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.roommateForm label {
+    display: block;
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.roommateForm input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    border: 1px solid #E0ECDF;
+    background-color: #F2F9F3;
+    font-size: 14px;
+    font-family: Manrope-Regular, sans-serif;
+    color: #1A202C;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.roommateForm input:focus {
+    border-color: #005F4B;
+}
+
+.roommateForm input::placeholder {
+    color: #A0AEC0;
+}
+
+#createRoommateBtn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 6px;
+    background-color: #005F4B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: Manrope-SemiBold, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#createRoommateBtn:hover {
+    background-color: #004B3B;
+}
+
+.btn-back {
+    background-color: transparent;
+    color: #1A202C;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 20px;
+}
+
+.btn-back:hover {
+    background-color: #F7FAFC;
+    transform: translateX(-2px);
+}
+
 
 #add-expense {
     display: flex;
@@ -1028,4 +1277,5 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     cursor: pointer;
     bottom: 100px;
     right: 50px;
+
 }
