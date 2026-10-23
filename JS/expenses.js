@@ -52,6 +52,14 @@ function getTotalExpenses(expensesList) {
     return total;
 }
 
+// To update the total balance and the total cost
+function updateDashboard(expenseList) {
+    const totalAmount = getTotalExpenses(expenseList);
+    total.innerText = totalAmount + "€";
+    const balanceAmount = getBalance(expenseList);
+    balance.innerText = balanceAmount + "€";
+}
+
 // Calculate the balance of the current user based on expenses
 function getBalance(expensesList, currentUserEmail) {
     let balance = 0;
@@ -76,7 +84,25 @@ async function getAllExpenses() {
     }
 }
 
+async function deleteExpense(expenseId) {
+    const url = getApiUrl(`/api/expense/${expenseId}`);
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            console.error("Error deleting expense from backend");
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error(error.message);
+        return false;
+    }
+}
+
 function createExpenseComponent(expenseJson) {
+    console.log(expenseJson);
     const expense = document.createElement('div');
     expense.classList.add('expense');
 
@@ -115,6 +141,48 @@ function createExpenseComponent(expenseJson) {
     amount.textContent = expenseJson.price + '€';
 
     expenseAmount.appendChild(amount);
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '✕';
+    deleteBtn.classList.add("delete-btn");
+
+    deleteBtn.addEventListener('mouseenter', () => {
+        deleteBtn.style.backgroundColor = '#ffcdd2';
+    });
+    deleteBtn.addEventListener('mouseleave', () => {
+        deleteBtn.style.backgroundColor = '#ffebee';
+    });
+
+    deleteBtn.addEventListener('click', () => 
+    {
+        const modal = document.getElementById("deleteModal");
+        const confirmBtn = document.getElementById("confirmDeleteBtn");
+        const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+        modal.style.display = "flex";
+
+        const newConfirmBtn = confirmBtn.cloneNode(true);
+        confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+        const newCancelBtn = cancelBtn.cloneNode(true);
+        cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+
+        document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+            modal.style.display = 'none';
+            const success = await deleteExpense(expenseJson.id);
+            if (success) {
+                expenses = await getAllExpenses();
+                updateDashboard(expenses);
+                displayExpenseComponent(expenses);
+            }
+        });
+    });
+
+    expenseAmount.appendChild(deleteBtn);
 
     expense.appendChild(expenseDetails);
     expense.appendChild(expenseAmount);
