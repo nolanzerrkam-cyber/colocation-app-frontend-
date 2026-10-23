@@ -1232,3 +1232,10 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     margin-left: 10px;
     font-weight: bold;
 }
+
+.conditions
+{
+    font-size: small;
+    color: red;
+    text-align: left;
+}
