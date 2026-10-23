@@ -1239,3 +1239,8 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     color: red;
     text-align: left;
 }
+
+.conditions.valid
+{
+    color: green;
+}

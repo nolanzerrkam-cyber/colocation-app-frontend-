@@ -4,6 +4,11 @@ const modalOverlay = document.getElementById("modalOverlay");
 const roommateForm = document.getElementById("roommateForm");
 const submitButton = document.getElementById("submit-button"); 
 const notifier = document.getElementById("notifier"); 
+const firstNameLabel = document.getElementById("roommateFirstName");
+const lastNameLabel = document.getElementById("roommateLastName");
+const emailLabel = document.getElementById("roommateEmail");
+const phoneLabel = document.getElementById("roommatePhoneNumber");
+
 
 openButton.addEventListener("click", openModal);
 closeButton.addEventListener("click", closeModal);
@@ -116,3 +121,72 @@ function setLoading(isLoading) {
         }, 5000);
     }
 }
+
+
+
+
+function setConditions()
+{
+    // fn = first name, ln = last name, pn = phone number.
+    const fn = document.getElementById("fnCondition");
+    const ln = document.getElementById("lnCondition");
+    const pn = document.getElementById("pnCondition");
+    const emailLength = document.getElementById("emailLength");
+    const emailFormat = document.getElementById("emailFormat");
+    const domainEmailCheck = document.getElementById("domainEmailCheck");
+    const checkAt = document.getElementById("checkAt");
+
+    firstNameLabel.addEventListener("input", (e) => {
+        const validation = e.target.value.trim().length;
+        fn.classList.toggle("valid", validation);
+    });
+
+    lastNameLabel.addEventListener("input", (e) =>{
+        const validation = e.target.value.trim().length;
+        ln.classList.toggle("valid", validation)
+    });
+
+    phoneLabel.addEventListener("input", (e) => {
+        const validation = e.target.value.trim().length >= 8;
+        pn.classList.toggle("valid", validation);
+    });
+
+    roommateEmail.addEventListener("input", (e) => 
+    {
+        const validation = e.target.value.trim().length >= 10 && e.target.value.trim().length <= 64;
+        emailLength.classList.toggle("valid", validation);
+    });
+
+    roommateEmail.addEventListener("input", (e) => {
+        const input = e.target.value.trim();
+        const regex = /^[A-Za-z0-9.\\_\\-\\@]*$/;
+        const validation = regex.test(input);
+
+        console.log(input);
+        console.log(validation);
+
+        emailFormat.classList.toggle("valid", validation);
+    });
+
+    roommateEmail.addEventListener("input", (e) => {
+        const input = e.target.value.trim();
+        const regex = /[.]{1,1}[a-z]{2,}$/;
+        const validation = regex.test(input);
+
+        console.log(input);
+        console.log(validation);
+
+        domainEmailCheck.classList.toggle("valid", validation);
+    });
+
+    roommateEmail.addEventListener("input", (e) => {
+        const input = e.target.value.trim();
+        const regex = /@/
+        const validation = regex.test(input);
+
+        checkAt.classList.toggle("valid", validation);
+    });
+
+}
+
+setConditions();
