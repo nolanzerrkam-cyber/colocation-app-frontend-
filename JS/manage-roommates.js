@@ -80,13 +80,13 @@ function validateInput(formData) {
         errorCounter++;
     }
 
-    if (!formData.get("email")) {
-        errorMessage.push("The email is required");
+    if (!formData.get("email") || formData.get("email").length < 10) {
+        errorMessage.push("The email is required or has to be at least 10 characters long.");
         errorCounter++;
     }
 
-    if (!formData.get("phoneNumber")) {
-        errorMessage.push("A phoneNumber is required");
+    if (!formData.get("phoneNumber") || formData.get("phoneNumber").length < 8) {
+        errorMessage.push("A phoneNumber is required or the email needs to have at least 8 numbers.");
         errorCounter++;
     }
 
@@ -106,7 +106,13 @@ function setLoading(isLoading) {
         submitButton.innerText = "Loading...";
         submitButton.disabled = true;
     } else {
-        submitButton.innerText = "Create roommate...";
+        submitButton.innerText = "Roommate created !";
         submitButton.disabled = false;
+        setTimeout(() => 
+        {
+            submitButton.innerText = "Confirm the creation";
+            submitButton.disabled = false;
+            notifier.innerText = "";
+        }, 5000);
     }
 }

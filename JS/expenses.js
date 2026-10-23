@@ -261,7 +261,7 @@ function createExpense(expenseData) {
     })
         .then(response => {
             if (!response.ok) throw new Error('Error: network error');
-            choreForm.reset();
+            expenseForm.reset();
             setNotifier("Success: The expense has been created.", false)
         })
         .catch(error =>
