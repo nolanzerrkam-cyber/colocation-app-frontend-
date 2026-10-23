@@ -599,99 +599,160 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     display: flex;
     gap: 15px;
 }
-
-.task-filter {
-    padding: 5px 15px 5px 15px;
-    border-radius: 20px;
-    border: 1px solid oklch(0.25 0.025 190);
-    font-size: 11px;
-    background: white;
-}
-
-.task-filter:hover {
-    cursor: pointer;
-}
-
-.task-filter-selected {
-    background: black;
-    color: white;
-}
-
-#add-chore-1 {
-    font-size: 13px;
-    cursor: pointer;
-    font-family: Manrope-Medium, sans-serif;
-}
-
-#add-chore-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-    height: 60px;
-    width: 60px;
-    background: rgb(0, 93, 75);
-    color: white;
-    border-radius: 20px;
-    position: absolute;
-    cursor: pointer;
-    bottom: 40px;
-    right: 40px;
-}
+/* ---------- Header de la liste ---------- */
 
 #task-title-div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 0 5px 0;
+    margin: 0 0 10px 0;
 }
 
-#tasks-list {
-    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
-    border-radius: 20px;
-    background: white;
+#filter-div {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
 }
+
+.task-filter {
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 2px solid black;
+    background: white;
+    font-size: 11px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 black;
+    transition: transform 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.task-filter:hover {
+    color: #005F4B;
+    border-color: #005F4B;
+    transform: translateY(-2px);
+}
+
+.task-filter-selected,
+.task-filter-selected:hover {
+    background: #005F4B;
+    border-color: black;
+    color: white;
+}
+
+#add-chore-1 {
+    font-size: 13px;
+    font-family: Manrope-Bold, sans-serif;
+    color: #005F4B;
+    cursor: pointer;
+}
+
+#add-chore-1:hover {
+    text-decoration: underline;
+}
+
+#add-chore-2 {
+    position: fixed;
+    bottom: 12vh;
+    right: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 60px;
+    font-size: 30px;
+    background: #005F4B;
+    color: white;
+    border: 2px solid black;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    z-index: 5;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+#add-chore-2:hover {
+    background: #004B3B;
+    transform: translateY(-3px);
+}
+
+/* ---------- Liste ---------- */
+
+#tasks-list {
+    background: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 5px 0;
+}
+
+#tasks-list:empty::after {
+    content: "No task to display";
+    display: block;
+    padding: 30px;
+    text-align: center;
+    font-family: Manrope-Regular, sans-serif;
+    font-size: 13px;
+    color: #718096;
+}
+
+/* ---------- Tâche ---------- */
 
 .task {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 35px;
-    margin: 20px;
+    min-height: 40px;
+    margin: 15px 20px;
+    transition: transform 0.2s ease;
 }
 
-.task div:first-child {
+.task:hover {
+    transform: translateX(4px);
+}
+
+.task-details {
     display: flex;
     align-items: center;
-    gap: 10px;
-    height: 100%;
+    gap: 12px;
 }
 
-#task-check {
+.task-check {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    background: oklch(0.9359 0.043 172);
+    flex-shrink: 0;
+    height: 38px;
+    width: 38px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-size: 16px;
     cursor: pointer;
-    height: 35px;
-    width: 35px;
+    transition: transform 0.2s ease;
+}
+
+.task-check:hover {
+    transform: scale(1.08);
+}
+
+.task-check-done {
+    background: oklch(0.9359 0.043 172);
+    color: #005F4B;
+}
+
+.task-check-todo {
+    background: oklch(0.9359 0.043 25);
+    color: #990000;
+}
+
+.task-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .task h3 {
-    font-size: 12px;
+    font-size: 14px;
     font-family: Manrope-Bold, sans-serif;
-}
-
-.task p {
-    font-size: 10px;
-}
-
-#task-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+    color: #0F172A;
 }
 
 .task-time {
@@ -699,30 +760,54 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     gap: 10px;
 }
 
-#task-assignment {
+.task-time p {
+    font-size: 11px;
+    font-family: Manrope-Regular, sans-serif;
+    color: #718096;
+}
+
+.task-time p + p {
+    padding-left: 10px;
+    border-left: 1px solid #E0ECDF;
+}
+
+.task-assignment {
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: 5px;
+    gap: 4px;
 }
 
-#task-assignment div {
+.task-avatar {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid;
-    border-radius: 30px;
-    height: 25px;
-    width: 25px;
-    font-size: 8px;
+    height: 30px;
+    width: 30px;
+    border: 2px solid black;
+    border-radius: 50%;
+    background: #F2F9F3;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.task-assignment p {
+    font-size: 10px;
+    font-family: Manrope-Medium, sans-serif;
+    color: #718096;
+}
+
+.task-done h3 {
+    text-decoration: line-through;
+    color: #718096;
 }
 
 .task-separator {
     border: none;
     height: 1px;
-    background-color: #e2e8f0;
+    background-color: #E0ECDF;
     width: 95%;
-    margin: 20px auto 20px auto;
+    margin: 0 auto;
 }
 
 #balance-div {

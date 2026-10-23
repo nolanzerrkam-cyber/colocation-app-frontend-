@@ -41,55 +41,49 @@ const submitButton = document.getElementById("submit-button");
 
 const notifier = document.getElementById("notifier");
 
-window.addEventListener('load', () => {
+window.addEventListener('load', async () => {
     filter = "todo";
-    tasks = getTasks();
+    tasks = await getTasks();
     applyFilter(filter);
 })
 
-function getTasks() {
-    // TODO: retrieve from the backend
-    return [
-        {
-            taskName: "task1",
-            date: new Date(),
-            isRecurring: false,
-            assignee: "You",
-            isDone: false
-        },
-        {
-            taskName: "task2",
-            date: new Date(),
-            isRecurring: false,
-            assignee: "You",
-            isDone: true
-        },
-        {
-            taskName: "task3",
-            date: new Date(),
-            isRecurring: false,
-            assignee: "You",
-            isDone: true
+async function getTasks() {
+    try
+    {
+        const response = await fetch(getApiUrl('/api/task'), {
+            method: 'GET'
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erreur HTTP ${response.status}`);
         }
-    ]
+
+        const tasks = await response.json();
+        console.log(tasks);
+        return tasks;
+    }
+    catch(Error)
+    {
+        console.warn("Error : " + Error)
+    }
 }
 
 function createTaskComponent(taskJson) {
-    //taskName, date, isRecurring, assigneeName, isDone
     const task = document.createElement('div');
     task.classList.add('task');
 
     const taskDetails = document.createElement('div');
+    taskDetails.classList.add('task-details');
 
     const taskCheck = document.createElement('div');
-    taskCheck.id = 'task-check';
-    taskCheck.textContent = '✓';
+    taskCheck.classList.add('task-check', taskJson.isDone ? 'task-check-done' : 'task-check-todo');
+    taskCheck.textContent = taskJson.isDone ? '✓' : '✗';
 
     const taskContent = document.createElement('div');
-    taskContent.id = 'task-content';
+    taskContent.classList.add('task-content');
 
     const title = document.createElement('h3');
-    title.textContent = taskJson.taskName;
+    title.textContent = taskJson.name;
 
     const taskTime = document.createElement('div');
     taskTime.classList.add('task-time');
@@ -102,36 +96,28 @@ function createTaskComponent(taskJson) {
     const pRepeat = document.createElement('p');
     pRepeat.textContent = taskJson.isRecurring ? "Repeat" : "Does not repeat";
 
-    taskTime.appendChild(pTime);
-    taskTime.appendChild(pRepeat);
-    taskContent.appendChild(title);
-    taskContent.appendChild(taskTime);
-    taskDetails.appendChild(taskCheck);
-    taskDetails.appendChild(taskContent);
+    taskTime.append(pTime, pRepeat);
+    taskContent.append(title, taskTime);
+    taskDetails.append(taskCheck, taskContent);
 
     const taskAssignment = document.createElement('div');
-    taskAssignment.id = 'task-assignment';
+    taskAssignment.classList.add('task-assignment');
 
     const avatar = document.createElement('div');
-    avatar.textContent = taskJson.assignee.charAt(0);
+    avatar.classList.add('task-avatar');
+    avatar.textContent = taskJson.roommateFullName.charAt(0);
 
     const pAssignee = document.createElement('p');
-    pAssignee.textContent = taskJson.assignee;
+    pAssignee.textContent = taskJson.roommateFullName;
 
-    taskAssignment.appendChild(avatar);
-    taskAssignment.appendChild(pAssignee);
+    taskAssignment.append(avatar, pAssignee);
+    task.append(taskDetails, taskAssignment);
 
-    task.appendChild(taskDetails);
-    task.appendChild(taskAssignment);
+    if (taskJson.isDone)
+        task.classList.add('task-done', 'grey-filter');
 
-    if (taskJson.isDone) {
-        task.classList.add("grey-filter")
-        title.style.textDecoration = "line-through"
-    }
-
-    tasksList.appendChild(task)
+    tasksList.appendChild(task);
 }
-
 // Remove all child of the tasks list div
 function removeTasksComponent() {
     while (tasksList.firstChild)
@@ -178,15 +164,20 @@ function applyFilter(filterName) {
         el.classList.remove("task-filter-selected")
 
     let filteredTasks = [];
+    //filter tasks by todo, mine and done
     switch (filterName) {
+
         case 'todo':
             todoButton.classList.add("task-filter-selected")
             filteredTasks = tasks.filter(t => !t.isDone)
             break
-        case 'mine':
-            mineButton.classList.add("task-filter-selected")
-            filteredTasks = tasks.filter(t => t.assignee === "You")
+        case 'mine': {
+            mineButton.classList.add("task-filter-selected");
+            const user = JSON.parse(sessionStorage.getItem("user") ?? "null");
+            const name = user ? `${user.firstname} ${user.lastname}` : "";
+            filteredTasks = tasks.filter(t => t.roommateFullName === name);
             break;
+        }
         case 'done':
             doneButton.classList.add("task-filter-selected")
             filteredTasks = tasks.filter(t => t.isDone)
@@ -196,7 +187,8 @@ function applyFilter(filterName) {
     displayTasksComponent(filteredTasks);
 }
 
-function displayTasksComponent(tasks) {
+function displayTasksComponent(tasks)
+{
     removeTasksComponent();
 
     const tasksLength = tasks.length;
