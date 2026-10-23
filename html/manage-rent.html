@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Rents & Taxes [Owner]</title>    
+    <link rel="stylesheet" href="../CSS/allcss.css">
+    <script type="module" src="../JS/appjs.js" defer></script>
+</head>
+<body>
+<div class="topPage">
+    <div class="brand">
+        <img src="../image/logocoloc-removebg-preview.png"/>
+        <img src="../image/nomcoloc-removebg-preview.png"/>
+    </div>
+    <div id="hour"></div>
+    <a id="logout" href="login.html" >Logout</a>
+</div>
+
+    <div class="centerPage">
+        <div class="infoPage" id="manageRentCard">
+            <h2>Rent & Tax Overview</h2>
+            
+            <div class="roommates-container">
+                <div class="roommate-item">
+                    <span>Alexandre Dupont (Room 01)</span>
+                    <strong>$545 (Paid)</strong>
+                </div>
+                <div class="roommate-item">
+                    <span>Sophie Martin (Room 02)</span>
+                    <strong>$565 (Pending)</strong>
+                </div>
+                <div class="roommate-item">
+                    <span>Lucas Bernard (Room 03)</span>
+                    <strong>$525 (Paid)</strong>
+                </div>
+            </div>
+
+            <button class="btn btn-add" style="margin-top: 15px;">+ Add Tax / Charge</button>
+        </div>
+    </div>
+
+    <div class="footerApp">
+        <a class="ButtonApp" id="roomatesButton" href="manage-roomates.html"></a>
+        <a class="ButtonApp" id="moreButton" href="owner.html"></a>
+        <a class="ButtonApp" id="rentButtonOwner" href="#"></a>
+    </div>
+</body>
+</html>

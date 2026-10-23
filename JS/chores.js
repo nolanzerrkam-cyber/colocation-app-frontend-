@@ -1,3 +1,5 @@
+import {getApiUrl} from "./api.js";
+
 let filter; // todo, mine, done
 let tasks; // list of tasks
 
@@ -143,7 +145,7 @@ function createSeparatorComponent() {
 }
 
 function createTask(taskData) {
-    fetch('http://localhost:8080/api/task', {
+    fetch(getApiUrl('api/task'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

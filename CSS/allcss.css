@@ -37,7 +37,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Manrope-ExtraBold, sans-serif;}
+    font-family: Manrope-ExtraBold, sans-serif;
+}
 
 html, body {
     height: 100%;
@@ -45,21 +46,151 @@ html, body {
     overflow-x: hidden;
 }
 
+h1 {
+    text-align: center;
+}
+
+.bodyLogin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background: oklch(0.975 0.012 172);
+}
+
+.loginPart {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 460px;
+    padding: 36px 32px 32px 32px;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border: 2px solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.loginPart h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #0F172A;
+    margin-bottom: 6px;
+}
+
+.loginPart > p {
+    font-size: 13px;
+    color: #718096;
+    margin-bottom: 24px;
+    font-family: Manrope-Regular, sans-serif;
+}
+
+.loginPart form {
+    display: flex;
+    flex-direction: column;
+}
+
+.loginPart label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.loginPart input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #E0ECDF;
+    background-color: #F2F9F3;
+    font-size: 14px;
+    color: #1A202C;
+    outline: none;
+    box-sizing: border-box;
+    margin-bottom: 18px;
+}
+
+#password {
+    background-color: #F2F9F3;
+}
+
+#submitLogin {
+    width: 100%;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 24px;
+    background-color: #005F4B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#submitLogin:hover {
+    background-color: #004B3B;
+}
+
+#error {
+    display: none;
+    background-color: #FFD8D8;
+    color: #990000;
+    border: 1px solid #FF9999;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    margin-bottom: 18px;
+}
+
+.adminShowOnly {
+    border: 2px dashed #A0AEC0;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    background-color: #FAFAFA;
+}
+
+.adminShowOnly h1 {
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.adminShowOnly a {
+    display: block;
+    font-size: 12px;
+    color: #005F4B;
+    text-decoration: none;
+    margin-top: 6px;
+    font-weight: bold;
+}
+
+.adminShowOnly a:hover {
+    text-decoration: underline;
+}
+
 .topPage {
     display: flex;
     justify-content: start;
     align-items: center;
-
     padding: 0 15px;
     height: 10vh;
     top: 0;
     background: oklch(0.975 0.012 172);
-
     position: fixed;
     width: 100vw;
     z-index: 10;
     overflow: hidden;
 }
+
 .brand {
     display: flex;
     align-items: center;
@@ -75,6 +206,53 @@ html, body {
     width: auto;
     object-fit: contain;
 }
+#logout {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    color: red;
+    border: 2px solid red;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    justify-content: center;
+    min-width: 90px;
+    min-height: 40px;
+    transition: color 0.3s ease;
+}
+
+#logout::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: red;
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+#logout:hover::before {
+    width: 100%;
+}
+
+#logout:hover {
+    color: #FFFFFF;
+}
+#hour  {
+    border: 2px solid black;
+    border-radius: 8px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    min-width: 90px;
+    min-height: 40px;
+}
 
 .footerApp {
     display: flex;
@@ -84,103 +262,8 @@ html, body {
     background: oklch(0.975 0.012 172);
     align-items: center;
     justify-content: center;
-
     position: fixed;
     width: 100vw;
-}
-
-.middlePage {
-    display: grid;
-    grid-template-columns: 60% 1fr;
-    grid-template-rows: 30% 45% auto;
-    font-family: Manrope-Regular, sans-serif;
-    background: oklch(0.975 0.012 172);
-    grid-template-areas:
-        "payment shop"
-        "chores shop"
-        "chores rent";
-
-    position: absolute;
-    top: 10vh;
-    height: calc(100vh - 17vh);
-    width: 100vw;
-    box-sizing: border-box;
-    gap: 15px;
-    padding: 15px;
-}
-
-.sum {
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    height: 100%;
-    width: 100%;
-    position: relative;
-    cursor: pointer;
-
-    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
-    opacity 0.3s ease-out,
-    border-color 0.1s ease,
-    box-shadow 0.3s ease-out;
-
-    transform-origin: top left;
-}
-
-.sum:hover {
-    color: #005F4B;
-    border: 4px solid #005F4B;
-    transform: translateY(-5px);
-}
-
-.sum.clicked {
-    z-index: 9999;
-}
-
-body:has(.sum.clicked) .sum:not(.clicked) {
-    opacity: 0;
-    transition: opacity 0.2s ease-out;
-}
-
-#sumRent {
-    grid-area: rent;
-
-}
-
-#sumChores {
-    grid-area: chores;
-
-}
-
-#sumExpenses {
-    grid-area: payment;
-
-}
-
-#sumShop {
-    grid-area: shop;
-
-}
-
-h1 {
-    text-align: center;
-}
-
-#hour {
-    border: 2px solid black;
-    padding: 10px 15px;
-    border-radius: 8px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
-    min-width: 90px;
-    min-height: 40px;
 }
 
 .ButtonApp {
@@ -194,8 +277,8 @@ h1 {
     border-radius: 10%;
     box-shadow: 2px 0 black;
 }
-.ButtonApp:hover
-{
+
+.ButtonApp:hover {
     color: #005F4B;
     border: 3px solid #005F4B;
     transform: translateY(-2px);
@@ -226,6 +309,52 @@ h1 {
     background-image: url("../image/shop_icon.png");
 }
 
+#roomatesButton {
+    background-image: url("../image/roomates.png");
+}
+
+#supportButton {
+    background-image: url("../image/placeholder.png");
+}
+
+
+.middlePage {
+    display: grid;
+    grid-template-columns: 60% 1fr;
+    grid-template-rows: 30% 45% auto;
+    font-family: Manrope-Regular, sans-serif;
+    background: oklch(0.975 0.012 172);
+    grid-template-areas:
+        "payment shop"
+        "chores shop"
+        "chores rent";
+    position: absolute;
+    top: 10vh;
+    height: calc(100vh - 17vh);
+    width: 100vw;
+    box-sizing: border-box;
+    gap: 15px;
+    padding: 15px;
+}
+
+.middlePageOwner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    position: absolute;
+    top: 10vh;
+    height: calc(100vh - 19vh);
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 20px;
+}
+
+.middlePageOwner .sum {
+    max-width: 450px;
+    height: 70vh;
+}
+
 .centerPage {
     display: flex;
     justify-content: center;
@@ -252,55 +381,193 @@ h1 {
     flex-direction: column;
     box-sizing: border-box;
     padding: 15px;
-
-
     min-height: 0;
     overflow-y: auto;
+    gap: 15px;
     overflow-x: hidden;
-
     scrollbar-width: none;
-
-    /* Pour Chrome, Safari et Edge */
-    &::-webkit-scrollbar {
-        display: none;
-    }
 }
 
-/*le css pour le mobile*/
-@media screen and (max-width: 900px) {
-    .middlePage {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 17vh);
-        position: absolute;
-        overflow-y: auto;
-        padding-bottom: 25px;
-    }
+.infoPage::-webkit-scrollbar {
+    display: none;
+}
 
-    .sumRent {
-        height: 130px;
-        width: 100%;
-    }
+.background {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: oklch(0.975 0.012 172);
+}
 
-    .sumChores {
-        height: 220px;
-        width: 100%;
-    }
+.background h1 {
+    font-size: 35px;
+    font-family: Manrope-ExtraBold, sans-serif;
+    text-align: left;
+}
 
-    .sumExpenses {
-        height: 160px;
-        width: 100%;
-    }
+.background main {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    margin: 0;
+}
 
-    .sumShop {
-        height: 180px;
-        width: 100%;
-    }
+.sum {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s ease-out,
+    border-color 0.1s ease,
+    box-shadow 0.3s ease-out;
+    transform-origin: top left;
+}
 
-    .topPage {
-        gap: 20px;
-    }
+.sum:hover {
+    color: #005F4B;
+    border: 4px solid #005F4B;
+    transform: translateY(-5px);
+}
+
+.sum.clicked {
+    z-index: 9999;
+}
+
+body:has(.sum.clicked) .sum:not(.clicked) {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+#sumRent {
+    grid-area: rent;
+}
+
+#sumChores {
+    grid-area: chores;
+}
+
+#sumExpenses {
+    grid-area: payment;
+}
+
+#sumShop {
+    grid-area: shop;
+}
+
+#sumRoomates {
+    grid-column: 1;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+#sumRentOwner {
+    grid-column: 2;
+    height: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+}
+
+#sumSupport {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center !important;
+    width: 12rem;
+    height: 12rem;
+    border-radius: 50%;
+    z-index: 10;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
+}
+
+.roomatesCard {
+    height: 65%;
+    justify-content: flex-start;
+    padding: 20px;
+}
+
+.statusCard {
+    height: 15%;
+}
+
+.action-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.roommates-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: auto;
+    max-height: calc(100% - 40px);
+}
+
+.roommate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 15px;
+    border: 2px solid black;
+    border-radius: 8px;
+}
+
+.roommate-info {
+    text-align: left;
+}
+
+.roommate-name {
+    font-weight: bold;
+    font-size: 1rem;
+    display: block;
+}
+
+.roommate-details {
+    font-size: 0.85rem;
+    color: #444;
+}
+
+.btn {
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+.btn-add {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid black;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+    border: 2px solid black;
 }
 
 #chores-page {
@@ -321,6 +588,11 @@ h1 {
     flex-direction: column;
     width: 100vw;
     margin: 0;
+}
+
+#chores-page h2 {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
 }
 
 #filter-div {
@@ -345,15 +617,26 @@ h1 {
     color: white;
 }
 
-#chores-page h2 {
-    font-size: 15px;
-    font-family: Manrope-Bold, sans-serif;
-}
-
 #add-chore-1 {
     font-size: 13px;
     cursor: pointer;
     font-family: Manrope-Medium, sans-serif;
+}
+
+#add-chore-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    height: 60px;
+    width: 60px;
+    background: rgb(0, 93, 75);
+    color: white;
+    border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    bottom: 40px;
+    right: 40px;
 }
 
 #task-title-div {
@@ -434,20 +717,140 @@ h1 {
     font-size: 8px;
 }
 
-#add-chore-2 {
+.task-separator {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    width: 95%;
+    margin: 20px auto 20px auto;
+}
+
+#balance-div {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 30px;
-    height: 60px;
-    width: 60px;
-    background: rgb(0, 93, 75);
-    color: white;
+    height: 200px;
+    min-height: 200px;
+    width: 100%;
+    background: #1A202C;
     border-radius: 20px;
-    position: absolute;
+    color: white;
+}
+
+#balance-div h2 {
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    letter-spacing: 2px;
+}
+
+#balance-div div:first-child {
+    width: 95%;
+    height: 70%;
+}
+
+#balance {
+    font-family: Manrope-ExtraBold, sans-serif;
+    font-size: 40px;
+    padding: 15px 0 30px 0;
+}
+
+#total {
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+#total-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: Manrope-Regular, sans-serif;
+    font-size: 11px;
+    padding: 15px 0 0 0;
+}
+
+.separator {
+    height: 1px;
+    background: #E0ECDF;
+}
+
+#recent-expenses-title {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
+}
+
+#expenses-list {
+    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
+    border-radius: 20px;
+    background: white;
+    margin: 0 0 0px 0;
+}
+
+.expense {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    margin: 20px;
+}
+
+.expense div:first-child {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 100%;
+}
+
+.expense h3 {
+    font-size: 12px;
+    font-family: Manrope-Bold, sans-serif;
+    display: flex;
+    align-items: start;
+}
+
+.expense p {
+    font-size: 10px;
+}
+
+.expense-check {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background: oklch(0.9359 0.043 172);
     cursor: pointer;
-    bottom: 40px;
-    right: 40px;
+    height: 35px;
+    width: 35px;
+}
+
+.expense-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.expense-sender {
+    display: flex;
+    gap: 10px;
+}
+
+.expense-amount {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.expense-amount p {
+    font-size: 15px;
+    font-family: Manrope-ExtraBold, sans-serif;
+}
+
+.expense-separator {
+    border: none;
+    height: 1px;
+    background-color: #e2e8f0;
+    width: 95%;
+    margin: 20px auto 20px auto;
 }
 
 .modal-overlay {
@@ -570,160 +973,126 @@ h1 {
     filter: grayscale(1);
 }
 
-.task-separator {
-    border: none;
-    height: 1px;
-    background-color: #e2e8f0;
-    width: 95%;
-    margin: 20px auto 20px auto;
-}
-
 #notifier {
     padding: 15px 0 0 0;
     color: white;
 }
 
-.background {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background: oklch(0.975 0.012 172);
-}
-
-.background h1 {
-    font-size: 35px;
-    font-family: Manrope-ExtraBold, sans-serif;
-    text-align: left;
-}
-
-.background main {
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
-    margin: 0;
-
-}
-
-#balance-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 200px;
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    background: #1A202C;
-    border-radius: 20px;
-    color: white;
-}
-
-#balance-div h2 {
-    font-size: 11px;
-    font-family: Manrope-Bold, sans-serif;
-    letter-spacing: 2px;
-}
-
-#balance {
-    font-family: Manrope-ExtraBold, sans-serif;
-    font-size: 40px;
-    padding: 15px 0 30px 0;
-}
-
-#balance-div div:first-child {
-    width: 95%;
-    height: 70%;
-}
-
-#total {
-    font-family: Manrope-ExtraBold, sans-serif;
-}
-
-#total-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: Manrope-Regular, sans-serif;
-    font-size: 11px;
-    padding: 15px 0 0 0;
-}
-
-.separator {
-    height: 1px;
-    background: #E0ECDF;
-}
-
-#expenses-list {
-    border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
-    border-radius: 20px;
-    background: white;
-}
-
-.expense {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 35px;
-    margin: 20px;
-}
-
-.expense div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 10px;
     height: 100%;
-}
-
-.expense h3 {
-    font-size: 12px;
-    font-family: Manrope-Bold, sans-serif;
-}
-
-.expense p {
-    font-size: 10px;
-}
-
-.expense-check {
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 5px;
-    background: oklch(0.9359 0.043 172);
+    z-index: 1000;
+}
+
+.modal-box {
+    background-color: #ffffff;
+    padding: 24px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 320px;
+    width: 100%;
+}
+
+.modal-box p {
+    margin-bottom: 20px;
+    color: #333333;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.modal-btn-cancel {
+    padding: 8px 16px;
+    border: 1px solid #d1d5db;
+    background-color: #f3f4f6;
+    color: #374151;
+    border-radius: 6px;
     cursor: pointer;
-    height: 35px;
-    width: 35px;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
-.expense-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+.modal-btn-cancel:hover {
+    background-color: #e5e7eb;
 }
 
-.expense-sender {
-    display: flex;
-    gap: 10px;
-}
 
-.expense-amount {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.expense-amount p {
-    font-size: 15px;
-    font-family: Manrope-ExtraBold, sans-serif;
-}
-
-.expense-separator {
+.modal-btn-confirm {
+    padding: 8px 16px;
     border: none;
-    height: 1px;
-    background-color: #e2e8f0;
-    width: 95%;
-    margin: 20px auto 20px auto;
+    background-color: #dc2626;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
 }
 
-#recent-expenses-title {
-    font-size: 15px;
-    font-family: Manrope-Bold, sans-serif;
+.modal-btn-confirm:hover {
+    background-color: #b91c1c;
+}
+
+@media screen and (max-width: 900px) {
+    .middlePage {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 17vh);
+        position: absolute;
+        overflow-y: auto;
+        padding-bottom: 25px;
+    }
+
+    .sumRent {
+        height: 130px;
+        width: 100%;
+    }
+
+    .sumChores {
+        height: 220px;
+        width: 100%;
+    }
+
+    .sumExpenses {
+        height: 160px;
+        width: 100%;
+    }
+
+    .sumShop {
+        height: 180px;
+        width: 100%;
+    }
+
+    .topPage {
+        gap: 20px;
+    }
+}
+
+#add-expense {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    height: 60px;
+    width: 60px;
+    background: rgb(0, 93, 75);
+    color: white;
+    border-radius: 20px;
+    position: absolute;
+    cursor: pointer;
+    bottom: 100px;
+    right: 50px;
 }
