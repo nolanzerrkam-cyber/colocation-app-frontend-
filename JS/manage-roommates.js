@@ -44,7 +44,7 @@ function handleSubmitForm(event) {
 
 function createRoommate(roommateData) 
 {
-    fetch('http://localhost:8080/colocation_backend_war_exploded/api/user/register', 
+    fetch('http://localhost:8080/api/user/register', 
     {
         method: 'POST',
         headers: {
