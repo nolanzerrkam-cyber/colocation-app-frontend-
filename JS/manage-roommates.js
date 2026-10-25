@@ -47,7 +47,7 @@ function handleSubmitForm(event) {
     setLoading(false);
 }
 
-function createRoommate(roommateData) 
+async function createRoommate(roommateData) 
 {
     fetch('http://localhost:8080/api/user/register', 
     {
@@ -121,9 +121,6 @@ function setLoading(isLoading) {
         }, 5000);
     }
 }
-
-
-
 
 function setConditions()
 {
