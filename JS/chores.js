@@ -48,8 +48,7 @@ window.addEventListener('load', async () => {
 })
 
 async function getTasks() {
-    try
-    {
+    try {
         const response = await fetch(getApiUrl('/api/task'), {
             method: 'GET'
         });
@@ -61,9 +60,7 @@ async function getTasks() {
         const tasks = await response.json();
         console.log(tasks);
         return tasks;
-    }
-    catch(Error)
-    {
+    } catch (Error) {
         console.warn("Error : " + Error)
     }
 }
@@ -78,6 +75,7 @@ function createTaskComponent(taskJson) {
     const taskCheck = document.createElement('div');
     taskCheck.classList.add('task-check', taskJson.isDone ? 'task-check-done' : 'task-check-todo');
     taskCheck.textContent = taskJson.isDone ? '✓' : '✗';
+    taskCheck.addEventListener("click", () => modifyTask(taskJson.id, taskJson.name, taskJson.description, !taskJson.isDone, taskJson.deadline, taskJson.roommateEmail))
 
     const taskContent = document.createElement('div');
     taskContent.classList.add('task-content');
@@ -118,6 +116,7 @@ function createTaskComponent(taskJson) {
 
     tasksList.appendChild(task);
 }
+
 // Remove all child of the tasks list div
 function removeTasksComponent() {
     while (tasksList.firstChild)
@@ -150,6 +149,29 @@ function createTask(taskData) {
         })
         .catch(error =>
             setNotifier("Error: " + error, true));
+}
+
+// Modify a task in database
+function modifyTask(id, name, description, isDone, deadline, roommateEmail) {
+    fetch(getApiUrl(`/api/task/${id}`), {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            "name": name,
+            "description": description,
+            "isDone": isDone,
+            "deadline": new Date(deadline),
+            "roommateEmail": roommateEmail
+        })
+    })
+        .then(response => {
+            if (!response.ok) throw new Error('Error: network error');
+            window.location.reload();
+        })
+        .catch(error =>
+            console.log("Error: " + error));
 }
 
 async function createRecurringTask(taskData) {
@@ -187,8 +209,7 @@ function applyFilter(filterName) {
     displayTasksComponent(filteredTasks);
 }
 
-function displayTasksComponent(tasks)
-{
+function displayTasksComponent(tasks) {
     removeTasksComponent();
 
     const tasksLength = tasks.length;
