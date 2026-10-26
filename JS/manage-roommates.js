@@ -180,26 +180,34 @@ function handleSubmitForm(event) {
 
 async function createRoommate(roommateData) 
 {
-    fetch('http://localhost:8080/api/user/register', 
+    const url = getApiUrl("/api/roommate/register");
+    try
     {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "firstname": roommateData.get("firstname"),
-            "lastname": roommateData.get("lastname"),
-            "email": roommateData.get("email"),
-            "phonenumber": roommateData.get("phoneNumber"),
-        })
-    })
-        .then(response => {
-            if (!response.ok) throw new Error('Error: network error');
-            roommateForm.reset();
-            setNotifier("Success: The roommate has been created.", false);
-        })
-        .catch(error =>
-            setNotifier("Error: " + error, true));
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "firstname": roommateData.get("firstname"),
+                "lastname": roommateData.get("lastname"),
+                "email": roommateData.get("email"),
+                "phonenumber": roommateData.get("phoneNumber"),
+            })
+        });
+
+        if(!response.ok)
+        {
+            console.error("Error from the backend : failed to get a response.");
+        }
+
+        roommateForm.reset();
+        setNotifier("SUCCESS : the user was created ! Don't forget to change the password.");
+    }
+    catch(error)
+    {
+        setNotifier("An error has occured : " + error.message, true);
+    }
 }
 
 function validateInput(formData) {
@@ -289,10 +297,6 @@ function setConditions()
         const input = e.target.value.trim();
         const regex = /^[A-Za-z0-9.\\_\\-\\@]*$/;
         const validation = regex.test(input);
-
-        console.log(input);
-        console.log(validation);
-
         emailFormat.classList.toggle("valid", validation);
     });
 
@@ -300,10 +304,6 @@ function setConditions()
         const input = e.target.value.trim();
         const regex = /[.]{1,1}[a-z]{2,}$/;
         const validation = regex.test(input);
-
-        console.log(input);
-        console.log(validation);
-
         domainEmailCheck.classList.toggle("valid", validation);
     });
 
