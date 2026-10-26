@@ -1,4 +1,6 @@
 import {getApiUrl} from "./api.js";
+const MAX_ROOMMATES = 30;
+
 const list = document.getElementById('roommatesList');
 const addBtn = document.getElementById('addRoommateBtn');
 const roommatesNumber = document.getElementById('roommatesNumber');
@@ -12,6 +14,8 @@ const firstNameLabel = document.getElementById("roommateFirstName");
 const lastNameLabel = document.getElementById("roommateLastName");
 const emailLabel = document.getElementById("roommateEmail");
 const phoneLabel = document.getElementById("roommatePhoneNumber");
+const limitRoommates = document.getElementById("limitRoommates");
+
 
 addBtn.addEventListener("click", openModal);
 if(closeButton)
@@ -19,8 +23,10 @@ if(closeButton)
 if(roommateForm)
     roommateForm.addEventListener("submit", handleSubmitForm);
 
-window.addEventListener('load', async () => {
+window.addEventListener('load', async () => 
+{
     const roommatesList = await getAllRoommates();
+    limitRoommates.innerText = MAX_ROOMMATES;
     refreshRoommateComponents(roommatesList);
 })
 
@@ -110,7 +116,7 @@ modalOverlay.addEventListener("click", (event) => {
 function openModal() {
     const notifError = document.getElementById("error-section");
 
-    if(list.children.length >= 13)
+    if(list.children.length >= MAX_ROOMMATES)
     {
         notifError.innerHTML = "There are too much roommates ! Please respect the maximum size of the roomshare.";
         setTimeout(() =>
