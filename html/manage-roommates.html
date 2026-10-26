@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Roommates [Owner]</title>
+    <link rel="stylesheet" href="../CSS/allcss.css">
+    <script type="module" src="../JS/appjs.js" defer></script>
+    <script type="module" src="../JS/manage-roommates.js" defer></script>
+</head>
+<body>
+
+<div class="topPage">
+    <div class="brand">
+        <img src="../image/logocoloc-removebg-preview.png" alt="Logo"/>
+        <img src="../image/nomcoloc-removebg-preview.png" alt="Nom"/>
+    </div>
+    <div id="hour"></div>
+    <a id="logout" href="login.html" >Logout</a>
+</div>
+
+    <div class="centerPage">
+        <div class="infoPage" id="manageRoommatesCard">
+            
+            <div class="action-header">
+                <div class="header-top">
+                    <h2>List of roomates</h2>
+                    <button class="btn btn-add" id="addRoommateBtn">+ Add roomate</button>
+                </div>
+                <h3 id="error-section"></h3>
+            </div>
+
+            <div class="roommates-container" id="roommatesList">
+            </div>
+
+            <div class="statusCard">
+                <p><strong>In the shared home :</strong> <span id="roommatesNumber"></span>/30 roommates in total.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footerApp">
+        <a class="ButtonApp" id="roomatesButton" href="#" ></a>
+        <a class="ButtonApp" id="moreButton" href="owner.html"></a>
+        <a class="ButtonApp" id="rentButtonOwner" href="manage-rent.html"></a>
+    </div>
+
+</body>
+</html>

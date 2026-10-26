@@ -48,7 +48,7 @@ onload = function () {
     if (sumChores) sumChores.addEventListener("click", () => morph.call(sumChores, "html/chores.html"));
     if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "html/expenses.html"));
     if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "html/manage-rent.html"); });
-    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roomates.html"); });
+    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roommates.html"); });
 
     if(logoutBtn) logoutBtn.addEventListener("click", () => {
         sessionStorage.removeItem("user");
@@ -82,31 +82,6 @@ async function getHelloWorld() {
         console.error(error.message);
     }
 }
-
-
-const list = document.getElementById('roommatesList');
-const numberRoomates = document.getElementById('numberOfRoomates');
-
-
-if (numberRoomates && list) {
-    numberRoomates.innerHTML = list.children.length;
-}
-
-if (list) {
-    list.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-delete')) {
-            const errorSection = document.getElementById("error-section");
-            if (list.children.length === 30 && errorSection) {
-                errorSection.innerHTML = "";
-            }
-            e.target.closest('.roommate-item').remove();
-            if (numberRoomates) {
-                numberRoomates.innerHTML = list.children.length;
-            }
-        }
-    });
-}
-
 
 async function login(event) {
     event?.preventDefault();
