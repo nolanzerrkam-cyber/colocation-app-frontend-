@@ -227,6 +227,32 @@ async function createRoommate(roommateData)
 }
 
 /*
+    This function is made to delete a roommate completly from the database.
+    @param roommateData : roommateData is going to contain all the data for creating the roommate : firstname, lastname, password, phonenumber and email.
+*/
+async function deleteRoommate(roommateData)
+{
+    const url = getApiUrl(`/api/roommate/${roommateId}`);
+    try
+    {
+        const response = fetch(url, {
+            method : 'DELETE'
+        });
+        if(!response.ok)
+        {
+            console.error("Error from the backend, please call the administrator");
+            return false;
+        }
+        return true;
+    }
+    catch(error)
+    {
+        console.error("ERROR : " + error.message);
+        return false;    
+    }
+}
+
+/*
     This method is for returning errors when the owner didn't respect the rules for the creation of the account.
     @param formData : simply getting the information from the submitted form. Contains email, first and lastname, phonenumber and password
 */
