@@ -180,7 +180,7 @@ function handleSubmitForm(event) {
 
 async function createRoommate(roommateData) 
 {
-    const url = getApiUrl("/api/roommate/register");
+    const url = getApiUrl("/api/user/register");
     try
     {
         const response = await fetch(url, {
@@ -195,6 +195,9 @@ async function createRoommate(roommateData)
                 "phonenumber": roommateData.get("phoneNumber"),
             })
         });
+
+        console.log(response);
+        console.log(url);
 
         if(!response.ok)
         {
