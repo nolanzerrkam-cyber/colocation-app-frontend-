@@ -48,7 +48,7 @@ onload = function () {
     if (sumChores) sumChores.addEventListener("click", () => morph.call(sumChores, "html/chores.html"));
     if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "html/expenses.html"));
     if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "html/manage-rent.html"); });
-    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roomates.html"); });
+    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roommates.html"); });
 
     if(logoutBtn) logoutBtn.addEventListener("click", () => {
         sessionStorage.removeItem("user");
@@ -81,57 +81,6 @@ async function getHelloWorld() {
     } catch (error) {
         console.error(error.message);
     }
-}
-
-const list = document.getElementById('roommatesList');
-const addBtn = document.getElementById('addRoommateBtn');
-const numberRoomates = document.getElementById('numberOfRoomates');
-
-if (numberRoomates && list) {
-    numberRoomates.innerHTML = list.children.length;
-}
-
-if (list) {
-    list.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-delete')) {
-            const errorSection = document.getElementById("error-section");
-            if (list.children.length === 30 && errorSection) {
-                errorSection.innerHTML = "";
-            }
-            e.target.closest('.roommate-item').remove();
-            if (numberRoomates) {
-                numberRoomates.innerHTML = list.children.length;
-            }
-        }
-    });
-}
-
-if (addBtn) {
-    addBtn.addEventListener('click', () => {
-        const count = list.children.length + 1;
-        const error = document.getElementById("error-section");
-        if (count === 31) {
-            if (error) {
-                error.innerHTML = "There are too much roomates on the shared home !";
-            }
-        } else {
-            if (error) {
-                error.innerHTML = "";
-            }
-            const item = document.createElement('div');
-            item.className = 'roommate-item';
-            item.innerHTML = `
-                <div class="roommate-info">
-                    <span class="roommate-name">Roomate n°${count}</span>
-                    <div class="roommate-details">Room n°${count} — email@exemple.com</div>
-                </div>
-                <button class="btn btn-delete">- Delete</button>`;
-            list.appendChild(item);
-            if (numberRoomates) {
-                numberRoomates.innerHTML = list.children.length;
-            }
-        }
-    });
 }
 
 async function login(event) {
