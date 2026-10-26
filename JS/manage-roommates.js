@@ -110,7 +110,7 @@ modalOverlay.addEventListener("click", (event) => {
 function openModal() {
     const notifError = document.getElementById("error-section");
 
-    if(list.children.length >= 12)
+    if(list.children.length >= 13)
     {
         notifError.innerHTML = "There are too much roommates ! Please respect the maximum size of the roomshare.";
         setTimeout(() =>
@@ -153,29 +153,6 @@ function handleSubmitForm(event) {
 }
 
 /*
-    This function is to check if the limit of roommates has been attaigned. (30 Max)
-*/
-
-// function openModalDelete()
-// {
-//     const notifError = document.getElementById("error-section");
-
-//     if(list.children.length >= 10)
-//     {
-//         notifError.innerHTML = "There are too much roommates ! Please respect the maximum size of the roomshare.";
-//         setTimeout(() =>
-//         {
-//             notifError.innerHTML = "";
-//         }, 5000);
-//         return;
-//     }
-
-//     notifError.innerHTML = "";
-//     modalOverlay.style.display = "flex";
-// }
-
-
-/*
     This method is made to create a single roommate.
     @param roommateData : roommateData is going to contain all the data for creating the roommate : firstname, lastname, password, phonenumber and email.
 */
@@ -203,6 +180,9 @@ async function createRoommate(roommateData)
 
         roommateForm.reset();
         setNotifier("SUCCESS : the user was created ! Don't forget to change the password.");
+
+        const roommates = await getAllRoommates();
+        refreshRoommateComponents(roommates);
     }
     catch(error)
     {
