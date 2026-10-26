@@ -30,6 +30,47 @@
                 <h3 id="error-section"></h3>
             </div>
 
+            <div id="modalOverlay" class="modal-overlay">
+                <div class="modal-card">
+                    <button type="button" class="close-btn" id="closeBtn">&times;</button>
+
+                    <h2 class="title">Adding a roommate</h2>
+
+                    <form id="roommateForm">
+                        <div class="form-group">
+                            <label for="roommateFirstName">First name</label>
+                            <input type="text" id="roommateFirstName" name="firstname" placeholder="Max" required/>
+                            <p id="fnCondition" class="conditions">- Has to be completed to continue.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roommateLastName">Last name</label>
+                            <input type="text" id="roommateLastName" name="lastname" placeholder="Verstappen" required/>
+                            <p id="lnCondition" class="conditions">- Has to be completed to continue.</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roommateEmail">Email</label>
+                            <input type="email" id="roommateEmail" name="email" placeholder="Max.Verstappen@condorcet.be" required/>
+                            <p class="conditions" id="emailLength">- Has to be completed to continue, between 10 and 64 characters</p>
+                            <p class="conditions" id="emailFormat">- Only letters, numbers, underscore , hash and dot.</p>
+                            <p class="conditions" id="domainEmailCheck">- The domain has to be at least 2 letters.</p>
+                            <p class="conditions" id="checkAt">- A " @ " is present</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="roommatePhoneNumber">Phone Number</label>
+                            <input type="tel" id="roommatePhoneNumber" name="phoneNumber" placeholder="012345678" required/>
+                            <p id="pnCondition" class="conditions">- Has to be completed to continue and at least 8 numbers.</p>
+                        </div>
+
+                        <button type="submit" class="submit-btn" id="submit-button">Confirm the creation</button>
+                        <p id="notifier"></p>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="roommates-container" id="roommatesList">
             </div>
 

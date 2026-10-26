@@ -15,9 +15,10 @@ const phoneLabel = document.getElementById("roommatePhoneNumber");
 
 
 addBtn.addEventListener("click", openModal);
-closeButton.addEventListener("click", closeModal);
-
-roommateForm.addEventListener("submit", handleSubmitForm);
+if(closeButton)
+    closeButton.addEventListener("click", closeModal);
+if(roommateForm)
+    roommateForm.addEventListener("submit", handleSubmitForm);
 
 window.addEventListener('load', async () => {
     const roommatesList = await getAllRoommates();
