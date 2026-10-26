@@ -12,6 +12,7 @@ const firstNameLabel = document.getElementById("roommateFirstName");
 const lastNameLabel = document.getElementById("roommateLastName");
 const emailLabel = document.getElementById("roommateEmail");
 const phoneLabel = document.getElementById("roommatePhoneNumber");
+const notif = document.getElementById("error-section");
 
 
 addBtn.addEventListener("click", openModal);
@@ -100,7 +101,7 @@ function createRoommateComponent(roommate) {
     deleteBtn.className = 'btn btn-delete';
     deleteBtn.textContent = '- Delete';
 
-    deleteBtn.addEventListener('click', () => deleteRoommate(roommate, roommateComponent));
+    deleteBtn.addEventListener('click', () => openDeleteModal(roommate));
 
     roommateComponent.appendChild(info);
     roommateComponent.appendChild(deleteBtn);
@@ -134,17 +135,6 @@ async function getAllRoommates() {
         console.error(error.message);
         return [];
     }
-}
-
-/**
- * Remove the roommate component and remove the roommate from database
- * @param roommate - roommate
- * @param roommateComponent - roommate HTML component
- */
-function deleteRoommate(roommate, roommateComponent) {
-    roommateComponent.remove();
-    // todo delete from db
-    roommatesNumber.innerText = `${list.children.length}`
 }
 
 // here's for closing the modal when you are click outside the form
@@ -226,16 +216,16 @@ async function createRoommate(roommateData)
     }
 }
 
-/*
-    This function is made to delete a roommate completly from the database.
-    @param roommateData : roommateData is going to contain all the data for creating the roommate : firstname, lastname, password, phonenumber and email.
-*/
-async function deleteRoommate(roommateData)
+/**
+ * Remove the roommate component and remove the roommate from database
+ * @param roommateEmail - roommate's email !
+ */
+async function deleteRoommate(roommateEmail)
 {
-    const url = getApiUrl(`/api/roommate/${roommateId}`);
+    const url = getApiUrl(`/api/user/${roommateEmail}`);
     try
     {
-        const response = fetch(url, {
+        const response = await fetch(url, {
             method : 'DELETE'
         });
         if(!response.ok)
@@ -250,6 +240,42 @@ async function deleteRoommate(roommateData)
         console.error("ERROR : " + error.message);
         return false;    
     }
+}
+
+// Just for debug if we need it
+// function deleteRoommate(roommate, roommateComponent) {
+//     roommateComponent.remove();
+//     // todo delete from db
+//     roommatesNumber.innerText = `${list.children.length}`
+// }
+
+function openDeleteModal(roommate)
+{
+    const modal = document.getElementById("deleteModal");
+    const confirmBtn = document.getElementById("confirmDeleteBtn");
+    const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+    modal.style.display = "flex";
+
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+    const newCancelBtn = cancelBtn.cloneNode(true);
+    cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+
+    newCancelBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    newConfirmBtn.addEventListener("click", async () => {
+        modal.style.display = "none";
+        const success = await deleteRoommate(roommate.email);
+        if(success)
+        {
+            const roommates = await getAllRoommates();
+            refreshRoommateComponents(roommates);
+        }
+    });
 }
 
 /*

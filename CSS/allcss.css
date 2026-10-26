@@ -1181,3 +1181,10 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     bottom: 100px;
     right: 50px;
 }
+
+.redText
+{
+    color : red;
+    font-weight: bold;
+    text-decoration: underline;
+}
