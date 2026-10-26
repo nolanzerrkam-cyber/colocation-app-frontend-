@@ -152,6 +152,11 @@ modalOverlay.addEventListener("click", (event) => {
         closeModal();
 });
 
+
+/*
+    To make the pop up window for creating new roommates.
+    FLEX => showing to the user, NONE => invisible.
+*/
 function openModal() {
     modalOverlay.style.display = "flex";
 }
@@ -160,6 +165,12 @@ function closeModal() {
     modalOverlay.style.display = "none";
 }
 
+/*
+    This method is for handling the form for the roommate creation.
+    @param event : event is here to prevent the default behaviour from the submit event.
+    This method is making sure that there is no error, by checking if there is a error in message.
+    Then creating if there are no errors, and stoping the loading animation.
+*/
 function handleSubmitForm(event) {
     event.preventDefault();
     setLoading(true);
@@ -178,6 +189,11 @@ function handleSubmitForm(event) {
     setLoading(false);
 }
 
+
+/*
+    This method is made to create a single roommate.
+    @param roommateData : roommateData is going to contain all the data for creating the roommate : firstname, lastname, password, phonenumber and email.
+*/
 async function createRoommate(roommateData) 
 {
     const url = getApiUrl("/api/user/register");
@@ -209,6 +225,10 @@ async function createRoommate(roommateData)
     }
 }
 
+/*
+    This method is for returning errors when the owner didn't respect the rules for the creation of the account.
+    @param formData : simply getting the information from the submitted form. Contains email, first and lastname, phonenumber and password
+*/
 function validateInput(formData) {
     let errorCounter = 0;
     let errorMessage = [];
@@ -239,11 +259,21 @@ function validateInput(formData) {
     };
 }
 
+/*
+    This little method is for the error message under the submit button.
+    @param message : all the error message.
+    @param isError : to change the color of the text : if true, its red (error), if not its green (account created)
+*/
+
 function setNotifier(message, isError) {
     notifier.innerText = message;
     notifier.style.color = isError ? "red" : "green";
 }
 
+/*
+    This method is a simple animation so the user understand and sees when the account is created or not.
+    @param isLoading : boolean value to determine if the loading is starting or not.
+*/
 function setLoading(isLoading) {
     if (isLoading) {
         submitButton.innerText = "Loading...";
@@ -259,6 +289,11 @@ function setLoading(isLoading) {
         }, 5000);
     }
 }
+
+/*
+    This method is going to take the value of each labels, to check if each condition are respected for the creation of the account.
+    This could be optimised I think, but for now its working.
+*/
 
 function setConditions()
 {
