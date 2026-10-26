@@ -195,10 +195,6 @@ async function createRoommate(roommateData)
                 "phonenumber": roommateData.get("phoneNumber"),
             })
         });
-
-        console.log(response);
-        console.log(url);
-
         if(!response.ok)
         {
             console.error("Error from the backend : failed to get a response.");
