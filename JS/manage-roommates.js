@@ -12,8 +12,6 @@ const firstNameLabel = document.getElementById("roommateFirstName");
 const lastNameLabel = document.getElementById("roommateLastName");
 const emailLabel = document.getElementById("roommateEmail");
 const phoneLabel = document.getElementById("roommatePhoneNumber");
-const notif = document.getElementById("error-section");
-
 
 addBtn.addEventListener("click", openModal);
 if(closeButton)
@@ -25,45 +23,6 @@ window.addEventListener('load', async () => {
     const roommatesList = await getAllRoommates();
     refreshRoommateComponents(roommatesList);
 })
-
-if (list) {
-    list.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-delete')) {
-            const errorSection = document.getElementById("error-section");
-            if (list.children.length === 30 && errorSection) {
-                errorSection.innerHTML = "";
-            }
-        }
-    });
-}
-
-if (addBtn) {
-    addBtn.addEventListener('click', () => {
-        const count = list.children.length + 1;
-        const error = document.getElementById("error-section");
-        if (count === 31) {
-            if (error) {
-                error.innerHTML = "There are too much roomates on the shared home !";
-            }
-        } else {
-            if (error) {
-                error.innerHTML = "";
-            }
-            const item = document.createElement('div');
-            item.className = 'roommate-item';
-            item.innerHTML = `
-                <div class="roommate-info">
-                    <span class="roommate-name">Roomate n°${count}</span>
-                    <div class="roommate-details">Room n°${count} — email@exemple.com</div>
-                </div>
-                <button class="btn btn-delete">- Delete</button>`;
-            list.appendChild(item);
-            if (roommatesNumber) {
-                roommatesNumber.innerHTML = list.children.length;
-            }
-        }
-    });
-}
 
 /**
  * Remove old Roommate components and render them again
@@ -149,6 +108,19 @@ modalOverlay.addEventListener("click", (event) => {
     FLEX => showing to the user, NONE => invisible.
 */
 function openModal() {
+    const notifError = document.getElementById("error-section");
+
+    if(list.children.length >= 12)
+    {
+        notifError.innerHTML = "There are too much roommates ! Please respect the maximum size of the roomshare.";
+        setTimeout(() =>
+        {
+            notifError.innerHTML = "";
+        }, 5000);
+        return;
+    }
+
+    notifError.innerHTML = "";
     modalOverlay.style.display = "flex";
 }
 
@@ -179,6 +151,28 @@ function handleSubmitForm(event) {
 
     setLoading(false);
 }
+
+/*
+    This function is to check if the limit of roommates has been attaigned. (30 Max)
+*/
+
+// function openModalDelete()
+// {
+//     const notifError = document.getElementById("error-section");
+
+//     if(list.children.length >= 10)
+//     {
+//         notifError.innerHTML = "There are too much roommates ! Please respect the maximum size of the roomshare.";
+//         setTimeout(() =>
+//         {
+//             notifError.innerHTML = "";
+//         }, 5000);
+//         return;
+//     }
+
+//     notifError.innerHTML = "";
+//     modalOverlay.style.display = "flex";
+// }
 
 
 /*
