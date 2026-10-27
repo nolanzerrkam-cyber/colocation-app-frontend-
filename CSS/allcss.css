@@ -1165,7 +1165,11 @@ body:has(.sum.clicked) .sum:not(.clicked) {
         gap: 20px;
     }
 }
-
+#title-expense{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 #add-expense {
     display: flex;
     justify-content: center;
@@ -1176,8 +1180,5 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background: rgb(0, 93, 75);
     color: white;
     border-radius: 20px;
-    position: absolute;
     cursor: pointer;
-    bottom: 100px;
-    right: 50px;
 }
