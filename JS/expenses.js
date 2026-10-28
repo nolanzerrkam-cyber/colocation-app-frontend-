@@ -35,11 +35,9 @@ window.addEventListener('load', async () => {
     }
 
     expenses = await getAllExpenses();
-    console.log("expense ",expenses) //test2
     totalRoomateExpense = await getBalance(currentUser.email)
 
-    const totalAmount = expenses.totalExpense // a modifier
-    console.log("totalAmount ",totalAmount)
+    const totalAmount = expenses.totalExpense
     total.innerText = totalAmount + "€";
 
     balance.innerText = totalRoomateExpense + "€";
