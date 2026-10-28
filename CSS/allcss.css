@@ -1182,7 +1182,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     right: 50px;
 }
 
-/* ---------- Bouton delete d'une tâche ---------- */
 
 .task-delete {
     position: relative;
@@ -1201,7 +1200,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
-/* Remplissage rouge au survol (même effet que #logout) */
 .task-delete::before {
     content: "";
     position: absolute;
