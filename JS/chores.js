@@ -41,12 +41,27 @@ const submitButton = document.getElementById("submit-button");
 
 const notifier = document.getElementById("notifier");
 
+const confirmDialog = document.getElementById('confirm-dialog');
+const confirmMessage = document.getElementById('confirm-message');
+
+//confirm delete chores
+document.getElementById('confirm-ok')
+    .addEventListener('click', () => confirmDialog.close('ok'));
+
+document.getElementById('confirm-cancel')
+    .addEventListener('click', () => confirmDialog.close('cancel'));
+confirmDialog.addEventListener('click', (event) => {
+    if (event.target === confirmDialog)
+        confirmDialog.close('cancel');
+});
+
 window.addEventListener('load', async () => {
     filter = "todo";
     tasks = await getTasks();
     applyFilter(filter);
 })
 
+//getall task from backend to display
 async function getTasks() {
     try
     {
@@ -68,6 +83,41 @@ async function getTasks() {
     }
 }
 
+// ask for confirm to delete
+function askConfirmation(message) {
+    confirmMessage.textContent = message;
+    confirmDialog.returnValue = '';
+    confirmDialog.showModal();
+
+    return new Promise(resolve => {
+        confirmDialog.addEventListener('close',
+            () => resolve(confirmDialog.returnValue === 'ok'),
+            {once: true});
+    });
+}
+
+//delete task
+async function deleteTask(id) {
+    if (!(await askConfirmation("Delete this task?")))
+        return;
+
+    try {
+        const response = await fetch(getApiUrl(`/api/task/${id}`), {
+            method: 'DELETE'
+        });
+
+        if (!response.ok)
+            throw new Error(`Erreur HTTP ${response.status}`);
+
+        tasks = tasks.filter(t => t.id !== id);
+        applyFilter(filter);
+    }
+    catch (error) {
+        console.warn("Error : " + error);
+    }
+}
+
+//create the visuals for task
 function createTaskComponent(taskJson) {
     const task = document.createElement('div');
     task.classList.add('task');
@@ -110,7 +160,12 @@ function createTaskComponent(taskJson) {
     const pAssignee = document.createElement('p');
     pAssignee.textContent = taskJson.roommateFullName;
 
-    taskAssignment.append(avatar, pAssignee);
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('task-delete');
+    deleteButton.textContent = 'Delete';
+    deleteButton.addEventListener('click', () => deleteTask(taskJson.id));
+
+    taskAssignment.append(avatar, pAssignee, deleteButton);
     task.append(taskDetails, taskAssignment);
 
     if (taskJson.isDone)
