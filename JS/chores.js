@@ -74,7 +74,7 @@ async function getRoommates() {
             return [];
         }
 
-        return response.json();
+        return await response.json();
     } catch (error) {
         console.error(error.message);
         return [];
