@@ -208,7 +208,7 @@ h1 {
     width: auto;
     object-fit: contain;
 }
-#logout {
+.red-button {
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -218,14 +218,19 @@ h1 {
     background-color: white;
     display: flex;
     align-items: center;
-    margin-left: 15px;
     justify-content: center;
-    min-width: 90px;
+
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     min-height: 40px;
+    padding: 0;
+
+    cursor: pointer;
     transition: color 0.3s ease;
 }
 
-#logout::before {
+.red-button::before {
     content: "";
     position: absolute;
     top: 0;
@@ -237,12 +242,21 @@ h1 {
     z-index: -1;
 }
 
-#logout:hover::before {
+.red-button:hover::before {
     width: 100%;
 }
 
-#logout:hover {
+.red-button:hover {
     color: #FFFFFF;
+}
+
+#logout {
+    width: auto;
+    height: auto;
+    min-width: 90px;
+    min-height: 40px;
+    margin-left: 15px;
+    padding: 0 15px;
 }
 #hour  {
     border: 2px solid black;
@@ -923,7 +937,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 .expense-amount {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
     gap: 5px;
 }
 
@@ -1289,6 +1303,11 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 }
 
 
+#title-expense{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
 #add-expense {
     display: flex;
     justify-content: center;
@@ -1299,7 +1318,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background: rgb(0, 93, 75);
     color: white;
     border-radius: 20px;
-    position: absolute;
     cursor: pointer;
     bottom: 100px;
     right: 50px;

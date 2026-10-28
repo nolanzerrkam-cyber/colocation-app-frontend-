@@ -1,6 +1,7 @@
 import {getApiUrl} from "./api.js";
 
 let expenses;
+let totalRoomateExpense;
 
 const expensesList = document.getElementById("expenses-list");
 const total = document.getElementById("total-expenses");
@@ -28,43 +29,36 @@ const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
     const currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
-
     if(!currentUser) {
         window.location.href = "login.html"
         return;
     }
 
     expenses = await getAllExpenses();
+    totalRoomateExpense = await getBalance(currentUser.email)
 
-    const totalAmount = getTotalExpenses(expenses);
+    const totalAmount = expenses.totalExpense
     total.innerText = totalAmount + "€";
 
-    const balanceAmount = getBalance(expenses, currentUser.email);
-    balance.innerText = balanceAmount + "€";
+    balance.innerText = totalRoomateExpense + "€";
 
-    displayExpenseComponent(expenses);
+    displayExpenseComponent(expenses.expensesdto);
 });
 
-// Calculate the total expenses amount of the colocation
-function getTotalExpenses(expensesList) {
-    let total = 0;
-    expensesList.forEach(e => total += e.price);
-    return total;
-}
+async function getBalance(currentUserEmail) {
+    const url = getApiUrl("/api/expense/total?email=" + currentUserEmail);
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error("Error from backend");
+            return 0;
+        }
 
-// To update the total balance and the total cost
-function updateDashboard(expenseList) {
-    const totalAmount = getTotalExpenses(expenseList);
-    total.innerText = totalAmount + "€";
-    const balanceAmount = getBalance(expenseList);
-    balance.innerText = balanceAmount + "€";
-}
-
-// Calculate the balance of the current user based on expenses
-function getBalance(expensesList, currentUserEmail) {
-    let balance = 0;
-    expensesList.filter(e => e.email === currentUserEmail).forEach(e => balance += e.price);
-    return balance;
+        return response.json();
+    } catch (error) {
+        console.error(error.message);
+        return 0;
+    }
 }
 
 // TODO: implement a pagination system
@@ -74,14 +68,13 @@ async function getAllExpenses() {
         const response = await fetch(url);
         if (!response.ok) {
             console.error("Error from backend");
-            return [];
+            return {expenses: [], totalExpense: 0 };
         }
 
         return response.json();
     } catch (error) {
         console.error(error.message);
-        return [];
-    }
+        return {expenses: [], totalExpense: 0 };    }
 }
 
 async function deleteExpense(expenseId) {
@@ -137,21 +130,14 @@ function createExpenseComponent(expenseJson) {
     const expenseAmount = document.createElement('div');
     expenseAmount.classList.add('expense-amount');
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '✕';
+    deleteBtn.classList.add("red-button");
+
     const amount = document.createElement('p');
     amount.textContent = expenseJson.price + '€';
 
     expenseAmount.appendChild(amount);
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = '✕';
-    deleteBtn.classList.add("delete-btn");
-
-    deleteBtn.addEventListener('mouseenter', () => {
-        deleteBtn.style.backgroundColor = '#ffcdd2';
-    });
-    deleteBtn.addEventListener('mouseleave', () => {
-        deleteBtn.style.backgroundColor = '#ffebee';
-    });
 
     deleteBtn.addEventListener('click', () => 
     {
@@ -176,8 +162,7 @@ function createExpenseComponent(expenseJson) {
             const success = await deleteExpense(expenseJson.id);
             if (success) {
                 expenses = await getAllExpenses();
-                updateDashboard(expenses);
-                displayExpenseComponent(expenses);
+                displayExpenseComponent(expenses.expensesdto);
             }
         });
     });
