@@ -28,21 +28,13 @@ const submitButton = document.getElementById("submit-button");
 const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
-    const currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
+    let currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
     if(!currentUser) {
         window.location.href = "login.html"
         return;
     }
 
-    expenses = await getAllExpenses();
-    totalRoomateExpense = await getBalance(currentUser.email)
-
-    const totalAmount = expenses.totalExpense
-    total.innerText = totalAmount + "€";
-
-    balance.innerText = totalRoomateExpense + "€";
-
-    displayExpenseComponent(expenses.expensesdto);
+    await refreshPage(currentUser);
 });
 
 async function getBalance(currentUserEmail) {
@@ -161,8 +153,8 @@ function createExpenseComponent(expenseJson) {
             modal.style.display = 'none';
             const success = await deleteExpense(expenseJson.id);
             if (success) {
-                expenses = await getAllExpenses();
-                displayExpenseComponent(expenses.expensesdto);
+                let currentUser = JSON.parse(sessionStorage.getItem('user'));
+                await refreshPage(currentUser);
             }
         });
     });
@@ -198,7 +190,18 @@ function displayExpenseComponent(expenses) {
         }
     });
 }
+async function refreshPage(user)
+{
+    expenses = await getAllExpenses();
+    displayExpenseComponent(expenses.expensesdto);
 
+    const totalAmount = expenses.totalExpense;
+    if (total) total.innerText = totalAmount + "€";
+
+
+    const totalRoomateExpense = await getBalance(user.email);
+    if (balance) balance.innerText = totalRoomateExpense + "€";
+}
 function openModal() {
     modalOverlay.style.display = 'flex';
 }
