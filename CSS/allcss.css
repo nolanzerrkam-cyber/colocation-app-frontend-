@@ -186,15 +186,17 @@ h1 {
 
 .topPage {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 10px;
     height: 10vh;
     top: 0;
+    left: 0;
     background: oklch(0.975 0.012 172);
     position: fixed;
     width: 100vw;
     z-index: 10;
+    box-sizing: border-box;
     overflow: hidden;
 }
 
@@ -202,14 +204,13 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 6px;
-    padding: 0;
+    gap: 2px;
     height: 100%;
 }
 
 .brand img {
-    height: 5vh;
-    max-height: 45px;
+    height: 3vh;
+    max-height: 35px;
     width: auto;
     object-fit: contain;
 }
@@ -340,24 +341,73 @@ h1 {
 
 
 .middlePage {
-    display: grid;
-    grid-template-columns: 60% 1fr;
-    grid-template-rows: 30% 45% auto;
-    font-family: Manrope-Regular, sans-serif;
+    display: flex;
+    flex-direction: column;
     background: oklch(0.975 0.012 172);
-    grid-template-areas:
-        "payment shop"
-        "chores shop"
-        "chores rent";
     position: absolute;
     top: 10vh;
-    height: calc(100vh - 17vh);
     width: 100vw;
     box-sizing: border-box;
     gap: 15px;
     padding: 15px;
+    overflow-y: auto;
+    min-height: calc(100vh - 19vh);
 }
 
+#sumRent {
+    height: 20vh;
+    width: 100%;
+}
+
+#sumChores {
+    height: 20vh;
+    width: 100%;
+}
+
+#sumExpenses {
+    height: 20vh;
+    width: 100%;
+}
+
+#sumShop {
+    height: 20vh;
+    width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+    .middlePage {
+        display: grid;
+        grid-template-columns: 60% 1fr;
+        grid-template-rows: 30% 45% auto;
+        grid-template-areas:
+            "payment shop"
+            "chores shop"
+            "chores rent";
+        height: 90vh;
+        top: 10vh;
+        overflow-y: hidden;
+    }
+
+    #sumRent {
+        grid-area: rent;
+        height: 100%;
+    }
+
+    #sumChores {
+        grid-area: chores;
+        height: 100%;
+    }
+
+    #sumExpenses {
+        grid-area: payment;
+        height: 100%;
+    }
+
+    #sumShop {
+        grid-area: shop;
+        height: 100%;
+    }
+}
 .middlePageOwner {
     display: flex;
     justify-content: center;
@@ -468,21 +518,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     transition: opacity 0.2s ease-out;
 }
 
-#sumRent {
-    grid-area: rent;
-}
 
-#sumChores {
-    grid-area: chores;
-}
-
-#sumExpenses {
-    grid-area: payment;
-}
-
-#sumShop {
-    grid-area: shop;
-}
 
 #sumRoomates {
     grid-column: 1;
@@ -1151,41 +1187,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background-color: #b91c1c;
 }
 
-@media screen and (max-width: 900px) {
-    .middlePage {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 17vh);
-        position: absolute;
-        overflow-y: auto;
-        padding-bottom: 25px;
-    }
 
-    .sumRent {
-        height: 130px;
-        width: 100%;
-    }
-
-    .sumChores {
-        height: 220px;
-        width: 100%;
-    }
-
-    .sumExpenses {
-        height: 160px;
-        width: 100%;
-    }
-
-    .sumShop {
-        height: 180px;
-        width: 100%;
-    }
-
-    .topPage {
-        gap: 20px;
-    }
-}
 #title-expense{
     display: flex;
     flex-direction: row;
