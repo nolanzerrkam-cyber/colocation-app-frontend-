@@ -278,7 +278,7 @@ h1 {
 
 .footerApp {
     display: flex;
-    gap: 2%;
+    gap: 2vw;
     height: 9vh;
     bottom: 0%;
     background: oklch(0.975 0.012 172);
@@ -289,21 +289,35 @@ h1 {
 }
 
 .ButtonApp {
-    height: 8vh;
-    width: 20vh;
+    height: 7vh;
+    width: 16vw;
+    max-width: 55px;
     background-color: white;
     border: 2px black solid;
-    background-size: contain;
+    background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10%;
-    box-shadow: 2px 0 black;
+    box-shadow: 2px 2px 0 black;
 }
 
 .ButtonApp:hover {
     color: #005F4B;
     border: 3px solid #005F4B;
     transform: translateY(-2px);
+}
+
+@media screen and (min-width: 900px) {
+    .ButtonApp {
+        height: 7vh;
+        width: 10vw;
+        max-width: none;
+        background-size: contain;
+    }
+
+    .footerApp {
+        gap: 20px;
+    }
 }
 
 #settingsButton {
@@ -923,22 +937,26 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
     border-radius: 20px;
     background: white;
-    margin: 0 0 0px 0;
+    padding: 5px 0;
 }
 
 .expense {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 35px;
-    margin: 20px;
+    gap: 10px;
+    min-height: 30px;
+    padding: 10px 10px;
+    margin: 5px 5px;
 }
 
-.expense div:first-child {
+.expense > div:first-child {
     display: flex;
     align-items: center;
     gap: 10px;
     height: 100%;
+    flex: 1;
+    min-width: 0px;
 }
 
 .expense h3 {
@@ -959,8 +977,10 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border-radius: 5px;
     background: oklch(0.9359 0.043 172);
     cursor: pointer;
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
+    min-width: 30px;
+    min-height: 30px;
 }
 
 .expense-content {
@@ -972,14 +992,15 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 .expense-sender {
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .expense-amount {
     display: flex;
     align-items: center;
-    flex-direction: row;
-    gap: 5px;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
 .expense-amount p {
@@ -991,8 +1012,8 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border: none;
     height: 1px;
     background-color: #e2e8f0;
-    width: 95%;
-    margin: 20px auto 20px auto;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .modal-overlay {
