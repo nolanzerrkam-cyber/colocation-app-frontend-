@@ -327,6 +327,7 @@ function setLoading(isLoading) {
     This method is going to take the value of each labels, to check if each condition are respected for the creation of the account.
     This could be optimised I think, but for now its working.
 */
+
 function setConditions()
 {
     // fn = first name, ln = last name, pn = phone number.
@@ -382,4 +383,5 @@ function setConditions()
     });
 
 }
+
 setConditions();
