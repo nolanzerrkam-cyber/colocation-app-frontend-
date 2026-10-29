@@ -1322,6 +1322,13 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     right: 50px;
 }
 
+.redText
+{
+    color : red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
 .delete-btn {
     border: none;
     background-color: #ffebee;

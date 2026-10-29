@@ -30,7 +30,6 @@
                 <h3 id="error-section"></h3>
             </div>
 
-            
             <div id="modalOverlay" class="modal-overlay">
                 <div class="modal-card">
                     <button type="button" class="close-btn" id="closeBtn">&times;</button>
@@ -71,11 +70,21 @@
                 </div>
             </div>
 
+            <div id="deleteModal" class="modal-overlay">
+                <div class="modal-box">
+                    <p>Are you sure to remove this roommate ?<br /><span class="redText">This change CAN'T BE UNDONE ! </span></p>
+                    <div class="modal-buttons">
+                        <button id="cancelDeleteBtn" class="modal-btn-cancel">No</button>
+                        <button id="confirmDeleteBtn" class="modal-btn-confirm">Yes</button>
+                    </div>
+                </div>
+            </div>
+
             <div class="roommates-container" id="roommatesList">
             </div>
 
             <div class="statusCard">
-                <p><strong>In the shared home :</strong> <span id="roommatesNumber"></span>/30 roommates in total.</p>
+                <p><strong>In the shared home :</strong> <span id="roommatesNumber"></span>/<span id="limitRoommates"></span> roommates in total.</p>
             </div>
 
         </div>

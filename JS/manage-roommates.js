@@ -1,4 +1,6 @@
 import {getApiUrl} from "./api.js";
+const MAX_ROOMMATES = 30;
+
 const list = document.getElementById('roommatesList');
 const addBtn = document.getElementById('addRoommateBtn');
 const roommatesNumber = document.getElementById('roommatesNumber');
@@ -12,56 +14,21 @@ const firstNameLabel = document.getElementById("roommateFirstName");
 const lastNameLabel = document.getElementById("roommateLastName");
 const emailLabel = document.getElementById("roommateEmail");
 const phoneLabel = document.getElementById("roommatePhoneNumber");
+const limitRoommates = document.getElementById("limitRoommates");
 
 
 addBtn.addEventListener("click", openModal);
-closeButton.addEventListener("click", closeModal);
+if(closeButton)
+    closeButton.addEventListener("click", closeModal);
+if(roommateForm)
+    roommateForm.addEventListener("submit", handleSubmitForm);
 
-roommateForm.addEventListener("submit", handleSubmitForm);
-
-window.addEventListener('load', async () => {
+window.addEventListener('load', async () => 
+{
     const roommatesList = await getAllRoommates();
+    limitRoommates.innerText = MAX_ROOMMATES;
     refreshRoommateComponents(roommatesList);
 })
-
-if (list) {
-    list.addEventListener('click', (e) => {
-        if (e.target.classList.contains('btn-delete')) {
-            const errorSection = document.getElementById("error-section");
-            if (list.children.length === 30 && errorSection) {
-                errorSection.innerHTML = "";
-            }
-        }
-    });
-}
-
-if (addBtn) {
-    addBtn.addEventListener('click', () => {
-        const count = list.children.length + 1;
-        const error = document.getElementById("error-section");
-        if (count === 31) {
-            if (error) {
-                error.innerHTML = "There are too much roomates on the shared home !";
-            }
-        } else {
-            if (error) {
-                error.innerHTML = "";
-            }
-            const item = document.createElement('div');
-            item.className = 'roommate-item';
-            item.innerHTML = `
-                <div class="roommate-info">
-                    <span class="roommate-name">Roomate n°${count}</span>
-                    <div class="roommate-details">Room n°${count} — email@exemple.com</div>
-                </div>
-                <button class="btn btn-delete">- Delete</button>`;
-            list.appendChild(item);
-            if (roommatesNumber) {
-                roommatesNumber.innerHTML = list.children.length;
-            }
-        }
-    });
-}
 
 /**
  * Remove old Roommate components and render them again
@@ -99,7 +66,7 @@ function createRoommateComponent(roommate) {
     deleteBtn.className = 'btn btn-delete';
     deleteBtn.textContent = '- Delete';
 
-    deleteBtn.addEventListener('click', () => deleteRoommate(roommate, roommateComponent));
+    deleteBtn.addEventListener('click', () => openDeleteModal(roommate));
 
     roommateComponent.appendChild(info);
     roommateComponent.appendChild(deleteBtn);
@@ -135,17 +102,6 @@ async function getAllRoommates() {
     }
 }
 
-/**
- * Remove the roommate component and remove the roommate from database
- * @param roommate - roommate
- * @param roommateComponent - roommate HTML component
- */
-function deleteRoommate(roommate, roommateComponent) {
-    roommateComponent.remove();
-    // todo delete from db
-    roommatesNumber.innerText = `${list.children.length}`
-}
-
 // here's for closing the modal when you are click outside the form
 modalOverlay.addEventListener("click", (event) => {
     if(event.target === modalOverlay)
@@ -158,6 +114,19 @@ modalOverlay.addEventListener("click", (event) => {
     FLEX => showing to the user, NONE => invisible.
 */
 function openModal() {
+    const notifError = document.getElementById("error-section");
+
+    if(list.children.length >= MAX_ROOMMATES)
+    {
+        notifError.innerHTML = "There are too much roommates ! Please respect the maximum size of the roomshare.";
+        setTimeout(() =>
+        {
+            notifError.innerHTML = "";
+        }, 5000);
+        return;
+    }
+
+    notifError.innerHTML = "";
     modalOverlay.style.display = "flex";
 }
 
@@ -189,7 +158,6 @@ function handleSubmitForm(event) {
     setLoading(false);
 }
 
-
 /*
     This method is made to create a single roommate.
     @param roommateData : roommateData is going to contain all the data for creating the roommate : firstname, lastname, password, phonenumber and email.
@@ -218,11 +186,76 @@ async function createRoommate(roommateData)
 
         roommateForm.reset();
         setNotifier("SUCCESS : the user was created ! Don't forget to change the password.");
+
+        const roommates = await getAllRoommates();
+        refreshRoommateComponents(roommates);
     }
     catch(error)
     {
         setNotifier("An error has occured : " + error.message, true);
     }
+}
+
+/**
+ * Remove the roommate component and remove the roommate from database
+ * @param roommateEmail - roommate's email !
+ */
+async function deleteRoommate(roommateEmail)
+{
+    const url = getApiUrl(`/api/user/${roommateEmail}`);
+    try
+    {
+        const response = await fetch(url, {
+            method : 'DELETE'
+        });
+        if(!response.ok)
+        {
+            console.error("Error from the backend, please call the administrator");
+            return false;
+        }
+        return true;
+    }
+    catch(error)
+    {
+        console.error("ERROR : " + error.message);
+        return false;    
+    }
+}
+
+// Just for debug if we need it
+// function deleteRoommate(roommate, roommateComponent) {
+//     roommateComponent.remove();
+//     // todo delete from db
+//     roommatesNumber.innerText = `${list.children.length}`
+// }
+
+function openDeleteModal(roommate)
+{
+    const modal = document.getElementById("deleteModal");
+    const confirmBtn = document.getElementById("confirmDeleteBtn");
+    const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+    modal.style.display = "flex";
+
+    const newConfirmBtn = confirmBtn.cloneNode(true);
+    confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+    const newCancelBtn = cancelBtn.cloneNode(true);
+    cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+
+    newCancelBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    newConfirmBtn.addEventListener("click", async () => {
+        modal.style.display = "none";
+        const success = await deleteRoommate(roommate.email);
+        if(success)
+        {
+            const roommates = await getAllRoommates();
+            refreshRoommateComponents(roommates);
+        }
+    });
 }
 
 /*
