@@ -28,24 +28,18 @@ const submitButton = document.getElementById("submit-button");
 const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
-    const currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
+    let currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
     if(!currentUser) {
         window.location.href = "login.html"
         return;
     }
 
-    expenses = await getAllExpenses();
-    totalRoomateExpense = await getBalance(currentUser.email)
-
-    const totalAmount = expenses.totalExpense
-    total.innerText = totalAmount + "€";
-
-    balance.innerText = totalRoomateExpense + "€";
-
-    displayExpenseComponent(expenses.expensesdto);
+    await refreshPage(currentUser);
 });
 
 async function getBalance(currentUserEmail) {
+    /*function that get the Balance of the current user from the API
+    * the balance is how much expense this user has done.*/
     const url = getApiUrl("/api/expense/total?email=" + currentUserEmail);
     try {
         const response = await fetch(url);
@@ -63,6 +57,8 @@ async function getBalance(currentUserEmail) {
 
 // TODO: implement a pagination system
 async function getAllExpenses() {
+    /*function that get All the expense across the colocation and the total price of
+    all the expense from everyone */
     const url = getApiUrl("/api/expense");
     try {
         const response = await fetch(url);
@@ -78,6 +74,7 @@ async function getAllExpenses() {
 }
 
 async function deleteExpense(expenseId) {
+    /*function that delete an expense from the API*/
     const url = getApiUrl(`/api/expense/${expenseId}`);
     try {
         const response = await fetch(url, {
@@ -95,6 +92,7 @@ async function deleteExpense(expenseId) {
 }
 
 function createExpenseComponent(expenseJson) {
+    /*function that create all the html element when we push the create task button*/
     console.log(expenseJson);
     const expense = document.createElement('div');
     expense.classList.add('expense');
@@ -161,8 +159,8 @@ function createExpenseComponent(expenseJson) {
             modal.style.display = 'none';
             const success = await deleteExpense(expenseJson.id);
             if (success) {
-                expenses = await getAllExpenses();
-                displayExpenseComponent(expenses.expensesdto);
+                let currentUser = JSON.parse(sessionStorage.getItem('user'));
+                await refreshPage(currentUser);
             }
         });
     });
@@ -175,19 +173,21 @@ function createExpenseComponent(expenseJson) {
     expensesList.appendChild(expense);
 }
 
-// Remove all child of the tasks list div
 function removeExpenseComponent() {
+    // Remove all child of the tasks list div
     while (expensesList.firstChild)
         expensesList.removeChild(expensesList.lastChild);
 }
 
 function createSeparatorComponent() {
+    // create a html separator
     const separator = document.createElement('hr');
     separator.classList.add('expense-separator');
     expensesList.appendChild(separator);
 }
 
 function displayExpenseComponent(expenses) {
+    // add every expense to the html
     removeExpenseComponent();
 
     const expensesLength = expenses.length;
@@ -198,16 +198,31 @@ function displayExpenseComponent(expenses) {
         }
     });
 }
+async function refreshPage(user)
+{
+    // refresh the page after an action is done
+    expenses = await getAllExpenses();
+    displayExpenseComponent(expenses.expensesdto);
 
+    const totalAmount = expenses.totalExpense;
+    if (total) total.innerText = totalAmount + "€";
+
+
+    const totalRoomateExpense = await getBalance(user.email);
+    if (balance) balance.innerText = totalRoomateExpense + "€";
+}
 function openModal() {
+    // dispaly the modal
     modalOverlay.style.display = 'flex';
 }
 
 function closeModal() {
+    // hide the modal
     modalOverlay.style.display = 'none';
 }
 
 function handleSubmitForm(event) {
+    // function that handle the comportment of the form
     event.preventDefault();
     setLoading(true);
 
@@ -225,8 +240,8 @@ function handleSubmitForm(event) {
     setLoading(false);
 }
 
-// Persist a new expense in database through the API
 function createExpense(expenseData) {
+    // Persist a new expense in database through the API
     const currentUserEmail = JSON.parse(sessionStorage.getItem("user")).email;
 
     if (!currentUserEmail)
@@ -279,13 +294,14 @@ function validateInput(formData) {
 }
 
 
-// Display error message
 function setNotifier(message, isError) {
+    // Display error message
     notifier.innerText = message;
     notifier.style.color = isError ? "red" : "green";
 }
 
 function setLoading(isLoading) {
+    // function that create a loading message
     if (isLoading) {
         submitButton.innerText = "Loading...";
         submitButton.disabled = true;
