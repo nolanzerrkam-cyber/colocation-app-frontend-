@@ -1307,7 +1307,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     flex-direction: row;
     justify-content: space-between;
 }
-
 #add-expense {
     display: flex;
     justify-content: center;
