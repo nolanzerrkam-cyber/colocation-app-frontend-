@@ -334,6 +334,9 @@ h1 {
 #rentButton {
     background-image: url("../image/rent.png");
 }
+#rentButtonOwner{
+    background-image: url("../image/dollar-removebg-preview.png");
+}
 
 #choresButton {
     background-image: url("../image/todolist.png");
@@ -430,20 +433,25 @@ h1 {
 }
 .middlePageOwner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     position: absolute;
     top: 10vh;
     height: calc(100vh - 19vh);
     width: 100vw;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .middlePageOwner .sum {
-    max-width: 450px;
-    height: 70vh;
+    width: 100%;
+    max-width: none;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .centerPage {
@@ -539,29 +547,51 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 }
 
 
-
+#sumRoomates, #sumRentOwner {
+    height: auto;
+    min-height: 250px;
+}
 #sumRoomates {
-    grid-column: 1;
-    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     text-align: center;
 }
 
 #sumRentOwner {
-    grid-column: 2;
-    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     text-align: center;
 }
+@media screen and (min-width: 900px) {
+    .middlePageOwner {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 20px;
+        overflow-y: hidden;
+    }
 
+    .middlePageOwner .sum {
+        max-width: 450px;
+    }
+
+    #sumRoomates {
+        height: 75vh;
+        grid-column: auto;
+    }
+
+    #sumRentOwner {
+        height: 75vh;
+        grid-column: auto;
+    }
+}
 #sumSupport {
     position: absolute;
     top: 50%;
@@ -637,12 +667,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 .btn-add {
     background-color: #28a745;
-    color: white;
-    border: 2px solid black;
-}
-
-.btn-delete {
-    background-color: #dc3545;
     color: white;
     border: 2px solid black;
 }

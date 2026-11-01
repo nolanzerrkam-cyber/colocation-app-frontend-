@@ -39,7 +39,7 @@ if (addBtn) {
                     <span class="roommate-name">Roomate n°${count}</span>
                     <div class="roommate-details">Room n°${count} — email@exemple.com</div>
                 </div>
-                <button class="btn btn-delete">- Delete</button>`;
+                <button class="btn btn-delete red-button">x</button>`;
             list.appendChild(item);
             if (roommatesNumber) {
                 roommatesNumber.innerHTML = list.children.length;
@@ -81,8 +81,8 @@ function createRoommateComponent(roommate) {
     info.appendChild(detailsDiv);
 
     const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'btn btn-delete';
-    deleteBtn.textContent = '- Delete';
+    deleteBtn.className = 'btn red-button btn-delete ';
+    deleteBtn.textContent = 'x';
 
     deleteBtn.addEventListener('click', () => deleteRoommate(roommate, roommateComponent));
 
