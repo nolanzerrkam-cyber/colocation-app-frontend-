@@ -2,6 +2,7 @@ import {getApiUrl} from "./api.js";
 
 let filter; // todo, mine, done
 let tasks; // list of tasks
+let roommatesList; // list of roommates
 
 const todoButton = document.getElementById('todo-filter');
 todoButton.addEventListener('click', () => applyFilter('todo'));
@@ -42,14 +43,47 @@ const submitButton = document.getElementById("submit-button");
 const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
+    const userSession = JSON.parse(sessionStorage.getItem('user'));
+
     filter = "todo";
     tasks = await getTasks();
+    roommatesList = await getRoommates();
+    loadRoommates(roommatesList, userSession.email);
     applyFilter(filter);
 })
 
+// Load the roommates in the select tag of the form
+function loadRoommates(roommates, currentEmail) {
+    const selectElement = document.getElementById('assignTo');
+
+    roommates.forEach(roommate => {
+        const option = document.createElement('option');
+        option.value = roommate.email;
+        option.textContent = roommate.email === currentEmail ? "You" : roommate.fullName;
+        selectElement.appendChild(option);
+    });
+}
+
+// Retrieve the list of roommates from the database
+async function getRoommates() {
+    const url = getApiUrl("/api/roommate");
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error("Error from backend");
+            return [];
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error(error.message);
+        return [];
+    }
+}
+
+// Retrieve all tasks from the database
 async function getTasks() {
-    try
-    {
+    try {
         const response = await fetch(getApiUrl('/api/task'), {
             method: 'GET'
         });
@@ -59,15 +93,13 @@ async function getTasks() {
         }
 
         const tasks = await response.json();
-        console.log(tasks);
         return tasks;
-    }
-    catch(Error)
-    {
+    } catch (Error) {
         console.warn("Error : " + Error)
     }
 }
 
+// Create a new task UI component
 function createTaskComponent(taskJson) {
     const task = document.createElement('div');
     task.classList.add('task');
@@ -118,7 +150,8 @@ function createTaskComponent(taskJson) {
 
     tasksList.appendChild(task);
 }
-// Remove all child of the tasks list div
+
+// Make tasks list div empty
 function removeTasksComponent() {
     while (tasksList.firstChild)
         tasksList.removeChild(tasksList.lastChild)
@@ -130,8 +163,9 @@ function createSeparatorComponent() {
     tasksList.appendChild(separator)
 }
 
+// Create a new task in database
 function createTask(taskData) {
-    fetch(getApiUrl('api/task'), {
+    fetch(getApiUrl('/api/task'), {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -141,10 +175,11 @@ function createTask(taskData) {
             "description": "",
             "isDone": "false",
             "deadline": taskData.get("date"),
+            "roommateEmail": taskData.get("roommateEmail")
         })
     })
         .then(response => {
-            if (!response.ok) throw new Error('Error: network error');
+            if (!response.ok) throw new Error('Network error');
             choreForm.reset();
             setNotifier("Success: The task has been created.", false)
         })
@@ -166,18 +201,16 @@ function applyFilter(filterName) {
     let filteredTasks = [];
     //filter tasks by todo, mine and done
     switch (filterName) {
-
         case 'todo':
             todoButton.classList.add("task-filter-selected")
             filteredTasks = tasks.filter(t => !t.isDone)
             break
-        case 'mine': {
+        case 'mine':
             mineButton.classList.add("task-filter-selected");
             const user = JSON.parse(sessionStorage.getItem("user") ?? "null");
             const name = user ? `${user.firstname} ${user.lastname}` : "";
             filteredTasks = tasks.filter(t => t.roommateFullName === name);
             break;
-        }
         case 'done':
             doneButton.classList.add("task-filter-selected")
             filteredTasks = tasks.filter(t => t.isDone)
@@ -187,8 +220,8 @@ function applyFilter(filterName) {
     displayTasksComponent(filteredTasks);
 }
 
-function displayTasksComponent(tasks)
-{
+// Update the task components list
+function displayTasksComponent(tasks) {
     removeTasksComponent();
 
     const tasksLength = tasks.length;
@@ -199,9 +232,10 @@ function displayTasksComponent(tasks)
     })
 }
 
-function handleSubmitForm(event) {
+async function handleSubmitForm(event) {
     event.preventDefault();
     setLoading(true);
+    setNotifier("", false);
 
     const formData = new FormData(choreForm);
     const {isError, message} = validateInput(formData);
@@ -218,6 +252,7 @@ function handleSubmitForm(event) {
     setLoading(false);
 }
 
+// Validate form inputs
 function validateInput(formData) {
     let errorCounter = 0;
     let errorMessage = [];
@@ -238,27 +273,31 @@ function validateInput(formData) {
     };
 }
 
+// Display date input in the form if "Doesn't repeat" is selected
 function handleRepeatSelectChange() {
-    // Display date input in the form if "Doesn't repeat" is selected
     formGroupDate.style.display = repeatSelect.value === 'none' ? 'block' : 'none';
 }
 
+// Open Add a chore form modal
 function openModal() {
     modalOverlay.style.display = 'flex';
 }
 
+// Close Add a chore form modal
 function closeModal() {
     modalOverlay.style.display = 'none';
 }
 
+// Display a message below the form
 function setNotifier(message, isError) {
     notifier.innerText = message;
     notifier.style.color = isError ? "red" : "green";
 }
 
+// Disable or enable the submit button
 function setLoading(isLoading) {
     if (isLoading) {
-        submitButton.innerText = "Loading...";
+        submitButton.innerHTML = "Loading...";
         submitButton.disabled = true;
     } else {
         submitButton.innerText = "Create task";
