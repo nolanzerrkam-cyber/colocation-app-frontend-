@@ -637,9 +637,16 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 10px 15px;
+    padding: 10px 10px;
     border: 2px solid black;
     border-radius: 8px;
+    font-size: 12px;
+}
+@media screen and (min-width: 900px) {
+    .roommate-item {
+        font-size: 15px;
+        padding: 10px 15px;
+    }
 }
 
 .roommate-info {
