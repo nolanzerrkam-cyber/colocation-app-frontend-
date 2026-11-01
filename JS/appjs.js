@@ -47,8 +47,8 @@ onload = function () {
     if (sumRent) sumRent.addEventListener("click", () => morph.call(sumRent, "html/rent.html"));
     if (sumChores) sumChores.addEventListener("click", () => morph.call(sumChores, "html/chores.html"));
     if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "html/expenses.html"));
-    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "html/manage-rent.html"); });
-    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roommates.html"); });
+    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "manage-rent.html"); });
+    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "manage-roommates.html"); });
 
     if(logoutBtn) logoutBtn.addEventListener("click", () => {
         sessionStorage.removeItem("user");
