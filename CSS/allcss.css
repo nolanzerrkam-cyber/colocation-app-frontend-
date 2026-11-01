@@ -1029,6 +1029,8 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .modal-card {
@@ -1036,19 +1038,24 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background-color: #ffffff;
     width: 100%;
     max-width: 460px;
-    padding: 36px 32px 32px 32px;
-    border-radius: 24px;
+    padding: 24px 20px 20px 20px;
+    border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
-
+.modal-card::-webkit-scrollbar {
+    display: none;
+}
 .close-btn {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 36px;
-    height: 36px;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: 1px solid #E2E8F0;
     background: transparent;
@@ -1077,7 +1084,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 .title {
     margin: 0 0 24px 0;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #0F172A;
 }
@@ -1141,19 +1148,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     color: white;
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
 .modal-box {
     background-color: #ffffff;
     padding: 24px 30px;
@@ -1161,7 +1155,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
     max-width: 320px;
-    width: 100%;
+    width: 90%;
 }
 
 .modal-box p {
@@ -1207,7 +1201,24 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 .modal-btn-confirm:hover {
     background-color: #b91c1c;
 }
+@media screen and (min-width: 900px) {
+    .modal-card {
+        padding: 36px 32px 32px 32px;
+        border-radius: 24px;
+    }
 
+    .title {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+
+    .close-btn {
+        top: 24px;
+        right: 24px;
+        width: 36px;
+        height: 36px;
+    }
+}
 
 #title-expense{
     display: flex;
