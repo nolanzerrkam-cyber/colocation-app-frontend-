@@ -221,10 +221,11 @@ function closeModal() {
     modalOverlay.style.display = 'none';
 }
 
-function handleSubmitForm(event) {
+async function handleSubmitForm(event) {
     // function that handle the comportment of the form
     event.preventDefault();
     setLoading(true);
+    let currentUser = JSON.parse(sessionStorage.getItem('user'));
 
     const formData = new FormData(expenseForm);
     const {isError, message} = validateInput(formData);
@@ -238,6 +239,7 @@ function handleSubmitForm(event) {
     createExpense(formData);
 
     setLoading(false);
+    await refreshPage(currentUser);
 }
 
 function createExpense(expenseData) {
