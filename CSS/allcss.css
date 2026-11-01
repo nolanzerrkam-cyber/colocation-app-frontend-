@@ -188,7 +188,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 10px;
+    padding: 0 20px;
     height: 10vh;
     top: 0;
     left: 0;
@@ -214,6 +214,12 @@ h1 {
     width: auto;
     object-fit: contain;
 }
+@media screen and (min-width: 900px) {
+    .brand img {
+        height: 5vh;
+    }
+}
+
 .red-button {
     position: relative;
     overflow: hidden;
