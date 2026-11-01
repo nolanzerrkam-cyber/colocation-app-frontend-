@@ -720,26 +720,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     text-decoration: underline;
 }
 
-#add-chore-2 {
-    position: fixed;
-    bottom: 12vh;
-    right: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    width: 60px;
-    font-size: 30px;
-    background: #005F4B;
-    color: white;
-    border: 2px solid black;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    z-index: 5;
-    transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
 #add-chore-2:hover {
     background: #004B3B;
     transform: translateY(-3px);
@@ -1220,12 +1200,12 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     }
 }
 
-#title-expense{
+.title-div{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-#add-expense {
+.add-element-btn {
     display: flex;
     justify-content: center;
     align-items: center;
