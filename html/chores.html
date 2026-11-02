@@ -7,6 +7,16 @@
     <script type="module" src="../JS/chores.js" defer></script>
     <script type="module" src="../JS/appjs.js" defer></script>
 </head>
+
+<dialog id="confirm-dialog" class="confirm-dialog">
+    <div class="confirm-content">
+        <p id="confirm-message"></p>
+        <div class="confirm-actions">
+            <button type="button" id="confirm-cancel" class="confirm-btn">Cancel</button>
+            <button type="button" id="confirm-ok" class="confirm-btn confirm-btn-danger">Delete</button>
+        </div>
+    </div>
+</dialog>
 <body id="chores-page">
 <div class="topPage">
     <div class="brand">
