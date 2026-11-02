@@ -1,6 +1,7 @@
 import {getApiUrl} from "./api.js";
 
 let expenses;
+let totalRoomateExpense;
 
 const expensesList = document.getElementById("expenses-list");
 const total = document.getElementById("total-expenses");
@@ -27,64 +28,53 @@ const submitButton = document.getElementById("submit-button");
 const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
-    const currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
-
+    let currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
     if(!currentUser) {
         window.location.href = "login.html"
         return;
     }
 
-    expenses = await getAllExpenses();
-
-    const totalAmount = getTotalExpenses(expenses);
-    total.innerText = totalAmount + "€";
-
-    const balanceAmount = getBalance(expenses, currentUser.email);
-    balance.innerText = balanceAmount + "€";
-
-    displayExpenseComponent(expenses);
+    await refreshPage(currentUser);
 });
 
-// Calculate the total expenses amount of the colocation
-function getTotalExpenses(expensesList) {
-    let total = 0;
-    expensesList.forEach(e => total += e.price);
-    return total;
-}
-
-// To update the total balance and the total cost
-function updateDashboard(expenseList) {
-    const totalAmount = getTotalExpenses(expenseList);
-    total.innerText = totalAmount + "€";
-    const balanceAmount = getBalance(expenseList);
-    balance.innerText = balanceAmount + "€";
-}
-
-// Calculate the balance of the current user based on expenses
-function getBalance(expensesList, currentUserEmail) {
-    let balance = 0;
-    expensesList.filter(e => e.email === currentUserEmail).forEach(e => balance += e.price);
-    return balance;
-}
-
-// TODO: implement a pagination system
-async function getAllExpenses() {
-    const url = getApiUrl("/api/expense");
+async function getBalance(currentUserEmail) {
+    /*function that get the Balance of the current user from the API
+    * the balance is how much expense this user has done.*/
+    const url = getApiUrl("/api/expense/total?email=" + currentUserEmail);
     try {
         const response = await fetch(url);
         if (!response.ok) {
             console.error("Error from backend");
-            return [];
+            return 0;
         }
 
         return response.json();
     } catch (error) {
         console.error(error.message);
-        return [];
+        return 0;
     }
 }
 
+// TODO: implement a pagination system
+async function getAllExpenses() {
+    /*function that get All the expense across the colocation and the total price of
+    all the expense from everyone */
+    const url = getApiUrl("/api/expense");
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.error("Error from backend");
+            return {expenses: [], totalExpense: 0 };
+        }
+
+        return response.json();
+    } catch (error) {
+        console.error(error.message);
+        return {expenses: [], totalExpense: 0 };    }
+}
+
 async function deleteExpense(expenseId) {
+    /*function that delete an expense from the API*/
     const url = getApiUrl(`/api/expense/${expenseId}`);
     try {
         const response = await fetch(url, {
@@ -102,6 +92,7 @@ async function deleteExpense(expenseId) {
 }
 
 function createExpenseComponent(expenseJson) {
+    /*function that create all the html element when we push the create task button*/
     console.log(expenseJson);
     const expense = document.createElement('div');
     expense.classList.add('expense');
@@ -137,21 +128,14 @@ function createExpenseComponent(expenseJson) {
     const expenseAmount = document.createElement('div');
     expenseAmount.classList.add('expense-amount');
 
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '✕';
+    deleteBtn.classList.add("red-button");
+
     const amount = document.createElement('p');
     amount.textContent = expenseJson.price + '€';
 
     expenseAmount.appendChild(amount);
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.textContent = '✕';
-    deleteBtn.classList.add("delete-btn");
-
-    deleteBtn.addEventListener('mouseenter', () => {
-        deleteBtn.style.backgroundColor = '#ffcdd2';
-    });
-    deleteBtn.addEventListener('mouseleave', () => {
-        deleteBtn.style.backgroundColor = '#ffebee';
-    });
 
     deleteBtn.addEventListener('click', () => 
     {
@@ -175,9 +159,8 @@ function createExpenseComponent(expenseJson) {
             modal.style.display = 'none';
             const success = await deleteExpense(expenseJson.id);
             if (success) {
-                expenses = await getAllExpenses();
-                updateDashboard(expenses);
-                displayExpenseComponent(expenses);
+                let currentUser = JSON.parse(sessionStorage.getItem('user'));
+                await refreshPage(currentUser);
             }
         });
     });
@@ -190,19 +173,21 @@ function createExpenseComponent(expenseJson) {
     expensesList.appendChild(expense);
 }
 
-// Remove all child of the tasks list div
 function removeExpenseComponent() {
+    // Remove all child of the tasks list div
     while (expensesList.firstChild)
         expensesList.removeChild(expensesList.lastChild);
 }
 
 function createSeparatorComponent() {
+    // create a html separator
     const separator = document.createElement('hr');
     separator.classList.add('expense-separator');
     expensesList.appendChild(separator);
 }
 
 function displayExpenseComponent(expenses) {
+    // add every expense to the html
     removeExpenseComponent();
 
     const expensesLength = expenses.length;
@@ -213,18 +198,34 @@ function displayExpenseComponent(expenses) {
         }
     });
 }
+async function refreshPage(user)
+{
+    // refresh the page after an action is done
+    expenses = await getAllExpenses();
+    displayExpenseComponent(expenses.expensesdto);
 
+    const totalAmount = expenses.totalExpense;
+    if (total) total.innerText = totalAmount + "€";
+
+
+    const totalRoomateExpense = await getBalance(user.email);
+    if (balance) balance.innerText = totalRoomateExpense + "€";
+}
 function openModal() {
+    // dispaly the modal
     modalOverlay.style.display = 'flex';
 }
 
 function closeModal() {
+    // hide the modal
     modalOverlay.style.display = 'none';
 }
 
-function handleSubmitForm(event) {
+async function handleSubmitForm(event) {
+    // function that handle the comportment of the form
     event.preventDefault();
     setLoading(true);
+    let currentUser = JSON.parse(sessionStorage.getItem('user'));
 
     const formData = new FormData(expenseForm);
     const {isError, message} = validateInput(formData);
@@ -238,10 +239,11 @@ function handleSubmitForm(event) {
     createExpense(formData);
 
     setLoading(false);
+    await refreshPage(currentUser);
 }
 
-// Persist a new expense in database through the API
 function createExpense(expenseData) {
+    // Persist a new expense in database through the API
     const currentUserEmail = JSON.parse(sessionStorage.getItem("user")).email;
 
     if (!currentUserEmail)
@@ -261,7 +263,7 @@ function createExpense(expenseData) {
     })
         .then(response => {
             if (!response.ok) throw new Error('Error: network error');
-            choreForm.reset();
+            expenseForm.reset();
             setNotifier("Success: The expense has been created.", false)
         })
         .catch(error =>
@@ -294,13 +296,14 @@ function validateInput(formData) {
 }
 
 
-// Display error message
 function setNotifier(message, isError) {
+    // Display error message
     notifier.innerText = message;
     notifier.style.color = isError ? "red" : "green";
 }
 
 function setLoading(isLoading) {
+    // function that create a loading message
     if (isLoading) {
         submitButton.innerText = "Loading...";
         submitButton.disabled = true;
