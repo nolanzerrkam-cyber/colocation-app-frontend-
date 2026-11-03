@@ -249,7 +249,8 @@ function createExpense(expenseData) {
     if (!currentUserEmail)
         setNotifier("Error: user email is invalid", true);
 
-    fetch('http://localhost:8080/api/expense', {
+    const url = getApiUrl("/api/expense");
+    fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
