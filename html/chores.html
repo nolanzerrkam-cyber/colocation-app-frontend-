@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chores</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="module" src="../JS/chores.js" defer></script>
@@ -25,27 +26,29 @@
     </div>
     <div id="hour"></div>
     <a class="red-button" href="login.html" id="logout" >Logout</a>
-    <a class="ButtonApp" id="settingsButton" href="settings.html"></a>
 </div>
 <main>
     <div class="centerPage">
-        <div class="infoPage">
+    <div class="infoPage">
+        <div class="title-div">
             <h1>Chores</h1>
-            <div id="filter-div">
-                <button id="todo-filter" class="task-filter task-filter-selected">To do</button>
-                <button id="mine-filter" class="task-filter">Mine</button>
-                <button id="done-filter" class="task-filter">Done</button>
-            </div>
-            <div>
-                <div id="task-title-div">
-                    <h2>Coming up</h2>
-                    <p id="add-chore-1">+ Add chore</p>
-                </div>
-                <div id="tasks-list"></div>
-            </div>
-            <div id="modalOverlay" class="modal-overlay">
-                <div class="modal-card">
-                    <button type="button" class="close-btn" id="closeBtn">&times;</button>
+            <p id="add-chore-2" class="add-element-btn">+</p>
+        </div>
+    <div id="filter-div">
+        <button id="todo-filter" class="task-filter task-filter-selected">To do</button>
+        <button id="mine-filter" class="task-filter">Mine</button>
+        <button id="done-filter" class="task-filter">Done</button>
+    </div>
+    <div>
+        <div id="task-title-div">
+            <h2>Coming up</h2>
+            <p id="add-chore-1">+ Add chore</p>
+        </div>
+        <div id="tasks-list"></div>
+    </div>
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-card">
+            <button type="button" class="close-btn" id="closeBtn">&times;</button>
 
                     <h2 class="title">Add a chore</h2>
 
