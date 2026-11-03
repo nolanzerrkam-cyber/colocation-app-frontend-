@@ -16,14 +16,13 @@
     </div>
     <div id="hour"></div>
     <a class="red-button" href="login.html" id="logout" >Logout</a>
-    <a class="ButtonApp" id="settingsButton" href="settings.html"></a>
 </div>
 <main>
     <div class="centerPage">
         <div class="infoPage">
-            <div id="title-expense">
+            <div class="title-div">
                 <h1>Expenses</h1>
-                <p id="add-expense">+</p>
+                <p id="add-expense" class="add-element-btn">+</p>
             </div>
             <div id="balance-div">
                 <div>
@@ -41,10 +40,10 @@
     </div>
     <div id="deleteModal" class="modal-overlay">
         <div class="modal-box">
-            <p>Are you sure to delete this expense ?</p>
+            <p>Delete this expense ?</p>
             <div class="modal-buttons">
-                <button id="cancelDeleteBtn" class="modal-btn-cancel">No</button>
-                <button id="confirmDeleteBtn" class="modal-btn-confirm">Yes</button>
+                <button id="cancelDeleteBtn" class="modal-btn-cancel">Keep</button>
+                <button id="confirmDeleteBtn" class="modal-btn-confirm">Delete</button>
             </div>
         </div>
     </div>

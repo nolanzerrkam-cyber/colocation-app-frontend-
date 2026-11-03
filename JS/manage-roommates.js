@@ -30,6 +30,45 @@ window.addEventListener('load', async () =>
     refreshRoommateComponents(roommatesList);
 })
 
+if (list) {
+    list.addEventListener('click', (e) => {
+        if (e.target.classList.contains('btn-delete')) {
+            const errorSection = document.getElementById("error-section");
+            if (list.children.length === 30 && errorSection) {
+                errorSection.innerHTML = "";
+            }
+        }
+    });
+}
+
+if (addBtn) {
+    addBtn.addEventListener('click', () => {
+        const count = list.children.length + 1;
+        const error = document.getElementById("error-section");
+        if (count === 31) {
+            if (error) {
+                error.innerHTML = "There are too much roomates on the shared home !";
+            }
+        } else {
+            if (error) {
+                error.innerHTML = "";
+            }
+            const item = document.createElement('div');
+            item.className = 'roommate-item';
+            item.innerHTML = `
+                <div class="roommate-info">
+                    <span class="roommate-name">Roomate n°${count}</span>
+                    <div class="roommate-details">Room n°${count} — email@exemple.com</div>
+                </div>
+                <button class="btn btn-delete red-button">x</button>`;
+            list.appendChild(item);
+            if (roommatesNumber) {
+                roommatesNumber.innerHTML = list.children.length;
+            }
+        }
+    });
+}
+
 /**
  * Remove old Roommate components and render them again
  * @param roommates - list of roommate [email, firstname, lastname, phonenumber]
@@ -63,8 +102,8 @@ function createRoommateComponent(roommate) {
     info.appendChild(detailsDiv);
 
     const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'btn btn-delete';
-    deleteBtn.textContent = '- Delete';
+    deleteBtn.className = 'btn red-button btn-delete ';
+    deleteBtn.textContent = 'x';
 
     deleteBtn.addEventListener('click', () => openDeleteModal(roommate));
 
