@@ -62,14 +62,21 @@ h1 {
 .loginPart {
     background-color: #ffffff;
     width: 100%;
-    max-width: 460px;
-    padding: 36px 32px 32px 32px;
+    max-width: 80vw;
+    padding: 24px 20px;
     border-radius: 24px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     border: 2px solid #000000;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+}
+@media (min-width: 768px) {
+    .loginPart {
+        width: 100%;
+        max-width: 35vw;
+        padding: 36px 32px 32px 32px;
+    }
 }
 
 .loginPart h2 {
@@ -179,34 +186,42 @@ h1 {
 
 .topPage {
     display: flex;
-    justify-content: start;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 15px;
+    padding: 0 20px;
     height: 10vh;
     top: 0;
+    left: 0;
     background: oklch(0.975 0.012 172);
     position: fixed;
     width: 100vw;
     z-index: 10;
+    box-sizing: border-box;
     overflow: hidden;
+    gap: 10px;
 }
 
 .brand {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 6px;
-    padding: 0;
+    gap: 2px;
     height: 100%;
 }
 
 .brand img {
-    height: 5vh;
-    max-height: 45px;
+    height: 3vh;
+    max-height: 35px;
     width: auto;
     object-fit: contain;
 }
-#logout {
+@media screen and (min-width: 900px) {
+    .brand img {
+        height: 5vh;
+    }
+}
+
+.red-button {
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -216,14 +231,17 @@ h1 {
     background-color: white;
     display: flex;
     align-items: center;
-    margin-left: 15px;
     justify-content: center;
-    min-width: 90px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
     min-height: 40px;
+    padding: 0;
+    cursor: pointer;
     transition: color 0.3s ease;
 }
 
-#logout::before {
+.red-button::before {
     content: "";
     position: absolute;
     top: 0;
@@ -235,12 +253,21 @@ h1 {
     z-index: -1;
 }
 
-#logout:hover::before {
+.red-button:hover::before {
     width: 100%;
 }
 
-#logout:hover {
+.red-button:hover {
     color: #FFFFFF;
+}
+
+#logout {
+    width: auto;
+    height: auto;
+    min-width: 90px;
+    min-height: 40px;
+    margin-left: 15px;
+    padding: 0 15px;
 }
 #hour  {
     border: 2px solid black;
@@ -256,7 +283,7 @@ h1 {
 
 .footerApp {
     display: flex;
-    gap: 2%;
+    gap: 2vw;
     height: 9vh;
     bottom: 0%;
     background: oklch(0.975 0.012 172);
@@ -267,21 +294,35 @@ h1 {
 }
 
 .ButtonApp {
-    height: 8vh;
-    width: 20vh;
+    height: 7vh;
+    width: 16vw;
+    max-width: 55px;
     background-color: white;
     border: 2px black solid;
-    background-size: contain;
+    background-size: 60%;
     background-repeat: no-repeat;
     background-position: center;
     border-radius: 10%;
-    box-shadow: 2px 0 black;
+    box-shadow: 2px 2px 0 black;
 }
 
 .ButtonApp:hover {
     color: #005F4B;
     border: 3px solid #005F4B;
     transform: translateY(-2px);
+}
+
+@media screen and (min-width: 900px) {
+    .ButtonApp {
+        height: 7vh;
+        width: 10vw;
+        max-width: none;
+        background-size: contain;
+    }
+
+    .footerApp {
+        gap: 20px;
+    }
 }
 
 #settingsButton {
@@ -291,6 +332,9 @@ h1 {
 
 #rentButton {
     background-image: url("../image/rent.png");
+}
+#rentButtonOwner{
+    background-image: url("../image/dollar-removebg-preview.png");
 }
 
 #choresButton {
@@ -319,40 +363,94 @@ h1 {
 
 
 .middlePage {
-    display: grid;
-    grid-template-columns: 60% 1fr;
-    grid-template-rows: 30% 45% auto;
-    font-family: Manrope-Regular, sans-serif;
+    display: flex;
+    flex-direction: column;
     background: oklch(0.975 0.012 172);
-    grid-template-areas:
-        "payment shop"
-        "chores shop"
-        "chores rent";
     position: absolute;
     top: 10vh;
-    height: calc(100vh - 17vh);
     width: 100vw;
     box-sizing: border-box;
     gap: 15px;
     padding: 15px;
+    overflow-y: auto;
+    min-height: calc(100vh - 19vh);
 }
 
+#sumRent {
+    height: 20vh;
+    width: 100%;
+}
+
+#sumChores {
+    height: 20vh;
+    width: 100%;
+}
+
+#sumExpenses {
+    height: 20vh;
+    width: 100%;
+}
+
+#sumShop {
+    height: 20vh;
+    width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+    .middlePage {
+        display: grid;
+        grid-template-columns: 60% 1fr;
+        grid-template-rows: 30% 45% auto;
+        grid-template-areas:
+            "payment shop"
+            "chores shop"
+            "chores rent";
+        height: 90vh;
+        top: 10vh;
+        overflow-y: hidden;
+    }
+
+    #sumRent {
+        grid-area: rent;
+        height: 100%;
+    }
+
+    #sumChores {
+        grid-area: chores;
+        height: 100%;
+    }
+
+    #sumExpenses {
+        grid-area: payment;
+        height: 100%;
+    }
+
+    #sumShop {
+        grid-area: shop;
+        height: 100%;
+    }
+}
 .middlePageOwner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
     position: absolute;
     top: 10vh;
     height: calc(100vh - 19vh);
     width: 100vw;
     box-sizing: border-box;
-    padding: 20px;
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .middlePageOwner .sum {
-    max-width: 450px;
-    height: 70vh;
+    width: 100%;
+    max-width: none;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .centerPage {
@@ -447,44 +545,52 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     transition: opacity 0.2s ease-out;
 }
 
-#sumRent {
-    grid-area: rent;
-}
 
-#sumChores {
-    grid-area: chores;
+#sumRoomates, #sumRentOwner {
+    height: auto;
+    min-height: 250px;
 }
-
-#sumExpenses {
-    grid-area: payment;
-}
-
-#sumShop {
-    grid-area: shop;
-}
-
 #sumRoomates {
-    grid-column: 1;
-    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     text-align: center;
 }
 
 #sumRentOwner {
-    grid-column: 2;
-    height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     text-align: center;
 }
+@media screen and (min-width: 900px) {
+    .middlePageOwner {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        padding: 20px;
+        overflow-y: hidden;
+    }
 
+    .middlePageOwner .sum {
+        max-width: 450px;
+    }
+
+    #sumRoomates {
+        height: 75vh;
+        grid-column: auto;
+    }
+
+    #sumRentOwner {
+        height: 75vh;
+        grid-column: auto;
+    }
+}
 #sumSupport {
     position: absolute;
     top: 50%;
@@ -530,9 +636,16 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 10px 15px;
+    padding: 10px 10px;
     border: 2px solid black;
     border-radius: 8px;
+    font-size: 12px;
+}
+@media screen and (min-width: 900px) {
+    .roommate-item {
+        font-size: 15px;
+        padding: 10px 15px;
+    }
 }
 
 .roommate-info {
@@ -560,12 +673,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 .btn-add {
     background-color: #28a745;
-    color: white;
-    border: 2px solid black;
-}
-
-.btn-delete {
-    background-color: #dc3545;
     color: white;
     border: 2px solid black;
 }
@@ -647,26 +754,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 #add-chore-1:hover {
     text-decoration: underline;
-}
-
-#add-chore-2 {
-    position: fixed;
-    bottom: 12vh;
-    right: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 60px;
-    width: 60px;
-    font-size: 30px;
-    background: #005F4B;
-    color: white;
-    border: 2px solid black;
-    border-radius: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    z-index: 5;
-    transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 #add-chore-2:hover {
@@ -866,22 +953,26 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border: 1px solid oklch(0.6387 0.0591 169.34 / 46.63%);
     border-radius: 20px;
     background: white;
-    margin: 0 0 0px 0;
+    padding: 5px 0;
 }
 
 .expense {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 35px;
-    margin: 20px;
+    gap: 10px;
+    min-height: 30px;
+    padding: 10px 10px;
+    margin: 5px 5px;
 }
 
-.expense div:first-child {
+.expense > div:first-child {
     display: flex;
     align-items: center;
     gap: 10px;
     height: 100%;
+    flex: 1;
+    min-width: 0px;
 }
 
 .expense h3 {
@@ -902,8 +993,10 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border-radius: 5px;
     background: oklch(0.9359 0.043 172);
     cursor: pointer;
-    height: 35px;
-    width: 35px;
+    height: 30px;
+    width: 30px;
+    min-width: 30px;
+    min-height: 30px;
 }
 
 .expense-content {
@@ -915,14 +1008,15 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 .expense-sender {
     display: flex;
-    gap: 10px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .expense-amount {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    gap: 5px;
+    gap: 8px;
+    flex-shrink: 0;
 }
 
 .expense-amount p {
@@ -934,8 +1028,8 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     border: none;
     height: 1px;
     background-color: #e2e8f0;
-    width: 95%;
-    margin: 20px auto 20px auto;
+    width: 90%;
+    margin: 0 auto;
 }
 
 .modal-overlay {
@@ -951,6 +1045,8 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .modal-card {
@@ -958,19 +1054,24 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background-color: #ffffff;
     width: 100%;
     max-width: 460px;
-    padding: 36px 32px 32px 32px;
-    border-radius: 24px;
+    padding: 24px 20px 20px 20px;
+    border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     box-sizing: border-box;
+    max-height: 90vh;
+    overflow-y: auto;
+    scrollbar-width: none;
 }
-
+.modal-card::-webkit-scrollbar {
+    display: none;
+}
 .close-btn {
     position: absolute;
-    top: 24px;
-    right: 24px;
-    width: 36px;
-    height: 36px;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     border: 1px solid #E2E8F0;
     background: transparent;
@@ -999,7 +1100,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 
 .title {
     margin: 0 0 24px 0;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 700;
     color: #0F172A;
 }
@@ -1063,19 +1164,6 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     color: white;
 }
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
 .modal-box {
     background-color: #ffffff;
     padding: 24px 30px;
@@ -1083,7 +1171,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     text-align: center;
     max-width: 320px;
-    width: 100%;
+    width: 90%;
 }
 
 .modal-box p {
@@ -1129,28 +1217,26 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 .modal-btn-confirm:hover {
     background-color: #b91c1c;
 }
-
-@media screen and (max-width: 900px) {
-    .middlePage {
-        display: flex;
-        flex-direction: column;
-        height: auto;
-        min-height: calc(100vh - 17vh);
-        position: absolute;
-        overflow-y: auto;
-        padding-bottom: 25px;
+@media screen and (min-width: 900px) {
+    .modal-card {
+        padding: 36px 32px 32px 32px;
+        border-radius: 24px;
     }
 
-    .sumRent {
-        height: 130px;
-        width: 100%;
+    .title {
+        font-size: 24px;
+        margin-bottom: 24px;
     }
 
-    .sumChores {
-        height: 220px;
-        width: 100%;
+    .close-btn {
+        top: 24px;
+        right: 24px;
+        width: 36px;
+        height: 36px;
     }
+}
 
+.title-div{
     .sumExpenses {
         height: 160px;
         width: 100%;
@@ -1160,13 +1246,151 @@ body:has(.sum.clicked) .sum:not(.clicked) {
         height: 180px;
         width: 100%;
     }
-
-    .topPage {
-        gap: 20px;
-    }
 }
 
-#add-expense {
+.action-header {
+    margin-bottom: 15px;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.header-top h2 {
+    font-size: 15px;
+    font-family: Manrope-Bold, sans-serif;
+    color: #1A202C;
+}
+
+.btn {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: none;
+    font-size: 13px;
+    font-family: Manrope-SemiBold, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-add {
+    background-color: #005F4B;
+    color: #FFFFFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn-add:hover {
+    background-color: #004B3B;
+    transform: translateY(-2px);
+}
+
+#manageRoommatesCard {
+    position: relative;
+}
+
+.roommateForm {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: left;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.roommateForm.open {
+    display: block;
+    animation: formFadeIn 0.25s ease-out;
+}
+
+@keyframes formFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+
+.roommateForm form {
+    display: flex;
+    flex-direction: column;
+}
+
+.roommateForm label {
+    display: block;
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    letter-spacing: 0.05em;
+    color: #718096;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.roommateForm input {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    border: 1px solid #E0ECDF;
+    background-color: #F2F9F3;
+    font-size: 14px;
+    font-family: Manrope-Regular, sans-serif;
+    color: #1A202C;
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.roommateForm input:focus {
+    border-color: #005F4B;
+}
+
+.roommateForm input::placeholder {
+    color: #A0AEC0;
+}
+
+#createRoommateBtn {
+    width: 100%;
+    padding: 14px;
+    margin-top: 6px;
+    background-color: #005F4B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: Manrope-SemiBold, sans-serif;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#createRoommateBtn:hover {
+    background-color: #004B3B;
+}
+
+.btn-back {
+    background-color: transparent;
+    color: #1A202C;
+    border: 1px solid #E2E8F0;
+    margin-bottom: 20px;
+}
+
+.btn-back:hover {
+    background-color: #F7FAFC;
+    transform: translateX(-2px);
+}
+
+#title-expense{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.add-element-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1176,8 +1400,172 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     background: rgb(0, 93, 75);
     color: white;
     border-radius: 20px;
-    position: absolute;
     cursor: pointer;
     bottom: 100px;
     right: 50px;
+}
+
+.redText
+{
+    color : red;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.delete-btn {
+    border: none;
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.conditions
+{
+    font-size: small;
+    color: red;
+    text-align: left;
+}
+
+.conditions.valid
+{
+    color: green;
+}
+
+
+.task-delete {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    margin-top: 2px;
+    padding: 3px 10px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background: white;
+    color: #990000;
+    font-family: Manrope-Bold, sans-serif;
+    font-size: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 black;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.task-delete::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #dc3545;
+    transition: width 0.3s ease;
+    z-index: -1;
+}
+
+.task-delete:hover::before {
+    width: 100%;
+}
+
+.task-delete:hover {
+    color: white;
+    transform: translateY(-2px);
+}
+
+.task-delete:active {
+    transform: translateY(0);
+    box-shadow: 0 0 0 black;
+}
+
+
+.confirm-dialog {
+    margin: auto;
+    padding: 0;
+    border: 2px solid black;
+    border-radius: 24px;
+    background: white;
+    box-shadow: 4px 4px 0 black, 0 20px 40px rgba(0, 0, 0, 0.15);
+    max-width: 380px;
+    width: calc(100% - 32px);
+}
+
+.confirm-dialog[open] {
+    animation: confirm-pop 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.confirm-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+@keyframes confirm-pop {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.confirm-content {
+    padding: 28px 28px 24px 28px;
+}
+
+.confirm-content p {
+    margin-bottom: 24px;
+    font-family: Manrope-Bold, sans-serif;
+    font-size: 16px;
+    color: #0F172A;
+}
+
+.confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.confirm-btn {
+    padding: 10px 20px;
+    border: 2px solid black;
+    border-radius: 12px;
+    background: white;
+    color: #0F172A;
+    font-family: Manrope-Bold, sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 2px 2px 0 black;
+    transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.confirm-btn:hover {
+    color: #005F4B;
+    border-color: #005F4B;
+    transform: translateY(-2px);
+}
+
+.confirm-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 0 0 black;
+}
+
+.confirm-btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.confirm-btn-danger:hover {
+    background: #b91c1c;
+    border-color: black;
+    color: white;
+}
+
+.confirm-btn:focus-visible,
+.task-delete:focus-visible {
+    outline: 2px solid #005F4B;
+    outline-offset: 2px;
 }

@@ -47,8 +47,8 @@ onload = function () {
     if (sumRent) sumRent.addEventListener("click", () => morph.call(sumRent, "html/rent.html"));
     if (sumChores) sumChores.addEventListener("click", () => morph.call(sumChores, "html/chores.html"));
     if (sumExpenses) sumExpenses.addEventListener("click", () => morph.call(sumExpenses, "html/expenses.html"));
-    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(this, "html/manage-rent.html"); });
-    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(this, "html/manage-roommates.html"); });
+    if (sumRentOwner) sumRentOwner.addEventListener("click", function() { morph.call(sumRentOwner, "manage-rent.html"); });
+    if (sumRoomates) sumRoomates.addEventListener("click", function() { morph.call(sumRoomates, "manage-roommates.html"); });
 
     if(logoutBtn) logoutBtn.addEventListener("click", () => {
         sessionStorage.removeItem("user");
@@ -133,7 +133,7 @@ async function login(event) {
         if (result["role"] === "ROOMMATE") {
             window.location.href = "../index.html";
         } else {
-            window.location.href = "html/owner.html";
+            window.location.href = "owner.html";
         }
     } catch (err) {
         console.error(err);
@@ -168,3 +168,4 @@ function morph(redirect) {
         location.href = redirect;
     }, 380);
 }
+
