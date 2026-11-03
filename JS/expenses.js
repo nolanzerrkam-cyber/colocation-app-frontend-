@@ -29,7 +29,7 @@ const notifier = document.getElementById("notifier");
 
 window.addEventListener('load', async () => {
     let currentUser = JSON.parse(sessionStorage.getItem('user')); // get user data from session
-    if(!currentUser) {
+    if (!currentUser) {
         window.location.href = "login.html"
         return;
     }
@@ -64,13 +64,14 @@ async function getAllExpenses() {
         const response = await fetch(url);
         if (!response.ok) {
             console.error("Error from backend");
-            return {expenses: [], totalExpense: 0 };
+            return {expenses: [], totalExpense: 0};
         }
 
-        return response.json();
+        return await response.json();
     } catch (error) {
         console.error(error.message);
-        return {expenses: [], totalExpense: 0 };    }
+        return {expenses: [], totalExpense: 0};
+    }
 }
 
 async function deleteExpense(expenseId) {
@@ -137,8 +138,7 @@ function createExpenseComponent(expenseJson) {
 
     expenseAmount.appendChild(amount);
 
-    deleteBtn.addEventListener('click', () => 
-    {
+    deleteBtn.addEventListener('click', () => {
         const modal = document.getElementById("deleteModal");
         const confirmBtn = document.getElementById("confirmDeleteBtn");
         const cancelBtn = document.getElementById("cancelDeleteBtn");
@@ -188,6 +188,7 @@ function createSeparatorComponent() {
 
 function displayExpenseComponent(expenses) {
     // add every expense to the html
+    console.log("DEBUG DISPLAY EXPENSES COMPONENT")
     removeExpenseComponent();
 
     const expensesLength = expenses.length;
@@ -198,11 +199,15 @@ function displayExpenseComponent(expenses) {
         }
     });
 }
-async function refreshPage(user)
-{
+
+async function refreshPage(user) {
     // refresh the page after an action is done
+    setNotifier("", false);
+    closeModal();
     expenses = await getAllExpenses();
+    console.log(expenses)
     displayExpenseComponent(expenses.expensesdto);
+    console.log("DEBUG REFRESH PAGE")
 
     const totalAmount = expenses.totalExpense;
     if (total) total.innerText = totalAmount + "€";
@@ -211,6 +216,7 @@ async function refreshPage(user)
     const totalRoomateExpense = await getBalance(user.email);
     if (balance) balance.innerText = totalRoomateExpense + "€";
 }
+
 function openModal() {
     // dispaly the modal
     modalOverlay.style.display = 'flex';
@@ -236,39 +242,47 @@ async function handleSubmitForm(event) {
         return;
     }
 
-    createExpense(formData);
+    const success = await createExpense(formData);
+
+    if (success) {
+        let currentUser = JSON.parse(sessionStorage.getItem('user'));
+        setNotifier("Success: The expense has been created.", false);
+        expenseForm.reset();
+        await refreshPage(currentUser);
+    } else {
+        setNotifier("Error: " + error, true);
+    }
 
     setLoading(false);
-    await refreshPage(currentUser);
 }
 
-function createExpense(expenseData) {
+async function createExpense(expenseData) {
     // Persist a new expense in database through the API
     const currentUserEmail = JSON.parse(sessionStorage.getItem("user")).email;
 
     if (!currentUserEmail)
         setNotifier("Error: user email is invalid", true);
 
-    const url = getApiUrl("/api/expense");
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            "label": expenseData.get("name"),
-            "price": expenseData.get("price"),
-            "email": currentUserEmail,
-            "dateExpense": expenseData.get("date"),
-        })
-    })
-        .then(response => {
-            if (!response.ok) throw new Error('Error: network error');
-            expenseForm.reset();
-            setNotifier("Success: The expense has been created.", false)
-        })
-        .catch(error =>
-            setNotifier("Error: " + error, true));
+    try {
+        const url = getApiUrl("/api/expense");
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                "label": expenseData.get("name"),
+                "price": expenseData.get("price"),
+                "email": currentUserEmail,
+                "dateExpense": expenseData.get("date"),
+            })
+        });
+
+        if (!response.ok) throw new Error('Error: network error');
+        return true;
+    } catch (e) {
+        return false;
+    }
 }
 
 function validateInput(formData) {
