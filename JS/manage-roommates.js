@@ -167,7 +167,8 @@ async function createRoommate(roommateData)
     const url = getApiUrl("/api/user/register");
     try
     {
-        const response = await fetch(url, {
+        const response = await fetch(url, 
+        {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -177,6 +178,7 @@ async function createRoommate(roommateData)
                 "lastname": roommateData.get("lastname"),
                 "email": roommateData.get("email"),
                 "phonenumber": roommateData.get("phoneNumber"),
+                "rawPassword" : roommateData.get("rawPassword"),
             })
         });
         if(!response.ok)
