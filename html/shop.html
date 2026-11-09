@@ -21,9 +21,33 @@
     <div class="infoPage">
         <div class="title-div">
             <h1>Shopping items list</h1>
-            <p class="add-element-btn">+</p>
+            <p id="add-shopping-item" class="add-element-btn">+</p>
         </div>
         <div id="shopping-items-list"></div>
+    </div>
+</div>
+
+<div id="modalOverlay" class="modal-overlay">
+    <div class="modal-card">
+        <button type="button" class="close-btn" id="closeBtn">&times;</button>
+
+        <h2 class="title">Add a shopping item</h2>
+
+        <form id="shoppingItemsForm">
+            <div class="form-group">
+                <label for="itemLabel">LABEL</label>
+                <input type="text" id="itemLabel" name="label" placeholder="Biscuits" required/>
+            </div>
+
+            <div id="form-group" class="form-group">
+                <label for="quantity">QUANTITY</label>
+                <input type="number" min="1" id="quantity" name="quantity" placeholder="1"/>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submit-button">Create shopping item</button>
+            <p id="notifier">p</p>
+        </form>
+
     </div>
 </div>
 
