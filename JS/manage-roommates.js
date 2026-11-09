@@ -317,7 +317,7 @@ function validateInput(formData) {
         errorCounter++;
     }
 
-    if(!formData.get("email") || formData.get("rawPassword").length <= 8)
+    if(!formData.get("email") || formData.get("rawPassword").length < 8)
     {
         errorMessage.push("The password needs at least to be 8 characters long.");
         errorCounter++;
