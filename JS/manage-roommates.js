@@ -15,6 +15,7 @@ const lastNameLabel = document.getElementById("roommateLastName");
 const emailLabel = document.getElementById("roommateEmail");
 const phoneLabel = document.getElementById("roommatePhoneNumber");
 const limitRoommates = document.getElementById("limitRoommates");
+const pswrdLabel = document.getElementById("rawPassword");
 
 
 addBtn.addEventListener("click", openModal);
@@ -167,7 +168,8 @@ async function createRoommate(roommateData)
     const url = getApiUrl("/api/user/register");
     try
     {
-        const response = await fetch(url, {
+        const response = await fetch(url, 
+        {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -177,6 +179,7 @@ async function createRoommate(roommateData)
                 "lastname": roommateData.get("lastname"),
                 "email": roommateData.get("email"),
                 "phonenumber": roommateData.get("phoneNumber"),
+                "rawPassword" : roommateData.get("rawPassword"),
             })
         });
         if(!response.ok)
@@ -257,7 +260,6 @@ function openDeleteModal(roommate)
         }
     });
 }
-
 /*
     This method is for returning errors when the owner didn't respect the rules for the creation of the account.
     @param formData : simply getting the information from the submitted form. Contains email, first and lastname, phonenumber and password
@@ -281,8 +283,43 @@ function validateInput(formData) {
         errorCounter++;
     }
 
+    if(formData.get("email").length > 64)
+    {
+        errorMessage.push("The email is above 64 characters.");
+        errorCounter++;
+    }
+
+    let email = formData.get("email");
+    let emailRegex = /^[A-Za-z0-9._@-]+$/
+    if(!emailRegex.test(email))
+    {
+        errorMessage.push("Only letters numbers underscores and hash and dot and hash are accepted.");
+        errorCounter++;
+    }
+
+    let domainRegex = /[.]{1,1}[a-z]{2,}$/
+
+    if(!domainRegex.test(email))
+    {
+        errorMessage.push("You need to have a domain that has at least two characters.");
+        errorCounter++;
+    }
+    let arbRegex = /@/;
+
+    if(!arbRegex.test(email))
+    {
+        errorMessage.push("You need a hash in your email.");
+        errorCounter++;
+    }
+
     if (!formData.get("phoneNumber") || formData.get("phoneNumber").length < 8) {
         errorMessage.push("A phoneNumber is required or the email needs to have at least 8 numbers.");
+        errorCounter++;
+    }
+
+    if(!formData.get("email") || formData.get("rawPassword").length < 8)
+    {
+        errorMessage.push("The password needs at least to be 8 characters long.");
         errorCounter++;
     }
 
@@ -334,6 +371,7 @@ function setConditions()
     const fn = document.getElementById("fnCondition");
     const ln = document.getElementById("lnCondition");
     const pn = document.getElementById("pnCondition");
+    const pswd = document.getElementById("pswrdCondition");
     const emailLength = document.getElementById("emailLength");
     const emailFormat = document.getElementById("emailFormat");
     const domainEmailCheck = document.getElementById("domainEmailCheck");
@@ -382,6 +420,11 @@ function setConditions()
         checkAt.classList.toggle("valid", validation);
     });
 
+    pswrdLabel.addEventListener("input", (e) => {
+        const validation = e.target.value.trim().length >= 8;
+
+        pswd.classList.toggle("valid", validation);
+    });
 }
 
 setConditions();
