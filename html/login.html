@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in page</title>
+    <link rel="stylesheet" href="../CSS/allcss.css">
+    <script type="module" src="../JS/appjs.js" defer></script>
+</head>
+<body class="bodyLogin">
+    <div class="loginPart">
+        <h2>Welcome back to FlatMate !</h2>
+        <p>Please enter your credentials to continue.</p>
+        <div>
+            <p id="error"></p>
+            <form method="post" name="login">
+                <label for="email">Email: </label>
+                <input id="email" type="text">
+                <label for="password">Password: </label>
+                <input id="password" type="password">
+                <button id="submitLogin">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
