@@ -104,7 +104,7 @@ function createRoommateRentComponent(roommate, share, paid) {
 
     const name = document.createElement('span');
     name.classList.add('rent-name');
-    name.textContent = roommate.firstname + " " + roommate.lastname;
+    name.textContent = roommate.fullName
 
     const details = document.createElement('div');
     details.classList.add('rent-details');
