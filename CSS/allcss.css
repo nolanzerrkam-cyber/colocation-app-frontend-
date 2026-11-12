@@ -1666,7 +1666,7 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     animation: rent-spin 0.8s linear infinite;
 }
 
-@keyframes rent-spin 
+@keyframes rent-spin
 {
     to { transform: rotate(360deg);}
 }
@@ -1717,4 +1717,91 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 .rent-badge.unpaid {
     background: oklch(0.9359 0.043 25);
     color: #990000;
+}
+
+#changePwd {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    min-height: 40px;
+    padding: 0 15px;
+    margin-left: auto;
+    border: 2px solid #005F4B;
+    border-radius: 8px;
+    background-color: white;
+    color: #005F4B;
+    font-size: 13px;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#changePwd::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: #005F4B;
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+#changePwd:hover::before {
+    width: 100%;
+}
+
+#changePwd:hover {
+    color: #FFFFFF;
+}
+
+#changePwd + #hour {
+    margin-left: 0;
+}
+
+@media screen and (max-width: 600px) {
+    #changePwd {
+        min-width: auto;
+        padding: 0 10px;
+        font-size: 11px;
+    }
+}
+
+
+.modal-overlay.open {
+    display: flex;
+}
+
+#pwdOverlay {
+    z-index: 2000;
+}
+
+#pwdOverlay .modal-card {
+    animation: confirm-pop 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#pwdForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#changePwdMessage {
+    padding-top: 15px;
+    font-family: Manrope-Bold, sans-serif;
+    font-size: 13px;
+    text-align: center;
+}
+
+#changePwdMessage:empty {
+    display: none;
+}
+
+#changePwdSubmit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
