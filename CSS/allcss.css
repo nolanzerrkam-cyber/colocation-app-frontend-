@@ -1640,3 +1640,81 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     gap: 8px;
     flex-wrap: wrap;
 }
+
+#rent-message {
+    font-size: 13px;
+    color: #718096;
+}
+
+#rent-message.loading
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+#rent-message.loading::before
+{
+    content: "";
+    width: 32px;
+    height: 32px;
+    border: 4px solid #E0ECDF;
+    border-top-color: #005F4B;
+    border-radius: 50%;
+    animation: rent-spin 0.8s linear infinite;
+}
+
+@keyframes rent-spin 
+{
+    to { transform: rotate(360deg);}
+}
+
+.rent-card {
+    background: #1A202C;
+    color: white;
+    border-radius: 20px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.rent-card .subtitle {
+    color: #A0AEC0;
+    margin-bottom: 0;
+}
+
+.rent-share {
+    font-size: 40px;
+}
+
+.rent-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.rent-badge {
+    display: inline-block;
+    align-self: center;
+    padding: 8px 20px;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 2px 0 black;
+    font-size: 13px;
+}
+
+.rent-badge.paid {
+    background: oklch(0.9359 0.043 172);
+    color: #005F4B;
+}
+
+.rent-badge.unpaid {
+    background: oklch(0.9359 0.043 25);
+    color: #990000;
+}
