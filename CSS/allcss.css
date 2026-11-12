@@ -1855,3 +1855,15 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     font-size: 0.95rem;
     color: #1b202c;
 }
+
+.rent-summary-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.rent-summary {
+    font-size: 0.95rem;
+    color: #1b202c;
+}
