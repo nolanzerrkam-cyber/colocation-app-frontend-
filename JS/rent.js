@@ -38,8 +38,7 @@ async function getRent() {
 
         rent = await response.json();
         return true;
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error.message);
         return false;
     }
@@ -49,7 +48,7 @@ async function getRoommateRent() {
     const email = JSON.parse(sessionStorage.getItem("user")).email;
 
     try {
-        const response = await fetch(getApiUrl(`/api/rent/${email}`));
+        const response = await fetch(getApiUrl(`/api/rent?email=${email}`));
 
         if (!response.ok) {
             console.error("Error from backend");
@@ -58,8 +57,7 @@ async function getRoommateRent() {
 
         roommateRent = await response.json();
         return true;
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error.message);
         return false;
     }
@@ -154,12 +152,17 @@ async function payRent() {
     }
 
     const {month, year} = getCurrentPeriod();
-    const params = new URLSearchParams({email, month, year});
 
     rentBtn.disabled = true;
     try {
-        const response = await fetch(`${getApiUrl("/api/rent/payRent")}?${params}`, {
-            method: "GET"
+        const response = await fetch(getApiUrl("/api/rent/payRent"), {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                "email": email,
+                "month": month,
+                "year": year,
+            })
         });
 
         if (response.ok) {

@@ -1805,3 +1805,53 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+.rent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.rent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 2px 2px 0 black;
+}
+
+.rent-item:hover {
+    border-color: #005F4B;
+    transform: translateY(-2px);
+}
+
+.rent-name {
+    color: #1b202c;
+    font-size: 1.05rem;
+}
+
+.rent-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rent-details .rent-badge {
+    min-width: 90px;
+    text-align: center;
+}
+
+.rent-details strong {
+    color: #1b202c;
+}
+
+.rent-summary {
+    font-size: 0.95rem;
+    color: #1b202c;
+}
