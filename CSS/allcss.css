@@ -188,7 +188,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 8px;
+    gap: 6px;
     height: 10vh;
     top: 0;
     left: 0;
@@ -198,22 +199,34 @@ h1 {
     z-index: 10;
     box-sizing: border-box;
     overflow: hidden;
-    gap: 10px;
 }
+
 
 .brand {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 2px;
     height: 100%;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .brand img {
-    height: 3vh;
-    max-height: 35px;
+    height: 3.5vh;
+    max-height: 30px;
     width: auto;
     object-fit: contain;
+}
+
+.brand img:nth-child(2) {
+    display: none;
+}
+
+
+@media screen and (min-width: 900px) {
+    .brand img:nth-child(2) {
+        display: block;
+    }
 }
 @media screen and (min-width: 900px) {
     .brand img {
@@ -264,21 +277,27 @@ h1 {
 #logout {
     width: auto;
     height: auto;
-    min-width: 90px;
-    min-height: 40px;
-    margin-left: 15px;
-    padding: 0 15px;
+    min-width: 65px;
+    min-height: 32px;
+    margin-left: 4px;
+    padding: 0 8px;
+    font-size: 11px;
+    flex-shrink: 0;
 }
-#hour  {
+#hour {
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 65px;
+    min-height: 32px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    flex-shrink: 0;
     margin-left: auto;
-    min-width: 90px;
-    min-height: 40px;
 }
 
 .footerApp {
@@ -1639,4 +1658,229 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+}
+
+#rent-message {
+    font-size: 13px;
+    color: #718096;
+}
+
+#rent-message.loading
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-top: 40px;
+}
+
+#rent-message.loading::before
+{
+    content: "";
+    width: 32px;
+    height: 32px;
+    border: 4px solid #E0ECDF;
+    border-top-color: #005F4B;
+    border-radius: 50%;
+    animation: rent-spin 0.8s linear infinite;
+}
+
+@keyframes rent-spin
+{
+    to { transform: rotate(360deg);}
+}
+
+.rent-card {
+    background: #1A202C;
+    color: white;
+    border-radius: 20px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.rent-card .subtitle {
+    color: #A0AEC0;
+    margin-bottom: 0;
+}
+
+.rent-share {
+    font-size: 40px;
+}
+
+.rent-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.rent-badge {
+    display: inline-block;
+    align-self: center;
+    padding: 8px 20px;
+    border: 2px solid black;
+    border-radius: 20px;
+    box-shadow: 2px 2px 0 black;
+    font-size: 13px;
+}
+
+.rent-badge.paid {
+    background: oklch(0.9359 0.043 172);
+    color: #005F4B;
+}
+
+.rent-badge.unpaid {
+    background: oklch(0.9359 0.043 25);
+    color: #990000;
+}
+
+#changePwd {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    min-height: 40px;
+    padding: 0 15px;
+    border: 2px solid #005F4B;
+    border-radius: 8px;
+    background-color: white;
+    color: #005F4B;
+    font-size: 13px;
+    font-family: Manrope-Bold, sans-serif;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#changePwd::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background: #005F4B;
+    transition: width 0.4s ease;
+    z-index: -1;
+}
+
+#changePwd:hover::before {
+    width: 100%;
+}
+
+#changePwd:hover {
+    color: #FFFFFF;
+}
+
+/* --- VERSION MOBILE (écrans de moins de 768px ou 600px) --- */
+@media screen and (max-width: 768px) {
+    #changePwd {
+        min-width: auto;
+        min-height: 35px; /* Un tout petit peu plus compact en hauteur sur mobile */
+        padding: 0 8px;   /* Moins de padding latéral pour gagner de la place */
+        font-size: 10px;  /* Texte plus petit pour éviter de saturer le header */
+    }
+}
+
+
+.modal-overlay.open {
+    display: flex;
+}
+
+#pwdOverlay {
+    z-index: 2000;
+}
+
+#pwdOverlay .modal-card {
+    animation: confirm-pop 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+#pwdForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#changePwdMessage {
+    padding-top: 15px;
+    font-family: Manrope-Bold, sans-serif;
+    font-size: 13px;
+    text-align: center;
+}
+
+#changePwdMessage:empty {
+    display: none;
+}
+
+#changePwdSubmit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.rent-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.rent-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+    background: white;
+    border: 2px solid black;
+    border-radius: 12px;
+    box-shadow: 2px 2px 0 black;
+}
+
+.rent-item:hover {
+    border-color: #005F4B;
+    transform: translateY(-2px);
+}
+
+.rent-name {
+    color: #1b202c;
+    font-size: 1.05rem;
+}
+
+.rent-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rent-details .rent-badge {
+    min-width: 90px;
+    text-align: center;
+}
+
+.rent-details strong {
+    color: #1b202c;
+}
+
+.rent-summary {
+    font-size: 0.95rem;
+    color: #1b202c;
+}
+
+.rent-summary-line {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.rent-summary {
+    font-size: 0.95rem;
+    color: #1b202c;
 }

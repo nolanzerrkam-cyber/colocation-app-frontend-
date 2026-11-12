@@ -14,9 +14,11 @@
         <img src="../image/logocoloc-removebg-preview.png"/>
         <img src="../image/nomcoloc-removebg-preview.png"/>
     </div>
+    <button type="button" id="changePwd">Change password</button>
     <div id="hour"></div>
     <a class="red-button" href="login.html" id="logout">Logout</a>
 </div>
+<div id="changePwdContainer"></div>
 <div class="centerPage">
     <div class="infoPage">
         <div class="title-div">
@@ -26,6 +28,7 @@
         <div id="shopping-items-list"></div>
     </div>
 </div>
+<div id="changePwdForm"></div>
 
 <div id="modalOverlay" class="modal-overlay">
     <div class="modal-card">
@@ -50,7 +53,15 @@
 
     </div>
 </div>
-
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-box">
+        <p>Delete this expense ?</p>
+        <div class="modal-buttons">
+            <button id="cancelDeleteBtn" class="modal-btn-cancel">Keep</button>
+            <button id="confirmDeleteBtn" class="modal-btn-confirm">Delete</button>
+        </div>
+    </div>
+</div>
 <div class="footerApp">
     <a class="ButtonApp" id="rentButton" href="rent.html"></a>
     <a class="ButtonApp" id="choresButton" href="chores.html"></a>

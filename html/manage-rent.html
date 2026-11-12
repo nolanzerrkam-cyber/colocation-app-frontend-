@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Rents & Taxes [Owner]</title>    
+    <title>Rent Overview [Owner]</title>
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="module" src="../JS/appjs.js" defer></script>
+    <script type="module" src="../JS/rent-owner.js"></script>
 </head>
 <body>
 <div class="topPage">
@@ -19,24 +20,30 @@
 
     <div class="centerPage">
         <div class="infoPage" id="manageRentCard">
-            <h2>Rent & Tax Overview</h2>
-            
-            <div class="roommates-container">
-                <div class="roommate-item">
-                    <span>Alexandre Dupont (Room 01)</span>
-                    <strong>$545 (Paid)</strong>
-                </div>
-                <div class="roommate-item">
-                    <span>Sophie Martin (Room 02)</span>
-                    <strong>$565 (Pending)</strong>
-                </div>
-                <div class="roommate-item">
-                    <span>Lucas Bernard (Room 03)</span>
-                    <strong>$525 (Paid)</strong>
-                </div>
+            <h2>Rent Overview</h2>
+            <h3 id="rent-title"></h3>
+            <div class="rent-summary-line">
+                <p class="rent-summary" id="rent-summary"></p>
+                <button class="edit-icon" id="edit-rent" title="Edit total rent">✏️</button>
             </div>
 
-            <button class="btn btn-add" style="margin-top: 15px;">+ Add Tax / Charge</button>
+            <div class="rent-list" id="roommates-rent-list"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <button class="close-btn" id="closeBtn">×</button>
+            <span class="subtitle">Rent</span>
+            <h2 class="title">Edit the total rent</h2>
+            <form id="rentForm">
+                <div class="form-group">
+                    <label for="amount">Total rent (€)</label>
+                    <input type="number" id="amount" name="amount" min="1" step="0.01">
+                </div>
+                <button type="submit" class="submit-btn" id="submit-button">Save</button>
+                <p id="notifier"></p>
+            </form>
         </div>
     </div>
 
