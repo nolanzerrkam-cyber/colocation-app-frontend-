@@ -41,6 +41,23 @@ async function getAllShoppingItems() {
     }
 }
 
+async function deleteShoppingItem(itemId) {
+    const url = getApiUrl(`/api/shoppingItem/${itemId}`);
+    try {
+        const response = await fetch(url, {
+            method: 'DELETE'
+        });
+        if (!response.ok) {
+            console.error("Error deleting shopping item from backend");
+            return false;
+        }
+        return true;
+    } catch (error) {
+        console.error(error.message);
+        return false;
+    }
+}
+
 // Refresh the page elements dynamically without a real refresh
 async function refreshPage() {
     closeModal();
@@ -85,14 +102,45 @@ function createShoppingItemComponent(item) {
     const title = document.createElement('h3');
     title.textContent = item.quantity + "x " + item.label;
 
-    const shoppingItemCreator = document.createElement('div');
-    shoppingItemCreator.classList.add('shopping-items-creator');
-
     shoppingItemContent.appendChild(title);
     shoppingItemDetails.appendChild(shoppingItemCheck);
     shoppingItemDetails.appendChild(shoppingItemContent);
 
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = '✕';
+    deleteBtn.classList.add("red-button");
+
+    deleteBtn.addEventListener('click', () => {
+        const modal = document.getElementById("deleteModal");
+        const confirmBtn = document.getElementById("confirmDeleteBtn");
+        const cancelBtn = document.getElementById("cancelDeleteBtn");
+
+        if (modal) modal.style.display = "flex";
+
+        if (confirmBtn && cancelBtn) {
+            const newConfirmBtn = confirmBtn.cloneNode(true);
+            confirmBtn.parentNode.replaceChild(newConfirmBtn, confirmBtn);
+
+            const newCancelBtn = cancelBtn.cloneNode(true);
+            cancelBtn.parentNode.replaceChild(newCancelBtn, cancelBtn);
+
+            document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+                modal.style.display = 'none';
+                const success = await deleteShoppingItem(item.id);
+                if (success) {
+                    await refreshPage();
+                }
+            });
+        }
+    });
+
     shoppingItem.appendChild(shoppingItemDetails);
+    shoppingItem.appendChild(deleteBtn);
 
     shoppingItemsList.appendChild(shoppingItem);
 }
