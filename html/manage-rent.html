@@ -6,6 +6,7 @@
     <title>Manage Rents & Taxes [Owner]</title>    
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="module" src="../JS/appjs.js" defer></script>
+    <script type="module" src="../JS/rent-owner.js"></script>
 </head>
 <body>
 <div class="topPage">
@@ -19,24 +20,8 @@
 
     <div class="centerPage">
         <div class="infoPage" id="manageRentCard">
-            <h2>Rent & Tax Overview</h2>
-            
-            <div class="roommates-container">
-                <div class="roommate-item">
-                    <span>Alexandre Dupont (Room 01)</span>
-                    <strong>$545 (Paid)</strong>
-                </div>
-                <div class="roommate-item">
-                    <span>Sophie Martin (Room 02)</span>
-                    <strong>$565 (Pending)</strong>
-                </div>
-                <div class="roommate-item">
-                    <span>Lucas Bernard (Room 03)</span>
-                    <strong>$525 (Paid)</strong>
-                </div>
-            </div>
-
-            <button class="btn btn-add" style="margin-top: 15px;">+ Add Tax / Charge</button>
+            <h2>Rent Overview</h2>
+            <div class="roommates-container" id="roommates-rent-list"></div>
         </div>
     </div>
 
