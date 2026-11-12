@@ -6,6 +6,7 @@
     <title>Rent to pay</title>    
     <link rel="stylesheet" href="../CSS/allcss.css">
     <script type="module" src="../JS/appjs.js" defer></script>
+    <script type="module" src="../JS/rent.js"></script>
 </head>
 <body>
 <div class="topPage">
@@ -18,7 +19,17 @@
 </div>
     <div class="centerPage">
         <div class="infoPage">
-
+            <h1>Your rent to pay :</h1>
+            <div id="rent-details">
+                <div class="rent-card">
+                    <span class="subtitle">Your share</span>
+                    <p class="rent-share"><span id="rent-share">--</span> €</p>
+                    <div class="rent-line"><span>Total rent</span><span id="rent-total">--€</span></div>
+                    <hr class="separator">
+                    <div class="rent-line"><span>Deadline</span><span id="rent-deadline">Loading...</span></div>
+                </div>
+                <p id="rent-status" class="rent-badge unpaid">To pay</p>
+            </div>
         </div>
     </div>
     <div class="footerApp">
