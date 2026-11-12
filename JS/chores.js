@@ -141,8 +141,7 @@ async function deleteTask(id) {
 
         tasks = tasks.filter(t => t.id !== id);
         applyFilter(filter);
-    }
-    catch (error) {
+    } catch (error) {
         console.warn("Error : " + error);
     }
 }
@@ -236,6 +235,7 @@ function createTask(taskData) {
             if (!response.ok) throw new Error('Network error');
             choreForm.reset();
             setNotifier("Success: The task has been created.", false)
+            window.location.reload();
         })
         .catch(error =>
             setNotifier("Error: " + error, true));
