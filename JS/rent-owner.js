@@ -1,8 +1,6 @@
 import {getApiUrl} from "./api.js";
 
 const rentTitle = document.getElementById("rent-title");
-rentTitle.textContent = "All the rents for -> " + new Date().toLocaleDateString("en-GB", {month: "long", year: "numeric"});
-
 let rent;
 let roommates;
 let rentStatuses;
@@ -97,15 +95,33 @@ function createRoommateRentComponent(roommate, share, paid) {
     roommateItem.classList.add('roommate-item');
 
     const name = document.createElement('span');
+    name.classList.add('roommate-name');
     name.textContent = roommate.firstname + " " + roommate.lastname;
 
+    const details = document.createElement('div');
+    details.classList.add('roommate-details');
+
     const amount = document.createElement('strong');
-    amount.textContent = share.toFixed(2) + " € (" + (paid ? "Paid" : "Pending") + ")";
+    amount.textContent = share.toFixed(2) + " €";
+
+    const badge = document.createElement('span');
+    badge.textContent = paid ? "Paid" : "Pending";
+    badge.className = paid ? "rent-badge paid" : "rent-badge unpaid";
+
+    details.appendChild(amount);
+    details.appendChild(badge);
 
     roommateItem.appendChild(name);
-    roommateItem.appendChild(amount);
+    roommateItem.appendChild(details);
 
     roommatesRentList.appendChild(roommateItem);
+}
+
+function displayRentTitle() {
+    rentTitle.textContent = "All the rents for → " + new Date().toLocaleDateString("en-GB", {
+        month: "long",
+        year: "numeric"
+    });
 }
 
 function removeRoommatesRentComponents() {
