@@ -173,14 +173,102 @@ function morph(redirect) {
 }
 
 function displayChangePwdForm() {
-    const container = document.getElementById("changePwdContainer");
-    if (!container) return;
+    if (document.getElementById("pwdOverlay")) return;
 
-    container.innerHTML = `
-        <form id="changePwdForm">
-            <label for="newPwd">New Password: </label>
-            <input type="password" id="newPwd" minlength="8" required>
-            <button type="submit">Change Password</button>
-        </form>
+    const user = JSON.parse(sessionStorage.getItem("user") ?? "null");
+    const isRoommate = user && user.role === "ROOMMATE";
+
+    const overlay = document.createElement("div");
+    overlay.id = "pwdOverlay";
+    overlay.className = "modal-overlay open";
+
+    overlay.innerHTML = `
+        <div class="modal-card">
+            <button type="button" class="close-btn" id="closePwdBtn">&times;</button>
+            <span class="subtitle">Account</span>
+            <h2 class="title">Change password</h2>
+
+            ${!isRoommate
+        ? `<p class="conditions">Only roommates can change their password here.</p>`
+        : `<form id="pwdForm">
+                       <div class="form-group">
+                           <label for="oldPwd">Current password</label>
+                           <input type="password" id="oldPwd" placeholder="••••••••" required>
+                       </div>
+                       <div class="form-group">
+                           <label for="newPwd">New password</label>
+                           <input type="password" id="newPwd" minlength="8" placeholder="At least 8 characters" required>
+                       </div>
+                       <div class="form-group">
+                           <label for="confirmPwd">Confirm new password</label>
+                           <input type="password" id="confirmPwd" minlength="8" placeholder="Repeat the new password" required>
+                       </div>
+                       <button type="submit" class="submit-btn" id="changePwdSubmit">Change password</button>
+                       <p id="changePwdMessage"></p>
+                   </form>`}
+        </div>
     `;
+
+    document.body.appendChild(overlay);
+
+    const close = () => overlay.remove();
+    document.getElementById("closePwdBtn").addEventListener("click", close);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+
+    const form = document.getElementById("pwdForm");
+    if (form) form.addEventListener("submit", (event) => resetRoommatePassword(event, user.email));
+}
+
+async function resetRoommatePassword(event, email) {
+    event.preventDefault();
+
+    const form = event.target;
+    const oldPassword = document.getElementById("oldPwd").value;
+    const newPassword = document.getElementById("newPwd").value;
+    const confirmPassword = document.getElementById("confirmPwd").value;
+    const messageEl = document.getElementById("changePwdMessage");
+    const submitBtn = document.getElementById("changePwdSubmit");
+
+    const showMessage = (text, isError) => {
+        messageEl.textContent = text;
+        messageEl.style.color = isError ? "red" : "green";
+    };
+
+    if (!newPassword.trim()) {
+        showMessage("The new password cannot be empty or white space!", true);
+        return;
+    }
+    if (newPassword !== confirmPassword) {
+        showMessage("The new passwords do not match.", true);
+        return;
+    }
+    if (newPassword === oldPassword) {
+        showMessage("The new password must be different from the current one.", true);
+        return;
+    }
+
+    submitBtn.disabled = true;
+    try {
+        const response = await fetch(getApiUrl("/api/user/newPassword"), {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({email, oldPassword, newPassword})
+        });
+
+        const text = await response.text(); // backend returns plain text
+
+        if (response.ok) {
+            showMessage(text || "The password has been reset!", false);
+            form.reset();
+        } else if (response.status === 404) {
+            showMessage("User not found.", true);
+        } else {
+            showMessage(text || `Error ${response.status}`, true);
+        }
+    } catch (error) {
+        console.error(error);
+        showMessage("Server connection error.", true);
+    } finally {
+        submitBtn.disabled = false;
+    }
 }
