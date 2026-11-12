@@ -188,7 +188,8 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 8px;
+    gap: 6px;
     height: 10vh;
     top: 0;
     left: 0;
@@ -198,22 +199,34 @@ h1 {
     z-index: 10;
     box-sizing: border-box;
     overflow: hidden;
-    gap: 10px;
 }
+
 
 .brand {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
     gap: 2px;
     height: 100%;
+    flex-shrink: 1;
+    min-width: 0;
 }
 
 .brand img {
-    height: 3vh;
-    max-height: 35px;
+    height: 3.5vh;
+    max-height: 30px;
     width: auto;
     object-fit: contain;
+}
+
+.brand img:nth-child(2) {
+    display: none;
+}
+
+
+@media screen and (min-width: 900px) {
+    .brand img:nth-child(2) {
+        display: block;
+    }
 }
 @media screen and (min-width: 900px) {
     .brand img {
@@ -264,21 +277,27 @@ h1 {
 #logout {
     width: auto;
     height: auto;
-    min-width: 90px;
-    min-height: 40px;
-    margin-left: 15px;
-    padding: 0 15px;
+    min-width: 65px;
+    min-height: 32px;
+    margin-left: 4px;
+    padding: 0 8px;
+    font-size: 11px;
+    flex-shrink: 0;
 }
-#hour  {
+#hour {
     border: 2px solid black;
-    border-radius: 8px;
+    border-radius: 6px;
     background-color: white;
     display: flex;
     align-items: center;
     justify-content: center;
+    min-width: 65px;
+    min-height: 32px;
+    padding: 0 6px;
+    font-size: 11px;
+    font-family: Manrope-Bold, sans-serif;
+    flex-shrink: 0;
     margin-left: auto;
-    min-width: 90px;
-    min-height: 40px;
 }
 
 .footerApp {
@@ -1729,12 +1748,12 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     min-width: 90px;
     min-height: 40px;
     padding: 0 15px;
-    margin-left: auto;
     border: 2px solid #005F4B;
     border-radius: 8px;
     background-color: white;
     color: #005F4B;
     font-size: 13px;
+    font-family: Manrope-Bold, sans-serif;
     white-space: nowrap;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -1760,15 +1779,13 @@ body:has(.sum.clicked) .sum:not(.clicked) {
     color: #FFFFFF;
 }
 
-#changePwd + #hour {
-    margin-left: 0;
-}
-
-@media screen and (max-width: 600px) {
+/* --- VERSION MOBILE (écrans de moins de 768px ou 600px) --- */
+@media screen and (max-width: 768px) {
     #changePwd {
         min-width: auto;
-        padding: 0 10px;
-        font-size: 11px;
+        min-height: 35px; /* Un tout petit peu plus compact en hauteur sur mobile */
+        padding: 0 8px;   /* Moins de padding latéral pour gagner de la place */
+        font-size: 10px;  /* Texte plus petit pour éviter de saturer le header */
     }
 }
 
