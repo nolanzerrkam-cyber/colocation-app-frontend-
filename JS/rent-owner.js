@@ -1,10 +1,10 @@
 import {getApiUrl} from "./api.js";
 
-const rentTitle = document.getElementById("rent-title");
 let rent;
 let roommates;
 let rentStatuses;
 
+const rentTitle = document.getElementById("rent-title");
 const roommatesRentList = document.getElementById("roommates-rent-list");
 
 window.addEventListener("load", async () => {
@@ -79,6 +79,12 @@ async function getRentStatuses() {
     }
 }
 
+function displayRentTitle() {
+    rentTitle.textContent = "All the rents for → " + new Date().toLocaleDateString("en-GB", {
+        month: "long",
+        year: "numeric"
+    });
+}
 
 function displayRoommatesRent() {
     removeRoommatesRentComponents();
@@ -91,15 +97,15 @@ function displayRoommatesRent() {
 }
 
 function createRoommateRentComponent(roommate, share, paid) {
-    const roommateItem = document.createElement('div');
-    roommateItem.classList.add('roommate-item');
+    const rentItem = document.createElement('div');
+    rentItem.classList.add('rent-item');
 
     const name = document.createElement('span');
-    name.classList.add('roommate-name');
+    name.classList.add('rent-name');
     name.textContent = roommate.firstname + " " + roommate.lastname;
 
     const details = document.createElement('div');
-    details.classList.add('roommate-details');
+    details.classList.add('rent-details');
 
     const amount = document.createElement('strong');
     amount.textContent = share.toFixed(2) + " €";
@@ -111,17 +117,10 @@ function createRoommateRentComponent(roommate, share, paid) {
     details.appendChild(amount);
     details.appendChild(badge);
 
-    roommateItem.appendChild(name);
-    roommateItem.appendChild(details);
+    rentItem.appendChild(name);
+    rentItem.appendChild(details);
 
-    roommatesRentList.appendChild(roommateItem);
-}
-
-function displayRentTitle() {
-    rentTitle.textContent = "All the rents for → " + new Date().toLocaleDateString("en-GB", {
-        month: "long",
-        year: "numeric"
-    });
+    roommatesRentList.appendChild(rentItem);
 }
 
 function removeRoommatesRentComponents() {
@@ -133,7 +132,7 @@ function displayError() {
     removeRoommatesRentComponents();
 
     const error = document.createElement('span');
-    error.textContent = "An error has occured from the backend of the application";
+    error.textContent = "Unavailable";
 
     roommatesRentList.appendChild(error);
 }
