@@ -9,6 +9,7 @@ let sumRentOwner;
 let sumRoomates;
 let submitLoginBtn
 let logoutBtn;
+let changePwdBtn;
 
 onload = function () {
     const userSession = JSON.parse(sessionStorage.getItem('user'));
@@ -28,6 +29,7 @@ onload = function () {
     sumRoomates = document.getElementById("sumRoomates");
     submitLoginBtn = document.getElementById("submitLogin");
     boxes = Array.from(document.getElementsByClassName("sum"));
+    changePwdBtn = document.getElementById('changePwd');
 
     if (submitLoginBtn) {
         submitLoginBtn.addEventListener('click', login);
@@ -54,6 +56,7 @@ onload = function () {
         sessionStorage.removeItem("user");
         window.location.href = "../html/login.html"
     })
+    if(changePwdBtn) changePwdBtn.addEventListener('click', displayChangePwdForm)
 }
 
 function updateClock() {
@@ -169,3 +172,15 @@ function morph(redirect) {
     }, 380);
 }
 
+function displayChangePwdForm() {
+    const container = document.getElementById("changePwdContainer");
+    if (!container) return;
+
+    container.innerHTML = `
+        <form id="changePwdForm">
+            <label for="newPwd">New Password: </label>
+            <input type="password" id="newPwd" minlength="8" required>
+            <button type="submit">Change Password</button>
+        </form>
+    `;
+}

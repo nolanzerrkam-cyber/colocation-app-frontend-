@@ -1,4 +1,5 @@
 import {getApiUrl} from "./api.js";
+import {updatePassword} from "./password.js"
 const MAX_ROOMMATES = 30;
 
 const list = document.getElementById('roommatesList');
@@ -63,11 +64,25 @@ function createRoommateComponent(roommate) {
     info.appendChild(nameSpan);
     info.appendChild(detailsDiv);
 
+    const resetPwdBtn = document.createElement('button');
+    resetPwdBtn.className = "resetPwdBtn"
+    resetPwdBtn.textContent = 'Reset password';
+
+    resetPwdBtn.addEventListener('click', async () => {roommate.rawPassword = 'changeme';
+        const resp = await updatePassword(roommate);
+        console.log(resp)
+    });
+
+    roommateComponent.appendChild(resetPwdBtn);
+
+
     const deleteBtn = document.createElement('button');
     deleteBtn.className = 'btn red-button btn-delete ';
     deleteBtn.textContent = 'x';
 
     deleteBtn.addEventListener('click', () => openDeleteModal(roommate));
+
+
 
     roommateComponent.appendChild(info);
     roommateComponent.appendChild(deleteBtn);
