@@ -8,7 +8,6 @@ const rentStatus = document.getElementById("rentStatus");
 const rentShare = document.getElementById("rent-share");
 const rentTotal = document.getElementById("rent-total");
 const rentDeadline = document.getElementById("rent-deadline");
-const rentStatus = document.getElementById("rent-status");
 
 rentBtn.addEventListener("click", payRent);
 
