@@ -1850,3 +1850,8 @@ body:has(.sum.clicked) .sum:not(.clicked) {
 .rent-details strong {
     color: #1b202c;
 }
+
+.rent-summary {
+    font-size: 0.95rem;
+    color: #1b202c;
+}

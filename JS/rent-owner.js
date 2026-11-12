@@ -6,6 +6,7 @@ let rentStatuses;
 
 const rentTitle = document.getElementById("rent-title");
 const roommatesRentList = document.getElementById("roommates-rent-list");
+const rentSummary = document.getElementById("rent-summary");
 
 window.addEventListener("load", async () => {
     await refreshPage();
@@ -22,6 +23,7 @@ async function refreshPage() {
     }
 
     displayRentTitle();
+    displayRentSummary();
     displayRoommatesRent();
 }
 
@@ -135,4 +137,11 @@ function displayError() {
     error.textContent = "Unavailable";
 
     roommatesRentList.appendChild(error);
+}
+
+function displayRentSummary() {
+    const share = rent.price / roommates.length;
+    const paidCount = roommates.filter(roommate => rentStatuses[roommate.email]).length;
+
+    rentSummary.textContent = "Total of the rent gained : " + (share * paidCount).toFixed(2) + " € / " + rent.price.toFixed(2) + " €";
 }
