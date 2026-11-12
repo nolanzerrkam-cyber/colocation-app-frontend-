@@ -1,5 +1,4 @@
 import {getApiUrl} from "./api.js";
-import {updatePassword} from "./password.js"
 const MAX_ROOMMATES = 30;
 
 const list = document.getElementById('roommatesList');
@@ -61,32 +60,26 @@ function createRoommateComponent(roommate) {
     detailsDiv.className = 'roommate-details';
     detailsDiv.textContent = roommate.email;
 
-    info.appendChild(nameSpan);
-    info.appendChild(detailsDiv);
+    info.append(nameSpan, detailsDiv);
+
+    const actions = document.createElement('div');
+    actions.className = 'roommate-actions';
 
     const resetPwdBtn = document.createElement('button');
-    resetPwdBtn.className = "resetPwdBtn"
+    resetPwdBtn.type = 'button';
+    resetPwdBtn.className = 'resetPwdBtn';
     resetPwdBtn.textContent = 'Reset password';
-
-    resetPwdBtn.addEventListener('click', async () => {roommate.rawPassword = 'changeme';
-        const resp = await updatePassword(roommate);
-        console.log(resp)
-    });
-
-    roommateComponent.appendChild(resetPwdBtn);
-
+    resetPwdBtn.addEventListener('click', () => openResetPasswordModal(roommate));
 
     const deleteBtn = document.createElement('button');
-    deleteBtn.className = 'btn red-button btn-delete ';
+    deleteBtn.type = 'button';
+    deleteBtn.className = 'btn red-button btn-delete';
     deleteBtn.textContent = 'x';
-
     deleteBtn.addEventListener('click', () => openDeleteModal(roommate));
 
+    actions.append(resetPwdBtn, deleteBtn);
 
-
-    roommateComponent.appendChild(info);
-    roommateComponent.appendChild(deleteBtn);
-
+    roommateComponent.append(info, actions);
     list.append(roommateComponent);
 }
 
@@ -443,3 +436,92 @@ function setConditions()
 }
 
 setConditions();
+
+const DEFAULT_PASSWORD = "changeme";
+
+/**
+ * Ask the landlord's password, then reset the roommate's password to "changeme"
+ * @param roommate - [email, firstname, lastname, phonenumber]
+ */
+function openResetPasswordModal(roommate) {
+    if (document.getElementById("pwdOverlay")) return;
+
+    const landlord = JSON.parse(sessionStorage.getItem("user") ?? "null");
+    if (!landlord) return;
+
+    const overlay = document.createElement("div");
+    overlay.id = "pwdOverlay";
+    overlay.className = "modal-overlay open";
+
+    overlay.innerHTML = `
+        <div class="modal-card">
+            <button type="button" class="close-btn" id="closePwdBtn">&times;</button>
+            <span class="subtitle">Reset password</span>
+            <h2 class="title">${roommate.firstname} ${roommate.lastname}</h2>
+            <p class="conditions" style="color:#718096; margin-bottom:18px;">
+                The password will be reset to "<b>${DEFAULT_PASSWORD}</b>".
+                Tell ${roommate.firstname} to change it after logging in.
+            </p>
+
+            <form id="pwdForm">
+                <div class="form-group">
+                    <label for="landlordPwd">Confirm with your password</label>
+                    <input type="password" id="landlordPwd" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="submit-btn" id="changePwdSubmit">Reset password</button>
+                <p id="changePwdMessage"></p>
+            </form>
+        </div>
+    `;
+
+    document.body.appendChild(overlay);
+    document.getElementById("landlordPwd").focus();
+
+    const close = () => overlay.remove();
+    document.getElementById("closePwdBtn").addEventListener("click", close);
+    overlay.addEventListener("click", (e) => { if (e.target === overlay) close(); });
+
+    document.getElementById("pwdForm").addEventListener("submit",
+        (event) => resetPasswordByLandlord(event, landlord.email, roommate.email, close));
+}
+
+async function resetPasswordByLandlord(event, landlordEmail, roommateEmail, close) {
+    event.preventDefault();
+
+    const landlordPassword = document.getElementById("landlordPwd").value;
+    const messageEl = document.getElementById("changePwdMessage");
+    const submitBtn = document.getElementById("changePwdSubmit");
+
+    const showMessage = (text, isError) => {
+        messageEl.textContent = text;
+        messageEl.style.color = isError ? "red" : "green";
+    };
+
+    submitBtn.disabled = true;
+    try {
+        const response = await fetch(getApiUrl("/api/user/newPassword/landlord"), {
+            method: "PUT",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+                landlordEmail,
+                landlordPassword,
+                roommateEmail,
+                newPassword: DEFAULT_PASSWORD
+            })
+        });
+
+        const text = await response.text();
+
+        if (response.ok) {
+            showMessage(`Password reset to "${DEFAULT_PASSWORD}".`, false);
+            setTimeout(close, 1500); // close the modal after a short confirmation
+        } else {
+            showMessage(text || `Error ${response.status}`, true);
+            submitBtn.disabled = false;
+        }
+    } catch (error) {
+        console.error(error);
+        showMessage("Server connection error.", true);
+        submitBtn.disabled = false;
+    }
+}
