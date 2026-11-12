@@ -37,21 +37,21 @@ window.addEventListener('load', async () => {
     await refreshPage(currentUser);
 });
 
-async function getBalance(currentUserEmail) {
+async function getRoommateExpense(currentUserEmail) {
     /*function that get the Balance of the current user from the API
     * the balance is how much expense this user has done.*/
-    const url = getApiUrl("/api/expense/total?email=" + currentUserEmail);
+    const url = getApiUrl("/api/expense?email=" + currentUserEmail);
     try {
         const response = await fetch(url);
         if (!response.ok) {
             console.error("Error from backend");
-            return 0;
+            return {expensesdto: [], totalExpense: 0};
         }
 
         return response.json();
     } catch (error) {
         console.error(error.message);
-        return 0;
+        return {expensesdto: [], totalExpense: 0};
     }
 }
 
@@ -213,8 +213,8 @@ async function refreshPage(user) {
     if (total) total.innerText = totalAmount + "€";
 
 
-    const totalRoomateExpense = await getBalance(user.email);
-    if (balance) balance.innerText = totalRoomateExpense + "€";
+    const roommateExpense = await getRoommateExpense(user.email);
+    if (balance) balance.innerText = roommateExpense.totalExpense + "€";
 }
 
 function openModal() {
