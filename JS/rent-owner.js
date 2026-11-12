@@ -23,6 +23,7 @@ async function refreshPage() {
         return;
     }
 
+    displayRentTitle();
     displayRoommatesRent();
 }
 
@@ -116,7 +117,7 @@ function displayError() {
     removeRoommatesRentComponents();
 
     const error = document.createElement('span');
-    error.textContent = "Unavailable";
+    error.textContent = "An error has occured from the backend of the application";
 
     roommatesRentList.appendChild(error);
 }
